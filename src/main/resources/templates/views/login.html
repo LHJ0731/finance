@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>理财管理系统登录界面</title>
+    <!-- 网站图标 -->
+    <link rel="icon" th:href="@{images/favicon.ico}" type="image/ico">
+    <!-- 引入bootstrap样式 -->
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <!--图标库-->
+    <link th:href="@{/lyear/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css"/>
+    <!--自定义样式-->
+    <link href="../lyear/css/style.min.css" th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
+
+    <style>
+        body {
+          background-color: #fff;
+        }
+        .lyear-login-box {
+          position: relative;
+          overflow-x: hidden;
+          width: 100%;
+          height: 100%;
+          -webkit-transition: 0.5s;
+          -o-transition: 0.5s;
+          transition: 0.5s;
+        }
+        .lyear-login-left {
+          width: 50%;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          position: fixed;
+          height: 100%;
+          z-index: 555;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center center;
+        }
+        .lyear-overlay {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 10;
+          background: rgba(0, 0, 0, 0.5);
+        }
+        .lyear-logo {
+          margin-bottom: 50px;
+        }
+        .lyear-featured {
+          z-index: 12;
+          position: absolute;
+          bottom: 0;
+          padding: 30px;
+          width: 100%;
+        }
+        .lyear-featured h4 {
+          color: #fff;
+          line-height: 32px;
+        }
+        .lyear-featured h4 small {
+          color: #fff;
+          display: block;
+          text-align: right;
+          margin-top: 15px;
+        }
+        .lyear-login-right {
+          margin-left: 50%;
+          position: relative;
+          z-index: 999;
+          padding: 100px;
+          background-color: #fff;
+        }
+        @media screen and (max-width: 1024px) {
+          .lyear-login-right {
+            padding: 50px;
+          }
+        }
+        @media screen and (max-width: 820px) {
+          .lyear-login-left {
+            width: 100%;
+            position: relative;
+            z-index: 999;
+            height: 300px;
+          }
+          .lyear-login-right {
+            margin-left: 0;
+          }
+        }
+        @media screen and (max-width: 480px) {
+          .lyear-login-right {
+            padding: 50px;
+          }
+        }
+        @media screen and (max-width: 320px) {
+          .lyear-login-right {
+            padding: 30px;
+          }
+        }
+    </style>
+</head>
+<body>
+<div class="lyear-login-box">
+    <div class="lyear-login-left" th:style="'background-image:url('+'/images/loginbg.png'+');'">
+        <div class="lyear-overlay"></div>
+        <div class="lyear-featured">
+            <h4>愿你有好运气，如果没有，愿你在不幸中学会慈悲；愿你被很多人爱，如果没有，愿你在寂寞中学会宽容。<small> - 刘瑜《愿你慢慢长大》</small></h4>
+        </div>
+    </div>
+    <div class="lyear-login-right">
+        <div class="lyear-logo text-center">
+            <a href="#!"><img src="images/logo-login.png" alt="logo" /></a>
+        </div>
+        <form>
+            <div class="form-group has-feedback feedback-left">
+                <label class="col-md-3 control-label" for="username">用户名</label>
+                <input type="text" placeholder="请输入您的用户名" class="form-control"
+                       name="username" id="username"/><span class="help-block"></span>
+                <span class="mdi mdi-account form-control-feedback"
+                      aria-hidden="true"></span>
+            </div>
+            <div class="form-group has-feedback feedback-left">
+                <label class="col-md-3 control-label" for="password">密码</label>
+                <input type="password" placeholder="请输入密码" class="form-control"
+                       id="password" name="password"/><span class="help-block"></span>
+                <span class="mdi mdi-lock form-control-feedback"
+                      aria-hidden="true"></span>
+            </div>
+
+            <div id="captcha_note_parent" class="form-group has-feedback feedback-left row" style="height: 100px">
+                <label class="col-md-3 control-label" for="captcha" style="margin-left: 10px; float: left;">验证码</label>
+                <div class="col-xs-7" style="clear: both;">
+                    <input type="text" id="captcha" name="captcha" class="form-control" placeholder="请输入验证码">
+                </div>
+                <div class="col-xs-5">
+                    <canvas id="canvas" width="120" height="45" style="float: right;"></canvas>
+                </div>
+                <span id="captcha_note_child" class="help-block" style="margin-left: 15px;clear: both;"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="lyear-checkbox checkbox-primary m-t-10">
+                    <input id="remember" type="checkbox"><span>记住密码</span>
+                </label>
+                <a style="float: right;" th:href="@{/toregister.html}">还没有账号？去注册</a>
+            </div>
+
+            <div class="form-group">
+                <button id="login_btn" class="btn btn-block btn-primary" type="button">立即登录</button>
+            </div>
+
+            <footer class="text-center">
+                <p class="m-b-0">Copyright © 2021 <a href="#!">LHJ</a>. All right reserved</p>
+            </footer>
+        </form>
+    </div>
+</div>
+<!-- 引入jQuery和bootstrap的js -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/jquerycookie.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+<script th:src="@{/js/md5.js}"></script>
+<script>
+    var show_num = [];
+    $(function () {
+        $("input[name='username']").blur(verifyUsername);//当用户名失去焦点时调用验证用户名方法
+        $("input[name='password']").change(removeLoginDisabled);//当密码框发生变化时，取消不可点击登录
+        //生成图片验证码
+        drawPic(show_num);
+        $("#canvas").click(function (e) {
+            //取消事件的默认动作。
+            e.preventDefault();
+            drawPic(show_num);
+        });
+        $("#captcha").blur(verifyCaptcha);
+        $("#login_btn").mousedown(verifyLogin);
+        //回车登录
+        $("body").keyup(function (event) {
+            if (event.keyCode === 13) {//keyCode=13是回车键
+                verifyLogin();
+            }
+        });
+        if ($.cookie("remember") == "true") {
+            //设置前端的复选框被选中
+            $("#remember").prop("checked", true);
+            $("#username").val($.cookie("username"));
+            $("#password").val($.cookie("password"));
+        }else{
+            $("#remember").prop("checked", false);
+        }
+    });
+
+    //记住用户名密码
+    function Save() {
+        //如果选择了
+        if ($("#remember").prop("checked")) {
+            //取出页面上用户名和密码的值
+            var str_username = $("#username").val();
+            var str_password = $("#password").val();
+            //利用cookie.js，放置到cookie中。 将用户名，密码，是否保存，放置到cookie中.
+            $.cookie("remember", "true", { expires: 7 }); //存储一个带7天期限的cookie
+            $.cookie("username", str_username, { expires: 7 });
+            $.cookie("password", str_password, { expires: 7 });
+        }
+        //如果没有选择了,则取消cookie存储的值
+        else {
+            $.cookie("remember", "false", { expire: -1 });
+            $.cookie("username", "", { expires: -1 });
+            $.cookie("password", "", { expires: -1 });
+        }
+    };
+
+    function verifyCaptcha() {
+        var captcha_num = $("#captcha").val().toLowerCase();
+        var real_num = show_num.join("");
+        $("#captcha_note_parent").removeClass("has-success has-error");
+        $("#captcha_note_child").text("");
+        if (captcha_num == "") {
+            $("#captcha_note_parent").addClass("has-error");
+            $("#captcha_note_child").text("验证码为空");
+            $("#login_btn").attr("disabled", "disabled");
+            return false;
+        } else if (captcha_num == real_num) {
+            $("#captcha_note_parent").addClass("has-success");
+            $("#captcha_note_child").text("验证码正确");
+            $("#login_btn").removeAttr("disabled");
+            return true;
+        } else {
+            $("#captcha_note_parent").addClass("has-error");
+            $("#captcha_note_child").text("验证码错误");
+            $("#login_btn").attr("disabled", "disabled");
+            return false;
+        }
+    }
+
+    function verifyUsername() {
+        //发送ajax请求校验用户名是否可用
+        var username = document.getElementById("username").value;
+        var lock = true;
+        if (username === "") {
+            show_validate_msg("#username", "error", "用户名为空");
+            $("#login_btn").attr("disabled", "disabled");
+            return false;
+        } else {
+            $.ajax({
+                url: "/login/loginVerifyUsername/"+username,
+                type: "GET",
+                success: function (result) {
+                    if (result.code === 200) {
+                        show_validate_msg("#username", "error",
+                            "用户名不存在");
+                        $("#login_btn")
+                            .attr("disabled", "disabled");
+                        lock = false;
+                    } else {
+                        show_validate_msg("#username", "success",
+                            "欢迎" + username + "登录");
+                        $("#login_btn").removeAttr("disabled");
+                    }
+                }
+            });
+            return lock;
+        }
+    }
+
+    function removeLoginDisabled() {
+        $("#login_btn").removeAttr("disabled");
+    }
+
+    function verifyLogin() {
+        Save();
+        $("input[name='username']").blur(verifyUsername);
+        $("#captcha").blur(verifyCaptcha);
+
+        if ($("#username").val() == "") {
+            show_validate_msg("#username", "error", "用户名为空");
+            $("#login_btn").attr("disabled", "disabled");
+            return false;
+        }
+
+        if ($("#password").val() == "") {
+            show_validate_msg("#password", "error", "密码为空");
+            $("#login_btn").attr("disabled", "disabled");
+            return false;
+        }
+
+        if ($("#captcha").val() == "") {
+            $("#captcha_note_parent").addClass("has-error");
+            $("#captcha_note_child").text("验证码为空");
+            $("#login_btn").attr("disabled", "disabled");
+            return false;
+        }
+
+        if (verifyUsername() && verifyCaptcha()) {
+            var pwd = $("#password").val();
+            $("#password").val($.md5(pwd));
+            console.log($("#password").val())
+            $.ajax({
+                url: "/login/verifyLogin",
+                type: "GET",
+                data: {
+                    "username": $("#username").val(),
+                    "password": $("#password").val()
+                },
+                success: function (result) {
+                    if (result.code === 100) {
+                        var url = result.extend.url;
+                        //alert(url);
+                        location.href = url;
+                    } else {
+                        show_validate_msg("#password", "error",
+                            "密码错误");
+                        $("#login_btn")
+                            .attr("disabled", "disabled");
+                    }
+                }
+            })
+        }
+
+    }
+
+    //显示校验结果的提示信息
+    function show_validate_msg(ele, status, msg) {
+        //清除当前元素的校验状态
+        $(ele).parent().removeClass("has-success has-error");
+        $(ele).next("span").text("");
+        if ("success" === status) {
+            $(ele).parent().addClass("has-success");
+            $(ele).next("span").text(msg);
+        } else if ("error" === status) {
+            $(ele).parent().addClass("has-error");
+            $(ele).next("span").text(msg);
+        }
+    }
+
+    /**生成一个随机数**/
+    function randomNum(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    /**生成一个随机色**/
+    function randomColor(min, max) {
+        var r = randomNum(min, max);
+        var g = randomNum(min, max);
+        var b = randomNum(min, max);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+
+    /**绘制验证码图片**/
+    function drawPic(show_num) {
+        var canvas = document.getElementById("canvas");
+        var width = canvas.width;
+        var height = canvas.height;
+        var ctx = canvas.getContext('2d');
+        ctx.textBaseline = 'bottom';
+
+        /**绘制背景色**/
+        ctx.fillStyle = randomColor(280, 280); //颜色若太深可能导致看不清
+        ctx.fillRect(0, 0, width, height);
+        /**绘制文字**/
+        var sCode = "A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0";
+        var aCode = sCode.split(",");
+        for (var i = 0; i < 4; i++) {
+            var txt = aCode[randomNum(0, aCode.length)];//得到随机的一个内容
+            show_num[i] = txt.toLowerCase();
+            ctx.fillStyle = randomColor(50, 160); //随机生成字体颜色
+            ctx.font = randomNum(15, 40) + 'px SimHei'; //随机生成字体大小
+            var x = 10 + i * 25;
+            var y = randomNum(25, 45);
+            var deg = randomNum(-45, 45);
+            //修改坐标原点和旋转角度
+            ctx.translate(x, y);
+            ctx.rotate(deg * Math.PI / 180);
+            ctx.fillText(txt, 0, 0);
+            //恢复坐标原点和旋转角度
+            ctx.rotate(-deg * Math.PI / 180);
+            ctx.translate(-x, -y);
+        }
+    }
+</script>
+</body>
+</html>

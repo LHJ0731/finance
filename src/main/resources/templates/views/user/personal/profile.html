@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>个人理财系统</title>
+    <!-- 引入bootstrap样式 -->
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <!--图标库-->
+    <link th:href="@{/lyear/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css"/>
+    <!--弹出框样式-->
+    <link th:href="@{/lyear/jconfirm/jquery-confirm.min.css}" rel="stylesheet" type="text/css"/>
+    <!--自定义样式-->
+    <link href="../lyear/css/style.min.css" th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
+    <style>
+        .fileinput-button{
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+        .fileinput-button input{
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            -ms-filter: alpha(opacity=0);
+        }
+    </style>
+</head>
+<body>
+<div class="lyear-layout-web">
+    <div class="lyear-layout-container">
+        <!--左侧导航-->
+        <div th:replace="user/common/leftbar::#leftbaraside"></div>
+        <!--头部信息-->
+        <div th:replace="user/common/topbar::#topbarheader"></div>
+
+        <!--页面主要内容-->
+        <main class="lyear-layout-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>个人信息</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="edit-avatar">
+                                    <img th:src="@{/images/{photo}.jpg(photo=${session.loginUser.username})}" th:alt="${session.loginUser.username}" class="img-avatar">
+                                    <div class="avatar-divider"></div>
+                                    <div class="edit-avatar-content">
+                                        <button class="btn btn-default" id="user-alter-img">修改头像</button>
+                                        <p class="m-0">选择一张你喜欢的图片，仅支持jpg格式的图片且上传图片大小不能超过2M。</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <form id="profileForm" class="site-form">
+                                    <div class="form-group">
+                                        <label>用户名</label>
+                                        <input type="text"
+                                               class="form-control" name="username" id="username"
+                                               th:value="${user.username}" disabled="disabled"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>真实姓名</label>
+                                        <input type="text" class="form-control" name="realname"
+                                               id="realname" placeholder="您的真实姓名还未填写"
+                                               th:value="${user.realname}">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>身份证号</label>
+                                        <input type="text" class="form-control" name="idcard"
+                                               id="idcard" placeholder="您的身份证号码还未填写"
+                                               th:value="${user.idcard}">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>交易密码</label>
+                                        <input type="email" class="form-control" name="paypwd"
+                                               id="paypwd" placeholder="您的交易密码（6位数字）还未设置"
+                                               th:value="${user.paypwd}">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>手机号</label>
+                                        <input type="text" class="form-control" name="phone"
+                                               id="phone" placeholder="您的手机号还未填写"
+                                               th:value="${user.phone}">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>电子邮箱</label>
+                                        <input type="email" class="form-control" name="email"
+                                               id="email" placeholder="您的邮箱地址还未填写"
+                                               th:value="${user.email}">
+                                        <span class="help-block"></span>
+                                    </div>
+                                    <button id="updateUserBtn" type="button"
+                                            class="btn btn-primary">保存
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 修改头像的模态框 -->
+                    <div class="modal fade" id="headimgAlterModal" tabindex="-1"
+                         role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">修改用户头像</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <!--要提交的表单 -->
+                                    <form class="form-horizontal" id="form-horizontal" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">选择头像：</label>
+                                            <div class="col-sm-6">
+                                                <div id="display_none" style="float: left"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <button class="fileinput-button" id="headimgbutton">选择新头像
+                                                    <input type="file" id="headimg" name="headimg" onchange="preview(this)" accept="image/jpeg">
+                                                </button>
+                                                <span class="help-block"></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            id="headimg_update_btn">修改
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!--End 页面主要内容-->
+    </div>
+</div>
+
+<!-- 引入jQuery和bootstrap的js -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+<!--滚动条插件-->
+<script th:src="@{/lyear/js/perfect-scrollbar.min.js}"></script>
+<!--弹出框js-->
+<script th:src="@{/lyear/jconfirm/jquery-confirm.min.js}"></script>
+<!--自定义js脚本-->
+<script th:src="@{/lyear/js/main.min.js}"></script>
+<script th:inline="javascript">
+
+    $(function () {
+        $("#realname").blur(checkRealname);
+        $("#idcard").blur(checkIdCard);
+        $("#paypwd").blur(checkPaypwd);
+        $("#phone").blur(checkPhone);
+        $("#email").blur(checkEmail);
+        $("#updateUserBtn").mousedown(function () {
+            if (checkRealname() && checkIdCard() && checkPaypwd() && checkPhone() && checkEmail()) {
+                updateUser();
+            }
+        });
+    });
+
+    //点击修改头像按钮打开修改头像模态框
+    $("#user-alter-img").click(function (){
+        $("#headimgAlterModal").modal({
+            //点击修改头像框背景不删除增加框
+            backdrop:"static"
+        });
+    });
+
+    //关闭模态框后重新加载模态框数据
+    $("#headimgAlterModal").on('hide.bs.modal',function() {
+        //关闭后重置表单数据
+        window.location.reload();
+    });
+
+    $("#headimgbutton").click(function (){
+        clean_form("#headimgAlterModal form");
+    })
+
+    //点击修改按钮时,上传头像
+    $("#headimg_update_btn").click(function (){
+        clean_form("#headimgAlterModal form");
+        console.log("点击了修改按钮");
+        var file=$('#headimg').get(0).files[0];
+        console.log(file);
+        if (file){
+            var username = [[${session.loginUser.username}]];
+            var formData = new FormData();//这里需要实例化一个FormData来进行文件上传
+            formData.append("file",file);
+            console.log(username);
+            $.ajax({
+                url:"/user/updateUserheadimg/"+ username,
+                type:"PUT",
+                data: formData,
+                processData : false,
+                contentType : false,
+                success: function (result){
+                    if (result.code === 100){
+                        $("#headimgAlterModal").modal('hide');
+                        $.alert("用户头像修改成功！");
+                    }else{
+                        $.alert("用户头像修改失败！");
+                    }
+                }
+            })
+            return true;
+        }else{
+            alert("请选择您的头像！");
+            show_validate_msg("#headimgbutton","error","请选择您的头像！");
+            return false;
+        }
+    })
+
+    //选中文件后展示图片
+    function preview(f){
+        var fileSize = 0;
+        fileSize = f.files[0].size;
+        var size = fileSize / 1024;
+        if(size>2000){
+            alert("附件不能大于2M");
+            f.value="";
+            return false;   //阻止submit提交
+        }
+        var name=f.value;
+        var fileType = name.substring(name.lastIndexOf(".")+1).toLowerCase();
+        if(fileType !="jpg") {
+            alert("请选择图片JPG格式文件上传)！");
+            f.value = "";
+            return false;   //阻止submit提交
+        }
+        var rd = new FileReader();//创建文件读取对象
+        var files = f.files[0];//获取file组件中的文件
+        rd.readAsDataURL(files);//文件读取装换为base64类型
+        //显示在页面上，取消display:none;
+        $("#display_none").show();
+        rd.onloadend = function(e) {
+            //加载完毕之后，在div中添加一个元素
+            $("#display_none").html("<img src='"+this.result+"' width=\"120\" height=\"120\"/>")
+        }
+    }
+
+    //校验用户真实姓名
+    function checkRealname() {
+        var realname = $("#realname").val();
+        if (realname.length === 0) {
+            show_validate_msg("#realname", "error", "请输入真实姓名");
+            return false;
+        }
+        //匹配汉字
+        var realnameReg = /^[\u4e00-\u9fa5]{0,}$/;
+        if (realnameReg.test(realname) === false) {
+            show_validate_msg("#realname", "error", "请输入中文字符");
+            return false;
+        }
+        return true;
+    }
+
+    //校验用户身份证号
+    function checkIdCard() {
+        var idcard = $("#idcard").val();
+        if (idcard.length === 0) {
+            show_validate_msg("#idcard", "error", "请输入身份证号");
+            return false;
+        }
+        //匹配身份证号
+        var idcardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (idcardReg.test(idcard) === false) {
+            show_validate_msg("#idcard", "error", "请输入正确的身份证号");
+            return false;
+        }
+        return true;
+    }
+
+    //校验用户交易密码
+    function checkPaypwd() {
+        var paypwd = $("#paypwd").val();
+        if (paypwd.length === 0) {
+            show_validate_msg("#paypwd", "error", "请输入交易密码");
+            return false;
+        }
+        //匹配6位正整数
+        var paypwdReg = /^\d{6}$/;
+        if (paypwdReg.test(paypwd) === false) {
+            show_validate_msg("#paypwd", "error", "请输入6位数字的交易密码");
+            return false;
+        }
+        return true;
+    }
+
+    //校验用户手机号码
+    function checkPhone() {
+        var phone = $("#phone").val();
+        if (phone.length === 0) {
+            show_validate_msg("#phone", "error", "请输入手机号码");
+            return false;
+        }
+        //匹配手机号
+        var phoneReg = /^1[3,5,8]\d{9}$/;
+        if (phoneReg.test(phone) === false) {
+            show_validate_msg("#phone", "error", "请输入正确的手机号码");
+            return false;
+        }
+        return true;
+    }
+
+    //校验用户电子邮箱
+    function checkEmail() {
+        var email = $("#email").val();
+        if (email.length === 0) {
+            show_validate_msg("#email", "error", "请输入用户邮箱");
+            return false;
+        }
+        //匹配邮箱
+        var emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        if (emailReg.test(email) === false) {
+            show_validate_msg("#email", "error", "请输入正确的电子邮箱");
+            return false;
+        }
+        return true;
+    }
+
+    //更新用户信息
+    function updateUser() {
+        var userId = [[${session.loginUser.id}]];
+        $.ajax({
+            url: "/user/updateUserProfile/" + userId,
+            type: "PUT",
+            data: $("#profileForm").serialize(),
+            success: function (result) {
+                if (result.code === 100) {
+                    $.alert('个人信息修改成功！');
+                    setTimeout(function () {
+                        location.href = "/user/personal/toProfile.html";
+                    }, 1000);
+                } else {
+                    $.alert('个人信息修改失败！');
+                }
+            }
+        })
+    }
+
+    //清空表单样式
+    function clean_form(ele) {
+        //清空表单样式
+        $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find(".help-block").text("");
+    }
+
+    //显示校验结果的提示信息
+    function show_validate_msg(ele, status, msg) {
+        //清除当前元素的校验状态
+        $(ele).parent().removeClass("has-success has-error");
+        $(ele).next("span").text("");
+        if ("success" == status) {
+            $(ele).parent().addClass("has-success");
+            $(ele).next("span").text(msg);
+        } else if ("error" == status) {
+            $(ele).parent().addClass("has-error");
+            $(ele).next("span").text(msg);
+        }
+    }
+
+</script>
+</body>
+</html>
