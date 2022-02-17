@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.Info;
 import com.bitzh.finance.entity.InfoExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface InfoMapper {

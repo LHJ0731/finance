@@ -241,7 +241,7 @@ public class UserController {
 
     @PutMapping("/user/updateUserheadimg/{username}")
     @ResponseBody
-    public Msg upload(@RequestParam("file") MultipartFile headimgFile, @PathVariable("username") String username,HttpServletRequest request, HttpSession session) {
+    public Msg upload(@RequestParam("file") MultipartFile headimgFile, @PathVariable("username") String username, HttpServletRequest request, HttpSession session) {
         System.out.println("进来了controller");
         if (!headimgFile.isEmpty() && headimgFile.getSize() > 0) {
             // 拿到文件名
@@ -251,12 +251,12 @@ public class UserController {
             // 输出文件夹绝对路径  -- 这里的绝对路径是相当于当前项目的路径而不是“容器”路径
             System.out.println(fileDir.getAbsolutePath());
             //文件改名
-            String filetype = filename.substring(filename.indexOf(".")+1);
+            String filetype = filename.substring(filename.indexOf(".") + 1);
             System.out.println(filetype);
-            String filehouzui= "."+filetype;
-            String newFilename= username + filehouzui;
+            String filehouzui = "." + filetype;
+            String newFilename = username + filehouzui;
             File file = new File(fileDir.getAbsolutePath() + File.pathSeparator + newFilename);
-            if (file.exists() && file.isFile()){
+            if (file.exists() && file.isFile()) {
                 System.out.println("该用户原头像文件存在，即将删除文件");
                 file.delete();
                 System.out.println("删除该原用户原头像文件成功");
@@ -271,7 +271,7 @@ public class UserController {
                 e.printStackTrace();
             }
             return Msg.success();
-        }else {
+        } else {
             return Msg.fail();
         }
     }

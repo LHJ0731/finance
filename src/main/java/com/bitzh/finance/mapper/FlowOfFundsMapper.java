@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.FlowOfFunds;
 import com.bitzh.finance.entity.FlowOfFundsExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface FlowOfFundsMapper {

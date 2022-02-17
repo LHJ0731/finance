@@ -51,8 +51,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
         //SpringBoot 2.x及以上版本会拦截静态资源请求，需要自己排除静态资源请求
         //拦截所有请求，不包括（"/index.html","/","/user/login"）登录界面请求和静态资源请求（"/asserts/**","/webjars/**"）
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/","/index.html","/toregister.html", "/login/**",
-                         "/bootstrap/**", "/images/**", "/lyear/**", "/js/**");
+                .excludePathPatterns("/", "/index.html", "/toregister.html", "/login/**",
+                        "/bootstrap/**", "/images/**", "/lyear/**", "/js/**");
     }
 
 }

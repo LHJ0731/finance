@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 public class FlowOfFundsServiceImpl implements FlowOfFundsService {
 
     @Autowired
     FlowOfFundsMapper flowOfFundsMapper;
+
     @Override
     @Transactional
     public Integer insertFlowOfFunds(FlowOfFunds flowOfFunds) {

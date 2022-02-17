@@ -14,12 +14,13 @@
     <!--自定义样式-->
     <link href="../lyear/css/style.min.css" th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
     <style>
-        .fileinput-button{
+        .fileinput-button {
             position: relative;
             display: inline-block;
             overflow: hidden;
         }
-        .fileinput-button input{
+
+        .fileinput-button input {
             position: absolute;
             left: 0;
             top: 0;
@@ -47,7 +48,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="edit-avatar">
-                                    <img th:src="@{/images/{photo}.jpg(photo=${session.loginUser.username})}" th:alt="${session.loginUser.username}" class="img-avatar">
+                                    <img th:src="@{/images/{photo}.jpg(photo=${session.loginUser.username})}"
+                                         th:alt="${session.loginUser.username}" class="img-avatar">
                                     <div class="avatar-divider"></div>
                                     <div class="edit-avatar-content">
                                         <button class="btn btn-default" id="user-alter-img">修改头像</button>
@@ -129,7 +131,8 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <button class="fileinput-button" id="headimgbutton">选择新头像
-                                                    <input type="file" id="headimg" name="headimg" onchange="preview(this)" accept="image/jpeg">
+                                                    <input type="file" id="headimg" name="headimg"
+                                                           onchange="preview(this)" accept="image/jpeg">
                                                 </button>
                                                 <span class="help-block"></span>
                                             </div>
@@ -179,70 +182,70 @@
     });
 
     //点击修改头像按钮打开修改头像模态框
-    $("#user-alter-img").click(function (){
+    $("#user-alter-img").click(function () {
         $("#headimgAlterModal").modal({
             //点击修改头像框背景不删除增加框
-            backdrop:"static"
+            backdrop: "static"
         });
     });
 
     //关闭模态框后重新加载模态框数据
-    $("#headimgAlterModal").on('hide.bs.modal',function() {
+    $("#headimgAlterModal").on('hide.bs.modal', function () {
         //关闭后重置表单数据
         window.location.reload();
     });
 
-    $("#headimgbutton").click(function (){
+    $("#headimgbutton").click(function () {
         clean_form("#headimgAlterModal form");
     })
 
     //点击修改按钮时,上传头像
-    $("#headimg_update_btn").click(function (){
+    $("#headimg_update_btn").click(function () {
         clean_form("#headimgAlterModal form");
         console.log("点击了修改按钮");
-        var file=$('#headimg').get(0).files[0];
+        var file = $('#headimg').get(0).files[0];
         console.log(file);
-        if (file){
+        if (file) {
             var username = [[${session.loginUser.username}]];
             var formData = new FormData();//这里需要实例化一个FormData来进行文件上传
-            formData.append("file",file);
+            formData.append("file", file);
             console.log(username);
             $.ajax({
-                url:"/user/updateUserheadimg/"+ username,
-                type:"PUT",
+                url: "/user/updateUserheadimg/" + username,
+                type: "PUT",
                 data: formData,
-                processData : false,
-                contentType : false,
-                success: function (result){
-                    if (result.code === 100){
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    if (result.code === 100) {
                         $("#headimgAlterModal").modal('hide');
                         $.alert("用户头像修改成功！");
-                    }else{
+                    } else {
                         $.alert("用户头像修改失败！");
                     }
                 }
             })
             return true;
-        }else{
+        } else {
             alert("请选择您的头像！");
-            show_validate_msg("#headimgbutton","error","请选择您的头像！");
+            show_validate_msg("#headimgbutton", "error", "请选择您的头像！");
             return false;
         }
     })
 
     //选中文件后展示图片
-    function preview(f){
+    function preview(f) {
         var fileSize = 0;
         fileSize = f.files[0].size;
         var size = fileSize / 1024;
-        if(size>2000){
+        if (size > 2000) {
             alert("附件不能大于2M");
-            f.value="";
+            f.value = "";
             return false;   //阻止submit提交
         }
-        var name=f.value;
-        var fileType = name.substring(name.lastIndexOf(".")+1).toLowerCase();
-        if(fileType !="jpg") {
+        var name = f.value;
+        var fileType = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
+        if (fileType != "jpg") {
             alert("请选择图片JPG格式文件上传)！");
             f.value = "";
             return false;   //阻止submit提交
@@ -252,9 +255,9 @@
         rd.readAsDataURL(files);//文件读取装换为base64类型
         //显示在页面上，取消display:none;
         $("#display_none").show();
-        rd.onloadend = function(e) {
+        rd.onloadend = function (e) {
             //加载完毕之后，在div中添加一个元素
-            $("#display_none").html("<img src='"+this.result+"' width=\"120\" height=\"120\"/>")
+            $("#display_none").html("<img src='" + this.result + "' width=\"120\" height=\"120\"/>")
         }
     }
 

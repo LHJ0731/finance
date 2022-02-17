@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.Bankcard;
 import com.bitzh.finance.entity.BankcardExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface BankcardMapper {

@@ -29,6 +29,7 @@ public class PermissionsController {
 
     /**
      * 跳转到用户权限管理界面（管理员）
+     *
      * @param model
      * @param session
      * @return
@@ -51,12 +52,13 @@ public class PermissionsController {
 
     /**
      * 更新用户权限
+     *
      * @param userPermissions
      * @return
      */
     @PutMapping("/admin/updateUserPermissions")
     @ResponseBody
-    public Msg updateUserPermissions(@RequestParam("userPermissions")String userPermissions){
+    public Msg updateUserPermissions(@RequestParam("userPermissions") String userPermissions) {
         String[] strings = userPermissions.split(";");
         //System.out.println(strings.length+":"+ Arrays.toString(strings));
         userPermissionsService.deleteAllUserPermissionsByUserId(1);
@@ -87,7 +89,7 @@ public class PermissionsController {
 
     @PutMapping("/admin/updateAdminPermissions")
     @ResponseBody
-    public Msg updateAdminPermissions(@RequestParam("adminPermissions")String adminPermissions){
+    public Msg updateAdminPermissions(@RequestParam("adminPermissions") String adminPermissions) {
         String[] strings = adminPermissions.split(";");
         //System.out.println(strings.length+":"+ Arrays.toString(strings));
         adminPermissionsService.deleteAllAdminPermissionsByAdminId(1);

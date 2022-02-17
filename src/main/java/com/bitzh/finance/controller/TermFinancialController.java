@@ -81,19 +81,21 @@ public class TermFinancialController {
 
     /**
      * 搜索期限理财产品
+     *
      * @param information
      * @return
      */
     @PostMapping("/user/selectTermFinancial")
     @ResponseBody
-    public Msg selectTermFinancial(@RequestParam("information")String information,Model model){
+    public Msg selectTermFinancial(@RequestParam("information") String information, Model model) {
         List<TermFinancial> list = termFinancialService.selectTermFinancialByInfo(information);
-        model.addAttribute("termFinancialList",list);
-        return Msg.success().add("termFinancialList",list);
+        model.addAttribute("termFinancialList", list);
+        return Msg.success().add("termFinancialList", list);
     }
 
     /**
      * 跳转到期限理财管理界面（管理员）
+     *
      * @param pageNum
      * @param pageSize
      * @param model
@@ -102,13 +104,13 @@ public class TermFinancialController {
      */
     @GetMapping("/admin/finance/toTermFinancial.html")
     public String toTermFinancialInfo(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                 Model model, HttpSession session) {
+                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                      Model model, HttpSession session) {
         PageHelper.startPage(pageNum, pageSize);
         List<TermFinancial> list = termFinancialService.selectAllTermFinancial();
         PageInfo<TermFinancial> pageInfo = new PageInfo<TermFinancial>(list, 5);
-        model.addAttribute("finacnePageInfo",pageInfo);
-        model.addAttribute("financeList",list);
+        model.addAttribute("finacnePageInfo", pageInfo);
+        model.addAttribute("financeList", list);
 
         model.addAttribute("activeUrl1", "financeActive");
         model.addAttribute("activeUrl2", "termfinancialActive");
@@ -123,9 +125,9 @@ public class TermFinancialController {
      */
     @PostMapping("/admin/addTermFinancial")
     @ResponseBody
-    public Msg addTermFinancial(TermFinancial termFinancial){
+    public Msg addTermFinancial(TermFinancial termFinancial) {
         Integer result = termFinancialService.insertTermFinancial(termFinancial);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -133,28 +135,29 @@ public class TermFinancialController {
 
     /**
      * 更新时回显信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/admin/getTermFinancialInfoById/{id}")
     @ResponseBody
-    public Msg getTermFinancialInfoById(@PathVariable("id") Integer id){
+    public Msg getTermFinancialInfoById(@PathVariable("id") Integer id) {
         TermFinancial termFinancial = termFinancialService.selectTermFinancialById(id);
-        return Msg.success().add("termFinancial",termFinancial);
+        return Msg.success().add("termFinancial", termFinancial);
     }
 
     /**
      * 更新
-     * @param id
      *
+     * @param id
      * @return
      */
     @PutMapping("/admin/updateTermFinancial/{id}")
     @ResponseBody
-    public Msg updateTermFinancial(@PathVariable("id") Integer id,TermFinancial termFinancial){
+    public Msg updateTermFinancial(@PathVariable("id") Integer id, TermFinancial termFinancial) {
         termFinancial.setId(id);
         Integer result = termFinancialService.updateTermFinancial(termFinancial);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -162,14 +165,15 @@ public class TermFinancialController {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/admin/deleteTermFinancialById/{id}")
     @ResponseBody
-    public Msg deleteTermFinancialById(@PathVariable("id") Integer id){
+    public Msg deleteTermFinancialById(@PathVariable("id") Integer id) {
         Integer result = termFinancialService.deleteTermFinancialById(id);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();

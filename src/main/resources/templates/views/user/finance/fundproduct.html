@@ -36,9 +36,12 @@
                                 <div class="row m-b-10">
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" aria-label="Text input with multiple buttons" id="information" placeholder="请输入关键词...">
+                                            <input type="text" class="form-control"
+                                                   aria-label="Text input with multiple buttons" id="information"
+                                                   placeholder="请输入关键词...">
                                             <div class="input-group-btn">
-                                                <button type="button" class="btn btn-default" aria-label="Help" data-toggle="tooltip" data-placement="top" title="可输入基金代码或基金简称">
+                                                <button type="button" class="btn btn-default" aria-label="Help"
+                                                        data-toggle="tooltip" data-placement="top" title="可输入基金代码或基金简称">
                                                     <span class="mdi mdi-alert-circle-outline"></span>
                                                 </button>
                                                 <button type="button" class="btn btn-default" id="search">搜索</button>
@@ -67,15 +70,18 @@
                                             <td th:text="${fpStat.index+1}"></td>
                                             <td th:text="${fp.code}"></td>
                                             <td th:text="${fp.funddesc}"></td>
-                                            <td th:if="${fp.type==1}" th:text="股票型基金"></td><td th:if="${fp.type==2}" th:text="债券型基金"></td>
-                                            <td th:if="${fp.type==3}" th:text="货币型基金"></td><td th:if="${fp.type==4}" th:text="混合型基金"></td>
+                                            <td th:if="${fp.type==1}" th:text="股票型基金"></td>
+                                            <td th:if="${fp.type==2}" th:text="债券型基金"></td>
+                                            <td th:if="${fp.type==3}" th:text="货币型基金"></td>
+                                            <td th:if="${fp.type==4}" th:text="混合型基金"></td>
                                             <td th:text="${#numbers.formatDecimal(fp.dailygrowth*100,1,2)}+'%'"></td>
                                             <td th:text="${#numbers.formatDecimal(fp.monthlygrowth*100,1,2)}+'%'"></td>
                                             <td th:text="${#numbers.formatDecimal(fp.annualgrowth*100,1,2)}+'%'"></td>
                                             <td th:text="${#numbers.formatDecimal(fp.leastmoney,1,2)}+'元'"></td>
                                             <td th:text="${fp.investerm}"></td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm buy_btn" th:attr="buyBtnId=${fp.id},buyBtnName=${fp.funddesc}">
+                                                <button class="btn btn-primary btn-sm buy_btn"
+                                                        th:attr="buyBtnId=${fp.id},buyBtnName=${fp.funddesc}">
                                                     <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 投资
                                                 </button>
                                             </td>
@@ -108,30 +114,30 @@
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script th:inline="javascript">
-    $(document).on("click",".buy_btn",function () {
+    $(document).on("click", ".buy_btn", function () {
         var fundProductId = $(this).attr("buyBtnId");
         var userId = [[${session.loginUser.id}]];
         //alert(userId);
         var name = $(this).attr("buyBtnName");
         $.alert({
             title: '提示：',
-            content: "确定买入 <strong>"+name+"</strong> 吗？",
+            content: "确定买入 <strong>" + name + "</strong> 吗？",
             buttons: {
                 confirm: {
                     text: '确认',
                     btnClass: 'btn-primary',
-                    action: function(){
+                    action: function () {
                         $.ajax({
-                            url : "/user/buyFundProduct",
-                            type : "POST",
-                            data : {
-                                "fundProductId":fundProductId,
-                                "userId":userId
+                            url: "/user/buyFundProduct",
+                            type: "POST",
+                            data: {
+                                "fundProductId": fundProductId,
+                                "userId": userId
                             },
-                            success : function(result) {
-                                if (result.code===100){
+                            success: function (result) {
+                                if (result.code === 100) {
                                     $.alert('买入成功!');
-                                }else {
+                                } else {
                                     $.alert('买入失败!');
                                 }
                             }
@@ -149,8 +155,8 @@
         });
     })
 
-    $("#search").click(function (){
-        var information=$("#information").val();
+    $("#search").click(function () {
+        var information = $("#information").val();
         $.ajax({
             url: "/user/selectFundProduct",
             type: "POST",
@@ -158,47 +164,47 @@
                 "information": information
             },
             success: function (result) {
-                if (result.code === 100){
+                if (result.code === 100) {
                     $("#tab_id tr:gt(0)").empty();
                     var fundProductList = result.extend.fundProductList;
-                    for (let fp =0; fp < fundProductList.length; fp++){
-                        var dailygrowth = Number(fundProductList[fp].dailygrowth*100).toFixed(2);
+                    for (let fp = 0; fp < fundProductList.length; fp++) {
+                        var dailygrowth = Number(fundProductList[fp].dailygrowth * 100).toFixed(2);
                         dailygrowth += "%";
-                        var monthlygrowth = Number(fundProductList[fp].monthlygrowth*100).toFixed(2);
+                        var monthlygrowth = Number(fundProductList[fp].monthlygrowth * 100).toFixed(2);
                         monthlygrowth += "%";
-                        var annualgrowth = Number(fundProductList[fp].annualgrowth*100).toFixed(2);
+                        var annualgrowth = Number(fundProductList[fp].annualgrowth * 100).toFixed(2);
                         annualgrowth += "%";
                         var fundProductType = "";
-                        if (fundProductList[fp].type == 1){
+                        if (fundProductList[fp].type == 1) {
                             fundProductType = "股票型基金";
-                        }else if (fundProductList[fp].type == 2){
+                        } else if (fundProductList[fp].type == 2) {
                             fundProductType = "债券型基金";
-                        }else if (fundProductList[fp].type == 3){
+                        } else if (fundProductList[fp].type == 3) {
                             fundProductType = "货币型基金";
-                        }else if (fundProductList[fp].type == 4){
+                        } else if (fundProductList[fp].type == 4) {
                             fundProductType = "混合型基金";
                         }
                         var leastmoney = fundProductList[fp].leastmoney.toFixed(2);
                         var rowTr = document.createElement('tr');
-                        rowTr.className="search_show";
-                        var child = "<td>"+ fundProductList[fp].id+"</td>" +
-                            "<td>"+ fundProductList[fp].code+"</td>" +
-                            "<td>"+ fundProductList[fp].funddesc+"</td>" +
-                            "<td>"+ fundProductType+"</td>\n" +
-                            "<td>"+dailygrowth+"</td>" +
-                            "<td>"+monthlygrowth+"</td>" +
-                            "<td>"+annualgrowth+"</td>" +
-                            "<td>"+leastmoney+"元</td>" +
-                            "<td>"+fundProductList[fp].investerm+"</td>" +
+                        rowTr.className = "search_show";
+                        var child = "<td>" + fundProductList[fp].id + "</td>" +
+                            "<td>" + fundProductList[fp].code + "</td>" +
+                            "<td>" + fundProductList[fp].funddesc + "</td>" +
+                            "<td>" + fundProductType + "</td>\n" +
+                            "<td>" + dailygrowth + "</td>" +
+                            "<td>" + monthlygrowth + "</td>" +
+                            "<td>" + annualgrowth + "</td>" +
+                            "<td>" + leastmoney + "元</td>" +
+                            "<td>" + fundProductList[fp].investerm + "</td>" +
                             "<td>" +
-                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\""+fundProductList[fp].id+"\" buyBtnName=\""+fundProductList[fp].funddesc+"\">" +
+                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\"" + fundProductList[fp].id + "\" buyBtnName=\"" + fundProductList[fp].funddesc + "\">" +
                             "<span class=\"glyphicon glyphicon-usd\" aria-hidden=\"true\"></span> 投资" +
                             "</button>" +
                             "</td>";
-                        rowTr.innerHTML=child;
+                        rowTr.innerHTML = child;
                         $("#tab_id").append(rowTr);
                     }
-                }else {
+                } else {
                     alert("查询失败");
                 }
             }

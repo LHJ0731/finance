@@ -29,29 +29,31 @@ public class ChangeMoneyController {
 
     /**
      * 跳转到零钱理财界面（用户）
+     *
      * @param model
      * @return
      */
     @RequestMapping("/user/finance/toChangeMoney.html")
-    public String toChangemoney(Model model){
+    public String toChangemoney(Model model) {
         List<ChangeMoney> list = changeMoneyService.selectAllChangeMoney();
-        model.addAttribute("changeMoneyList",list);
-        model.addAttribute("pageTopBarInfo","零钱理财界面");
-        model.addAttribute("activeUrl1","financeActive");
-        model.addAttribute("activeUrl2","changeMoneyActive");
+        model.addAttribute("changeMoneyList", list);
+        model.addAttribute("pageTopBarInfo", "零钱理财界面");
+        model.addAttribute("activeUrl1", "financeActive");
+        model.addAttribute("activeUrl2", "changeMoneyActive");
         return "/user/finance/changemoney";
     }
 
     /**
      * 买入零钱理财产品
+     *
      * @param changeMoneyId
      * @param userId
      * @return
      */
     @PostMapping("/user/buyChangeMoney")
     @ResponseBody
-    public Msg buyChangeMoney(@RequestParam("changeMoneyId")Integer changeMoneyId,
-                              @RequestParam("userId") Integer userId ){
+    public Msg buyChangeMoney(@RequestParam("changeMoneyId") Integer changeMoneyId,
+                              @RequestParam("userId") Integer userId) {
         ChangeMoney cm = changeMoneyService.selectChangeMoneyById(changeMoneyId);
         UserChangeMoney ucm = new UserChangeMoney();
         ucm.setUserid(userId);
@@ -61,7 +63,7 @@ public class ChangeMoneyController {
         ucm.setProfit(cm.getAnnualincome().multiply(cm.getInvesmoney()));
         ucm.setStatus(1);
         Integer result = userChangeMoneyService.insertUserChangeMoney(ucm);
-        if (result==1){
+        if (result == 1) {
             FlowOfFunds fof = new FlowOfFunds();
             fof.setUserid(userId);
             fof.setFlowmoney(cm.getInvesmoney());
@@ -71,26 +73,28 @@ public class ChangeMoneyController {
             fof.setFunddesc("无");
             flowOfFundsService.insertFlowOfFunds(fof);
             return Msg.success();
-        }else {
+        } else {
             return Msg.fail();
         }
     }
 
     /**
      * 搜索零钱理财产品
+     *
      * @param information
      * @return
      */
     @PostMapping("/user/selectChangeMoney")
     @ResponseBody
-    public Msg selectChangeMoney(@RequestParam("information")String information,Model model){
+    public Msg selectChangeMoney(@RequestParam("information") String information, Model model) {
         List<ChangeMoney> list = changeMoneyService.selectChangeMoneyByInfo(information);
-        model.addAttribute("changeMoneyList",list);
-        return Msg.success().add("changeMoneyList",list);
+        model.addAttribute("changeMoneyList", list);
+        return Msg.success().add("changeMoneyList", list);
     }
 
     /**
      * 跳转到零钱理财管理界面（管理员）
+     *
      * @param pageNum
      * @param pageSize
      * @param model
@@ -104,8 +108,8 @@ public class ChangeMoneyController {
         PageHelper.startPage(pageNum, pageSize);
         List<ChangeMoney> list = changeMoneyService.selectAllChangeMoney();
         PageInfo<ChangeMoney> pageInfo = new PageInfo<ChangeMoney>(list, 5);
-        model.addAttribute("finacnePageInfo",pageInfo);
-        model.addAttribute("financeList",list);
+        model.addAttribute("finacnePageInfo", pageInfo);
+        model.addAttribute("financeList", list);
 
         model.addAttribute("activeUrl1", "financeActive");
         model.addAttribute("activeUrl2", "changemoneyActive");
@@ -115,14 +119,15 @@ public class ChangeMoneyController {
 
     /**
      * 新增零钱理财产品
+     *
      * @param changeMoney
      * @return
      */
     @PostMapping("/admin/addChangeMoney")
     @ResponseBody
-    public Msg addChangeMoney(ChangeMoney changeMoney){
+    public Msg addChangeMoney(ChangeMoney changeMoney) {
         Integer result = changeMoneyService.insertChangeMoney(changeMoney);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -130,28 +135,30 @@ public class ChangeMoneyController {
 
     /**
      * 更新时回显信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/admin/getChangeMoneyInfoById/{id}")
     @ResponseBody
-    public Msg getChangeMoneyInfoById(@PathVariable("id") Integer id){
+    public Msg getChangeMoneyInfoById(@PathVariable("id") Integer id) {
         ChangeMoney changeMoney = changeMoneyService.selectChangeMoneyById(id);
-        return Msg.success().add("changeMoney",changeMoney);
+        return Msg.success().add("changeMoney", changeMoney);
     }
 
     /**
      * 更新
+     *
      * @param id
      * @param changeMoney
      * @return
      */
     @PutMapping("/admin/updateChangeMoney/{id}")
     @ResponseBody
-    public Msg updateChangeMoney(@PathVariable("id") Integer id,ChangeMoney changeMoney){
+    public Msg updateChangeMoney(@PathVariable("id") Integer id, ChangeMoney changeMoney) {
         changeMoney.setId(id);
         Integer result = changeMoneyService.updateChangeMoney(changeMoney);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -159,14 +166,15 @@ public class ChangeMoneyController {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/admin/deleteChangeMoneyById/{id}")
     @ResponseBody
-    public Msg deleteChangeMoneyById(@PathVariable("id") Integer id){
+    public Msg deleteChangeMoneyById(@PathVariable("id") Integer id) {
         Integer result = changeMoneyService.deleteChangeMoneyById(id);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();

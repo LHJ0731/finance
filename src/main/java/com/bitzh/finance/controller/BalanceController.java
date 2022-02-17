@@ -35,4 +35,5 @@ public class BalanceController {
         model.addAttribute("activeUrl2", "balanceActive");
         return "/user/personal/balance";
     }
+
 }

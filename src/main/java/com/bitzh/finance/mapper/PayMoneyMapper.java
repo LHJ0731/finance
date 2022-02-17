@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.PayMoney;
 import com.bitzh.finance.entity.PayMoneyExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PayMoneyMapper {

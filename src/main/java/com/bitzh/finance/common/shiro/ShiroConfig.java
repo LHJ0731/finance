@@ -49,7 +49,7 @@ public class ShiroConfig {
         filterMap.put("/images/**", "anon");
         filterMap.put("/lyear/**", "anon");
         filterMap.put("/js/**", "anon");
-        filterMap.put("/druid/**","anon");
+        filterMap.put("/druid/**", "anon");
         //对所有请求认证
         //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截
         filterMap.put("/**", "authc");

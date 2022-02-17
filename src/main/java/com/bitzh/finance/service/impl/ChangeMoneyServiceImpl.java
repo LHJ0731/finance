@@ -47,5 +47,7 @@ public class ChangeMoneyServiceImpl implements ChangeMoneyService {
 
     @Override
     @Transactional
-    public List<ChangeMoney> selectChangeMoneyByInfo(String information) { return changeMoneyMapper.selectChangeMoneyByInfo(information); }
+    public List<ChangeMoney> selectChangeMoneyByInfo(String information) {
+        return changeMoneyMapper.selectChangeMoneyByInfo(information);
+    }
 }

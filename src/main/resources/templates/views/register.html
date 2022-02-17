@@ -16,12 +16,14 @@
         .lear-wrapper {
             position: relative;
         }
+
         .lear-login {
             display: flex !important;
             min-height: 100vh;
             align-items: center !important;
             justify-content: center !important;
         }
+
         .login-center {
             background: #fff;
             min-width: 38.25rem;
@@ -29,13 +31,16 @@
             border-radius: 5px;
             margin: 2.85714em 0;
         }
+
         .login-header {
             margin-bottom: 1.5rem !important;
         }
+
         .login-center .has-feedback.feedback-left .form-control {
             padding-left: 38px;
             padding-right: 12px;
         }
+
         .login-center .has-feedback.feedback-left .form-control-feedback {
             left: 0;
             right: auto;
@@ -45,6 +50,7 @@
             z-index: 4;
             color: #dcdcdc;
         }
+
         .login-center .has-feedback.feedback-left.row .form-control-feedback {
             left: 15px;
         }
@@ -188,12 +194,12 @@
             return false;
         } else {
             $.ajax({
-                url: "/login/loginVerifyUsername/"+username,
+                url: "/login/loginVerifyUsername/" + username,
                 type: "GET",
                 success: function (result) {
                     if (result.code === 100) {
                         show_validate_msg("#username", "error",
-                            "用户"+username+"已存在");
+                            "用户" + username + "已存在");
                         $("#login_btn")
                             .attr("disabled", "disabled");
                         lock = false;
@@ -216,17 +222,17 @@
             show_validate_msg("#repassword", "error", "重复密码为空");
             $("#login_btn").attr("disabled", "disabled");
             return false;
-        } else if (password===""){
+        } else if (password === "") {
             show_validate_msg("#repassword", "error", "上一项密码为空");
             $("#login_btn").attr("disabled", "disabled");
             return false;
-        }else{
-            if (repassword===password){
+        } else {
+            if (repassword === password) {
                 show_validate_msg("#repassword", "success",
                     "重复密码相同");
                 $("#login_btn").removeAttr("disabled");
                 return true;
-            }else{
+            } else {
                 show_validate_msg("#repassword", "error", "两次密码不相同");
                 $("#login_btn").attr("disabled", "disabled");
                 return false;

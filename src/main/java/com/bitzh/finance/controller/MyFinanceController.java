@@ -50,7 +50,7 @@ public class MyFinanceController {
         model.addAttribute("pageTopBarInfo", "我的理财界面");
         model.addAttribute("activeUrl1", "personalActive");
         model.addAttribute("activeUrl2", "myFinanceActive");
-        if (session.getAttribute("myFinanceActiveUrl")==null){
+        if (session.getAttribute("myFinanceActiveUrl") == null) {
             session.setAttribute("myFinanceActiveUrl", "changeMoneyActive");
         }
         return "/user/personal/myfinance";
@@ -99,7 +99,7 @@ public class MyFinanceController {
 
     @PutMapping("/user/revokeUserFundProduct")
     @ResponseBody
-    public Msg revokeUserFundProduct(@RequestParam("userFundProductId") Integer userFundProductId,HttpSession session) {
+    public Msg revokeUserFundProduct(@RequestParam("userFundProductId") Integer userFundProductId, HttpSession session) {
 
         UserFundProduct ufp = userFundProductService.selectUserFundProductById(userFundProductId);
         ufp.setStatus(3);

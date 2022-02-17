@@ -45,21 +45,22 @@ public class MainController {
 
     /**
      * 错误界面返回
+     *
      * @param session
      * @return
      */
     @GetMapping("/toindex.html")
-    public String toIndex(HttpSession session){
+    public String toIndex(HttpSession session) {
 
         //TODO (用户和管理员同时登陆)
-        if (session.getAttribute("loginUser")!=null&&session.getAttribute("loginAdmin")!=null){
+        if (session.getAttribute("loginUser") != null && session.getAttribute("loginAdmin") != null) {
             return "redirect:/index.html";
         }
 
-        if (session.getAttribute("loginUser")!=null){
+        if (session.getAttribute("loginUser") != null) {
             return "redirect:/user/index.html";
         }
-        if (session.getAttribute("loginAdmin")!=null){
+        if (session.getAttribute("loginAdmin") != null) {
             return "redirect:/admin/index.html";
         }
         return "redirect:/index.html";
@@ -67,67 +68,70 @@ public class MainController {
 
     /**
      * 管理员首页
+     *
      * @param model
      * @return
      */
     @GetMapping("/admin/index.html")
     public String toAdminIndex(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                               Model model){
+                               Model model) {
         // 引入PageHelper插件，在查询之前调用startPage方法，传入页码以及每页大小
         PageHelper.startPage(pageNum, pageSize);
         List<User> list = userService.selectUserByStatusDesc();
         // 使用PageInfo包装查询后的结果，并交给页面处理
         // PageInfo封装了详细的分页信息，包括我们查询出来的数据，还可以传入连续显示的页数（5）
         PageInfo<User> pageInfo = new PageInfo<User>(list, 5);
-        model.addAttribute("userPageInfo",pageInfo);
-        model.addAttribute("userList",list);
+        model.addAttribute("userPageInfo", pageInfo);
+        model.addAttribute("userList", list);
 
-        model.addAttribute("pageTopBarInfo","系统首页");
-        model.addAttribute("activeUrl","indexActive");
+        model.addAttribute("pageTopBarInfo", "系统首页");
+        model.addAttribute("activeUrl", "indexActive");
         return "admin/main";
     }
 
     /**
      * 用户首页
+     *
      * @param model
      * @return
      */
     @GetMapping("/user/index.html")
-    public String toUserIndex(Model model){
+    public String toUserIndex(Model model) {
         List<News> list = newsService.selectAllNews();
 
-        model.addAttribute("newsList",list);
-        model.addAttribute("pageTopBarInfo","系统首页");
-        model.addAttribute("activeUrl","indexActive");
+        model.addAttribute("newsList", list);
+        model.addAttribute("pageTopBarInfo", "系统首页");
+        model.addAttribute("activeUrl", "indexActive");
         return "user/main";
     }
 
 
     /**
      * 注销（只有正常退出的用户可以注销）
+     *
      * @param session
      * @return
      */
     @GetMapping("/logout")
-    public String logout(@RequestParam("logout")String logout, HttpSession session) {
+    public String logout(@RequestParam("logout") String logout, HttpSession session) {
 
-        if ("userLogout".equals(logout)){
+        if ("userLogout".equals(logout)) {
             User loginUser = (User) session.getAttribute("loginUser");
             User user = userService.selectUserById(loginUser.getId());
             user.setStatus(0);
             userService.updateUser(user);
             session.removeAttribute("loginUser");
-            System.out.println("logout==>"+user.getUsername()+"已退出系统");
+            System.out.println("logout==>" + user.getUsername() + "已退出系统");
             return "login";
         }
-        if ("adminLogout".equals(logout)){
+        if ("adminLogout".equals(logout)) {
             Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
-            Admin admin =adminService.selectAdminById(loginAdmin.getId());
+            Admin admin = adminService.selectAdminById(loginAdmin.getId());
             admin.setStatus(0);
             adminService.updateAdmin(admin);
             session.removeAttribute("loginAdmin");
-            System.out.println("logout==>"+admin.getUsername()+"已退出系统");
+            System.out.println("logout==>" + admin.getUsername() + "已退出系统");
             return "login";
         }
         return "login";

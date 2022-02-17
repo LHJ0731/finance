@@ -14,6 +14,7 @@ import java.util.List;
 public class UserTermFinancialServiceImpl implements UserTermFinancialService {
     @Autowired
     UserTermFinancialMapper userTermFinancialMapper;
+
     @Override
     @Transactional
     public Integer insertUserTermFinancial(UserTermFinancial userTermFinancial) {

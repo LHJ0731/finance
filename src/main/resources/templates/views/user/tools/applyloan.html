@@ -39,16 +39,20 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="amount">借款金额（元）</label>
-                                            <input class="form-control" type="text" id="amount" name="amount" placeholder="请输入要申请的借款金额..">
+                                            <input class="form-control" type="text" id="amount" name="amount"
+                                                   placeholder="请输入要申请的借款金额..">
                                             <span class="help-block"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="rate">年借款利率</label>
-                                            <input class="form-control" type="text" id="rate" name="rate" th:placeholder="${#numbers.formatDecimal(0.0123*100,1,2)}+'%'" disabled>
+                                            <input class="form-control" type="text" id="rate" name="rate"
+                                                   th:placeholder="${#numbers.formatDecimal(0.0123*100,1,2)}+'%'"
+                                                   disabled>
                                         </div>
                                         <div class="form-group">
                                             <label for="term">借款期限（天）</label>
-                                            <input class="form-control" type="text" id="term" name="term" placeholder="请输入要申请的借款期限..">
+                                            <input class="form-control" type="text" id="term" name="term"
+                                                   placeholder="请输入要申请的借款期限..">
                                             <span class="help-block"></span>
                                         </div>
                                         <div class="form-group">
@@ -79,10 +83,10 @@
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script th:inline="javascript">
 
-    $(function() {
+    $(function () {
         $("#amount").blur(checkAmount);
         $("#term").blur(checkTerm);
-        $("#submit").mousedown(function() {
+        $("#submit").mousedown(function () {
             if (checkAmount() && checkTerm()) {
                 applyLoan();
             }
@@ -128,21 +132,21 @@
         var amount = $("#amount").val();
         $.alert({
             title: '提示：',
-            content: "确定借款 <strong>"+amount+"</strong>元 吗？",
+            content: "确定借款 <strong>" + amount + "</strong>元 吗？",
             buttons: {
                 confirm: {
                     text: '确认',
                     btnClass: 'btn-primary',
-                    action: function(){
+                    action: function () {
                         $.ajax({
                             url: "/user/applyLoan",
                             type: "POST",
                             data: {
                                 "amout": amount,
-                                "term":$("#term").val(),
-                                "rate":"0.0123"
+                                "term": $("#term").val(),
+                                "rate": "0.0123"
                             },
-                            success: function(result) {
+                            success: function (result) {
                                 if (result.code === 100) {
                                     $.alert('申请成功!请等待管理员审核');
                                     setTimeout(function () {

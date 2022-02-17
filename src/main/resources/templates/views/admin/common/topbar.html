@@ -26,13 +26,14 @@
                 <li class="dropdown dropdown-profile" style="margin-right: 20px">
                     <a href="javascript:void(0)" data-toggle="dropdown">
                         <img id="img" class="img-avatar img-avatar-48 m-r-10" src="./images/admin.jpg"
-                            th:src="@{/images/admin.jpg}" th:alt="${session.loginAdmin.username}"/>
+                             th:src="@{/images/admin.jpg}" th:alt="${session.loginAdmin.username}"/>
                         <span th:text="${session.loginAdmin.username}">
                             <span class="caret"></span>
 						</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a th:href="@{/logout(logout='adminLogout')}"><i class="mdi mdi-logout-variant"></i> 退出登录</a></li>
+                        <li><a th:href="@{/logout(logout='adminLogout')}"><i class="mdi mdi-logout-variant"></i>
+                            退出登录</a></li>
                     </ul>
 
                     <!--切换主题配色-->

@@ -36,9 +36,12 @@
                                 <div class="row m-b-10">
                                     <div class="col-lg-6">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" aria-label="Text input with multiple buttons" id="information" placeholder="请输入关键词...">
+                                            <input type="text" class="form-control"
+                                                   aria-label="Text input with multiple buttons" id="information"
+                                                   placeholder="请输入关键词...">
                                             <div class="input-group-btn">
-                                                <button type="button" class="btn btn-default" aria-label="Help" data-toggle="tooltip" data-placement="top" title="可输入期限理财产品名称">
+                                                <button type="button" class="btn btn-default" aria-label="Help"
+                                                        data-toggle="tooltip" data-placement="top" title="可输入期限理财产品名称">
                                                     <span class="mdi mdi-alert-circle-outline"></span>
                                                 </button>
                                                 <button type="button" class="btn btn-default" id="search">搜索</button>
@@ -63,12 +66,14 @@
                                         <tr th:each="tf:${termFinancialList}" class="search_show">
                                             <td th:text="${tfStat.index+1}"></td>
                                             <td th:text="${tf.name}"></td>
-                                            <td th:if="${tf.profit==1}" th:text="收益型"></td><td th:if="${tf.profit==2}" th:text="净值型"></td>
+                                            <td th:if="${tf.profit==1}" th:text="收益型"></td>
+                                            <td th:if="${tf.profit==2}" th:text="净值型"></td>
                                             <td th:text="${#numbers.formatDecimal(tf.annualincome*100,1,2)}+'%'"></td>
                                             <td th:text="${#numbers.formatDecimal(tf.leastmoney,1,2)}+'元'"></td>
                                             <td th:text="${tf.investerm}"></td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm buy_btn" th:attr="buyBtnId=${tf.id},buyBtnName=${tf.name}">
+                                                <button class="btn btn-primary btn-sm buy_btn"
+                                                        th:attr="buyBtnId=${tf.id},buyBtnName=${tf.name}">
                                                     <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 投资
                                                 </button>
                                             </td>
@@ -101,30 +106,30 @@
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script th:inline="javascript">
-    $(document).on("click",".buy_btn",function () {
+    $(document).on("click", ".buy_btn", function () {
         var termFinancialId = $(this).attr("buyBtnId");
         var userId = [[${session.loginUser.id}]];
         //alert(userId);
         var name = $(this).attr("buyBtnName");
         $.alert({
             title: '提示：',
-            content: "确定买入 <strong>"+name+"</strong> 吗？",
+            content: "确定买入 <strong>" + name + "</strong> 吗？",
             buttons: {
                 confirm: {
                     text: '确认',
                     btnClass: 'btn-primary',
-                    action: function(){
+                    action: function () {
                         $.ajax({
-                            url : "/user/buyTermFinancial",
-                            type : "POST",
-                            data : {
-                                "termFinancialId":termFinancialId,
-                                "userId":userId
+                            url: "/user/buyTermFinancial",
+                            type: "POST",
+                            data: {
+                                "termFinancialId": termFinancialId,
+                                "userId": userId
                             },
-                            success : function(result) {
-                                if (result.code===100){
+                            success: function (result) {
+                                if (result.code === 100) {
                                     $.alert('买入成功!');
-                                }else {
+                                } else {
                                     $.alert('买入失败!');
                                 }
                             }
@@ -142,8 +147,8 @@
         });
     })
 
-    $("#search").click(function (){
-        var information=$("#information").val();
+    $("#search").click(function () {
+        var information = $("#information").val();
         $.ajax({
             url: "/user/selectTermFinancial",
             type: "POST",
@@ -151,36 +156,36 @@
                 "information": information
             },
             success: function (result) {
-                if (result.code === 100){
+                if (result.code === 100) {
                     $("#tab_id tr:gt(0)").empty();
                     var termFinancialList = result.extend.termFinancialList;
-                    for (let tf =0; tf < termFinancialList.length; tf++){
-                        var  profit = "";
-                        if (termFinancialList[tf].profit == 1){
+                    for (let tf = 0; tf < termFinancialList.length; tf++) {
+                        var profit = "";
+                        if (termFinancialList[tf].profit == 1) {
                             profit = "收益型";
-                        }else if (termFinancialList[tf].profit == 2){
+                        } else if (termFinancialList[tf].profit == 2) {
                             profit = "净值型";
                         }
-                        var annualincome = Number(termFinancialList[tf].annualincome*100).toFixed(2);
+                        var annualincome = Number(termFinancialList[tf].annualincome * 100).toFixed(2);
                         annualincome += "%";
                         var leastmoney = termFinancialList[tf].leastmoney.toFixed(2);
                         var rowTr = document.createElement('tr');
-                        rowTr.className="search_show";
-                        var child = "<td>"+termFinancialList[tf].id+"</td>" +
-                            "<td>"+termFinancialList[tf].name+"</td>" +
-                            "<td>"+profit+"</td>" +
-                            "<td>"+annualincome+"</td>" +
-                            "<td>"+leastmoney+"元</td>" +
-                            "<td>"+termFinancialList[tf].investerm+"</td>" +
+                        rowTr.className = "search_show";
+                        var child = "<td>" + termFinancialList[tf].id + "</td>" +
+                            "<td>" + termFinancialList[tf].name + "</td>" +
+                            "<td>" + profit + "</td>" +
+                            "<td>" + annualincome + "</td>" +
+                            "<td>" + leastmoney + "元</td>" +
+                            "<td>" + termFinancialList[tf].investerm + "</td>" +
                             "<td>" +
-                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\""+termFinancialList[tf].id+"\" buyBtnName=\""+termFinancialList[tf].name+"\">" +
+                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\"" + termFinancialList[tf].id + "\" buyBtnName=\"" + termFinancialList[tf].name + "\">" +
                             "<span class=\"glyphicon glyphicon-usd\" aria-hidden=\"true\"></span> 投资" +
                             "</button>" +
                             "</td>";
-                        rowTr.innerHTML=child;
+                        rowTr.innerHTML = child;
                         $("#tab_id").append(rowTr);
                     }
-                }else {
+                } else {
                     alert("查询失败");
                 }
             }

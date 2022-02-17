@@ -15,6 +15,7 @@ public class BankCardServiceImpl implements BankCardService {
 
     @Autowired
     BankcardMapper bankcardMapper;
+
     @Override
     public List<Bankcard> selectAllBankCard() {
         return bankcardMapper.selectByExampleWithUser(null);

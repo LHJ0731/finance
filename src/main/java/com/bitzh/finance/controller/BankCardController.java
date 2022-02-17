@@ -121,6 +121,7 @@ public class BankCardController {
 
     /**
      * 跳转到银行卡管理界面（管理员）
+     *
      * @param pageNum
      * @param pageSize
      * @param model
@@ -134,8 +135,8 @@ public class BankCardController {
         PageHelper.startPage(pageNum, pageSize);
         List<Bankcard> list = bankCardService.selectAllBankCard();
         PageInfo<Bankcard> pageInfo = new PageInfo<Bankcard>(list, 5);
-        model.addAttribute("bankcardPageInfo",pageInfo);
-        model.addAttribute("bankcardList",list);
+        model.addAttribute("bankcardPageInfo", pageInfo);
+        model.addAttribute("bankcardList", list);
 
         model.addAttribute("pageTopBarInfo", "银行卡管理界面");
         model.addAttribute("activeUrl1", "userInfoActive");

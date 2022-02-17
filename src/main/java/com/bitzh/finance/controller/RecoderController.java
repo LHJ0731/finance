@@ -22,6 +22,7 @@ public class RecoderController {
 
     /**
      * 跳转到资金记录界面
+     *
      * @param model
      * @return
      */
@@ -38,8 +39,8 @@ public class RecoderController {
         // PageInfo封装了详细的分页信息，包括我们查询出来的数据，还可以传入连续显示的页数（5）
         PageInfo<FlowOfFunds> pageInfo = new PageInfo<FlowOfFunds>(list, 5);
 
-        model.addAttribute("flowOfFundsList",list);
-        model.addAttribute("flowOfFundsPageInfo",pageInfo);
+        model.addAttribute("flowOfFundsList", list);
+        model.addAttribute("flowOfFundsPageInfo", pageInfo);
         model.addAttribute("pageTopBarInfo", "资金记录界面");
         model.addAttribute("activeUrl1", "toolsActive");
         model.addAttribute("activeUrl2", "recordActive");

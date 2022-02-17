@@ -1,4 +1,3 @@
-
 #数据库连接配置
 spring:
   datasource:
@@ -62,8 +61,8 @@ pagehelper:
 
 #  使用mybatis配置文件时需要指明
 mybatis:
-#  config-location: classpath:mybatis/mybatis-config.xml
-# 指定sql映射文件位置
+  #  config-location: classpath:mybatis/mybatis-config.xml
+  # 指定sql映射文件位置
   mapper-locations: classpath:com/bitzh/finance/mapper/*.xml
 
 # spring boot集成mybatis的方式打印sql语句

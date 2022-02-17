@@ -32,29 +32,31 @@ public class PayMoneyController {
 
     /**
      * 跳转到工资理财界面
+     *
      * @param model
      * @return
      */
     @RequestMapping("/user/finance/toPayMoney.html")
-    public String toPaymoney(Model model){
+    public String toPaymoney(Model model) {
         List<PayMoney> list = payMoneyService.selectAllPayMoney();
-        model.addAttribute("payMoneyList",list);
-        model.addAttribute("pageTopBarInfo","工资理财界面");
-        model.addAttribute("activeUrl1","financeActive");
-        model.addAttribute("activeUrl2","payMoneyActive");
+        model.addAttribute("payMoneyList", list);
+        model.addAttribute("pageTopBarInfo", "工资理财界面");
+        model.addAttribute("activeUrl1", "financeActive");
+        model.addAttribute("activeUrl2", "payMoneyActive");
         return "/user/finance/paymoney";
     }
 
     /**
      * 购买工资理财产品
+     *
      * @param payMoneyId
      * @param userId
      * @return
      */
     @PostMapping("/user/buyPayMoney")
     @ResponseBody
-    public Msg buyPayMoney(@RequestParam("payMoneyId")Integer payMoneyId,
-                           @RequestParam("userId") Integer userId ){
+    public Msg buyPayMoney(@RequestParam("payMoneyId") Integer payMoneyId,
+                           @RequestParam("userId") Integer userId) {
         PayMoney pm = payMoneyService.selectPayMoneyById(payMoneyId);
         UserPayMoney upm = new UserPayMoney();
         upm.setUserid(userId);
@@ -64,40 +66,42 @@ public class PayMoneyController {
         upm.setProfit(new BigDecimal("0.03123").multiply(pm.getMonthmoney()));
         upm.setStatus(1);
         Integer result = userPayMoneyService.insertUserPayMoney(upm);
-        if (result==1){
+        if (result == 1) {
             FlowOfFunds fof = new FlowOfFunds();
             fof.setUserid(userId);
             fof.setFlowmoney(pm.getMonthmoney());
             fof.setType(1);
             fof.setSource("工资理财");
             fof.setCreatetime(new Date());
-            if (pm.getType()==1){
+            if (pm.getType() == 1) {
                 fof.setFunddesc("国债");
-            }else if(pm.getType()==2){
+            } else if (pm.getType() == 2) {
                 fof.setFunddesc("期货");
             }
             flowOfFundsService.insertFlowOfFunds(fof);
             return Msg.success();
-        }else {
+        } else {
             return Msg.fail();
         }
     }
 
     /**
      * 搜索工资理财产品
+     *
      * @param information
      * @return
      */
     @PostMapping("/user/selectPayMoney")
     @ResponseBody
-    public Msg selectChangeMoney(@RequestParam("information")String information,Model model){
+    public Msg selectChangeMoney(@RequestParam("information") String information, Model model) {
         List<PayMoney> list = payMoneyService.selectPayMoneyByInfo(information);
-        model.addAttribute("payMoneyList",list);
-        return Msg.success().add("payMoneyList",list);
+        model.addAttribute("payMoneyList", list);
+        return Msg.success().add("payMoneyList", list);
     }
 
     /**
      * 跳转到工资理财管理界面（管理员）
+     *
      * @param pageNum
      * @param pageSize
      * @param model
@@ -106,13 +110,13 @@ public class PayMoneyController {
      */
     @GetMapping("/admin/finance/toPayMoney.html")
     public String toPayMoneyInfo(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                             Model model, HttpSession session) {
+                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                 Model model, HttpSession session) {
         PageHelper.startPage(pageNum, pageSize);
         List<PayMoney> list = payMoneyService.selectAllPayMoney();
         PageInfo<PayMoney> pageInfo = new PageInfo<PayMoney>(list, 5);
-        model.addAttribute("finacnePageInfo",pageInfo);
-        model.addAttribute("financeList",list);
+        model.addAttribute("finacnePageInfo", pageInfo);
+        model.addAttribute("financeList", list);
 
         model.addAttribute("activeUrl1", "financeActive");
         model.addAttribute("activeUrl2", "paymoneyActive");
@@ -122,14 +126,15 @@ public class PayMoneyController {
 
     /**
      * 新增工资理财产品
+     *
      * @param payMoney
      * @return
      */
     @PostMapping("/admin/addPayMoney")
     @ResponseBody
-    public Msg addPayMoney(PayMoney payMoney){
+    public Msg addPayMoney(PayMoney payMoney) {
         Integer result = payMoneyService.insertPayMoney(payMoney);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -137,28 +142,30 @@ public class PayMoneyController {
 
     /**
      * 更新时回显信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/admin/getPayMoneyInfoById/{id}")
     @ResponseBody
-    public Msg getPayMoneyInfoById(@PathVariable("id") Integer id){
+    public Msg getPayMoneyInfoById(@PathVariable("id") Integer id) {
         PayMoney payMoney = payMoneyService.selectPayMoneyById(id);
-        return Msg.success().add("payMoney",payMoney);
+        return Msg.success().add("payMoney", payMoney);
     }
 
     /**
      * 更新
+     *
      * @param id
      * @param payMoney
      * @return
      */
     @PutMapping("/admin/updatePayMoney/{id}")
     @ResponseBody
-    public Msg updatePayMoney(@PathVariable("id") Integer id,PayMoney payMoney){
+    public Msg updatePayMoney(@PathVariable("id") Integer id, PayMoney payMoney) {
         payMoney.setId(id);
         Integer result = payMoneyService.updatePayMoney(payMoney);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -166,14 +173,15 @@ public class PayMoneyController {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/admin/deletePayMoneyById/{id}")
     @ResponseBody
-    public Msg deletePayMoneyById(@PathVariable("id") Integer id){
+    public Msg deletePayMoneyById(@PathVariable("id") Integer id) {
         Integer result = payMoneyService.deletePayMoneyById(id);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();

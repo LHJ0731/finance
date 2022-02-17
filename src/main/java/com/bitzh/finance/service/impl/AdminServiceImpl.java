@@ -20,16 +20,16 @@ public class AdminServiceImpl implements AdminService {
     public Admin selectAdminByTerms(String username, String password) {
         AdminExample adminExample = new AdminExample();
         AdminExample.Criteria criteria = adminExample.createCriteria();
-        if (username!=null){
+        if (username != null) {
             criteria.andUsernameEqualTo(username);
         }
-        if (password!=null){
+        if (password != null) {
             criteria.andPasswordEqualTo(password);
         }
         List<Admin> list = adminMapper.selectByExample(adminExample);
-        if ("[]".equals(list.toString())){
+        if ("[]".equals(list.toString())) {
             return null;
-        }else {
+        } else {
             return list.get(0);
         }
     }

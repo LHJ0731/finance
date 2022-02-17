@@ -39,17 +39,20 @@
                                     <form>
                                         <div class="form-group">
                                             <label for="oldpwd">旧密码</label>
-                                            <input class="form-control" type="password" id="oldpwd" name="oldpwd" placeholder="请输入账号的原登录密码">
+                                            <input class="form-control" type="password" id="oldpwd" name="oldpwd"
+                                                   placeholder="请输入账号的原登录密码">
                                             <span class="help-block"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="newpwd">新密码</label>
-                                            <input class="form-control" type="password" id="newpwd" name="newpwd" placeholder="请输入新的密码">
+                                            <input class="form-control" type="password" id="newpwd" name="newpwd"
+                                                   placeholder="请输入新的密码">
                                             <span class="help-block"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="confirmpwd">确认新密码</label>
-                                            <input class="form-control" type="password" id="confirmpwd" name="confirmpwd" placeholder="请输入确认新的密码">
+                                            <input class="form-control" type="password" id="confirmpwd"
+                                                   name="confirmpwd" placeholder="请输入确认新的密码">
                                             <span class="help-block"></span>
                                         </div>
                                         <div class="form-group">
@@ -81,11 +84,11 @@
 <script th:src="@{/js/md5.js}"></script>
 <script th:inline="javascript">
 
-    $(function() {
+    $(function () {
         $("#oldpwd").blur(checkOldpwd);
         $("#newpwd").blur(checkNewpwd);
         $("#confirmpwd").blur(checkConfirmpwd);
-        $("#submit").mousedown(function() {
+        $("#submit").mousedown(function () {
             if (checkOldpwd() && checkNewpwd() && checkConfirmpwd()) {
                 updatePwd();
             }
@@ -130,7 +133,7 @@
             var confirmpwd = $("#confirmpwd").val();
             if (confirmpwd === password) {
                 return true;
-            }else if (confirmpwd==="") {
+            } else if (confirmpwd === "") {
                 show_validate_msg("#confirmpwd", "error", "请输入确认新密码");
                 return false;
             } else {
@@ -156,16 +159,16 @@
             type: "PUT",
             data: {
                 "id": userId,
-                "oldpwd":$("#oldpwd").val(),
-                "newpwd":$("#newpwd").val()
+                "oldpwd": $("#oldpwd").val(),
+                "newpwd": $("#newpwd").val()
             },
-            success: function(result) {
+            success: function (result) {
                 if (result.code === 100) {
                     $.alert('密码修改成功！');
                     setTimeout(function () {
                         location.href = "/user/personal/toSecurity.html";
                     }, 1000);
-                }else {
+                } else {
                     show_validate_msg("#oldpwd", "error", "旧密码有问题");
                 }
             }

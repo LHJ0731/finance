@@ -24,13 +24,16 @@
                     <a href="javascript:void(0)"><i class="mdi mdi-square-inc-cash"></i>
                         个人理财</a>
                     <ul class="nav nav-subnav">
-                        <li shiro:hasPermission="user:changeMoney" th:class="${activeUrl2=='changeMoneyActive'?'active':''}">
+                        <li shiro:hasPermission="user:changeMoney"
+                            th:class="${activeUrl2=='changeMoneyActive'?'active':''}">
                             <a th:href="@{/user/finance/toChangeMoney.html}">零钱理财</a></li>
                         <li shiro:hasPermission="user:payMoney" th:class="${activeUrl2=='payMoneyActive'?'active':''}">
                             <a th:href="@{/user/finance/toPayMoney.html}">工资理财</a></li>
-                        <li shiro:hasPermission="user:termFinancial" th:class="${activeUrl2=='termFinancialActive'?'active':''}">
+                        <li shiro:hasPermission="user:termFinancial"
+                            th:class="${activeUrl2=='termFinancialActive'?'active':''}">
                             <a th:href="@{/user/finance/toTermFinancial.html}">期限理财</a></li>
-                        <li shiro:hasPermission="user:fundProduct" th:class="${activeUrl2=='fundProductActive'?'active':''}">
+                        <li shiro:hasPermission="user:fundProduct"
+                            th:class="${activeUrl2=='fundProductActive'?'active':''}">
                             <a th:href="@{/user/finance/toFundProduct.html}">基金理财</a></li>
                         <li shiro:hasPermission="user:bank" th:class="${activeUrl2=='bankActive'?'active':''}">
                             <a th:href="@{/user/finance/toBank.html}">银行推荐</a></li>
@@ -50,11 +53,16 @@
                     th:class="${activeUrl1=='personalActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}"
                 ><a href="javascript:void(0)"><i class="mdi mdi-account-location"></i> 个人中心</a>
                     <ul class="nav nav-subnav">
-                        <li th:class="${activeUrl2=='myFinanceActive'?'active':''}"><a th:href="@{/user/personal/toMyFinance.html}">我的理财</a></li>
-                        <li th:class="${activeUrl2=='myLoanActive'?'active':''}"><a th:href="@{/user/personal/toMyLoan.html}">我的借款</a></li>
-                        <li th:class="${activeUrl2=='bankCardActive'?'active':''}"><a th:href="@{/user/personal/toBankCard.html}">银行卡管理</a></li>
-                        <li th:class="${activeUrl2=='securityActive'?'active':''}"><a th:href="@{/user/personal/toSecurity.html}">账户安全</a></li>
-                        <li th:class="${activeUrl2=='balanceActive'?'active':''}"><a th:href="@{/user/personal/toBalance.html}" >账户余额</a></li>
+                        <li th:class="${activeUrl2=='myFinanceActive'?'active':''}"><a
+                                th:href="@{/user/personal/toMyFinance.html}">我的理财</a></li>
+                        <li th:class="${activeUrl2=='myLoanActive'?'active':''}"><a
+                                th:href="@{/user/personal/toMyLoan.html}">我的借款</a></li>
+                        <li th:class="${activeUrl2=='bankCardActive'?'active':''}"><a
+                                th:href="@{/user/personal/toBankCard.html}">银行卡管理</a></li>
+                        <li th:class="${activeUrl2=='securityActive'?'active':''}"><a
+                                th:href="@{/user/personal/toSecurity.html}">账户安全</a></li>
+                        <li th:class="${activeUrl2=='balanceActive'?'active':''}"><a
+                                th:href="@{/user/personal/toBalance.html}">账户余额</a></li>
                     </ul>
                 </li>
             </ul>

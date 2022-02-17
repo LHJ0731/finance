@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.UserPermissions;
 import com.bitzh.finance.entity.UserPermissionsExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserPermissionsMapper {

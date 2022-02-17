@@ -13,6 +13,7 @@ import java.util.List;
 public class PermissionsServiceImpl implements PermissionsService {
     @Autowired
     PermissionsMapper permissionsMapper;
+
     @Override
     public List<Permissions> selectPermissionsByPermission(String permission) {
         PermissionsExample permissionsExample = new PermissionsExample();

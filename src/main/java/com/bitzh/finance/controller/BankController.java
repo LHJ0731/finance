@@ -20,13 +20,14 @@ public class BankController {
 
     /**
      * 跳转用户银行推荐界面
+     *
      * @param model
      * @return
      */
     @RequestMapping("/user/finance/toBank.html")
-    public String toBank(Model model){
+    public String toBank(Model model) {
         List<Bank> list = bankService.selectAllBank();
-        model.addAttribute("bankList",list);
+        model.addAttribute("bankList", list);
         model.addAttribute("activeUrl1", "financeActive");
         model.addAttribute("activeUrl2", "bankActive");
         model.addAttribute("pageTopBarInfo", "银行推荐界面");
@@ -35,6 +36,7 @@ public class BankController {
 
     /**
      * 跳转到推荐银行管理界面（管理员）
+     *
      * @param pageNum
      * @param pageSize
      * @param model
@@ -43,13 +45,13 @@ public class BankController {
      */
     @GetMapping("/admin/finance/toBank.html")
     public String toBank(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                Model model, HttpSession session) {
+                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                         Model model, HttpSession session) {
         PageHelper.startPage(pageNum, pageSize);
         List<Bank> list = bankService.selectAllBank();
         PageInfo<Bank> pageInfo = new PageInfo<Bank>(list, 5);
-        model.addAttribute("finacnePageInfo",pageInfo);
-        model.addAttribute("financeList",list);
+        model.addAttribute("finacnePageInfo", pageInfo);
+        model.addAttribute("financeList", list);
         model.addAttribute("activeUrl1", "financeActive");
         model.addAttribute("activeUrl2", "bankActive");
         model.addAttribute("pageTopBarInfo", "银行推荐页面");
@@ -63,9 +65,9 @@ public class BankController {
      */
     @PostMapping("/admin/addBank")
     @ResponseBody
-    public Msg addBank(Bank bank){
+    public Msg addBank(Bank bank) {
         Integer result = bankService.insertBank(bank);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -73,28 +75,29 @@ public class BankController {
 
     /**
      * 更新时回显信息
+     *
      * @param id
      * @return
      */
     @GetMapping("/admin/getBankInfoById/{id}")
     @ResponseBody
-    public Msg getBankInfoById(@PathVariable("id") Integer id){
+    public Msg getBankInfoById(@PathVariable("id") Integer id) {
         Bank bank = bankService.selectBankById(id);
-        return Msg.success().add("bank",bank);
+        return Msg.success().add("bank", bank);
     }
 
     /**
      * 更新
-     * @param id
      *
+     * @param id
      * @return
      */
     @PutMapping("/admin/updateBank/{id}")
     @ResponseBody
-    public Msg updateBank(@PathVariable("id") Integer id,Bank bank){
+    public Msg updateBank(@PathVariable("id") Integer id, Bank bank) {
         bank.setId(id);
         Integer result = bankService.updateBank(bank);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();
@@ -102,14 +105,15 @@ public class BankController {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
     @DeleteMapping("/admin/deleteBankById/{id}")
     @ResponseBody
-    public Msg deleteBankById(@PathVariable("id") Integer id){
+    public Msg deleteBankById(@PathVariable("id") Integer id) {
         Integer result = bankService.deleteBankById(id);
-        if (result==1){
+        if (result == 1) {
             return Msg.success();
         }
         return Msg.fail();

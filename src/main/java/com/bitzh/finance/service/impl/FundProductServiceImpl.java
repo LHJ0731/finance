@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 public class FundProductServiceImpl implements FundProductService {
     @Autowired
     FundProductMapper fundProductMapper;
+
     @Override
     public List<FundProduct> selectAllFundProduct() {
         return fundProductMapper.selectByExample(null);
@@ -43,5 +45,7 @@ public class FundProductServiceImpl implements FundProductService {
 
     @Override
     @Transactional
-    public List<FundProduct> selectFundProductByInfo(String information) { return fundProductMapper.selectFundProductByInfo(information); }
+    public List<FundProduct> selectFundProductByInfo(String information) {
+        return fundProductMapper.selectFundProductByInfo(information);
+    }
 }

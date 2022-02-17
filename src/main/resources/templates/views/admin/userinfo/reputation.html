@@ -129,7 +129,8 @@
                                                     th:href="@{/admin/userinfo/toReputation.html(pageNum=${userPageInfo.pageNum}+1,pageSize=${userPageInfo.pageSize})}"
                                                     aria-label="Next"> <span aria-hidden="true">&raquo;</span>
                                             </a></li>
-                                            <li><a th:href="@{/admin/userinfo/toReputation.html(pageNum=${userPageInfo.pages},pageSize=${userPageInfo.pageSize})}">末页</a>
+                                            <li>
+                                                <a th:href="@{/admin/userinfo/toReputation.html(pageNum=${userPageInfo.pages},pageSize=${userPageInfo.pageSize})}">末页</a>
                                             </li>
                                         </ul>
                                     </nav>

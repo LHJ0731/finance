@@ -69,65 +69,75 @@
                                             </tr>
                                             <tr>
                                                 <td class="p-l-40">
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:changeMoney')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:changeMoney')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-6-20" value="user:changeMoney">
                                                         <span> 零钱理财</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:changeMoney')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:changeMoney')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-6-20" value="user:changeMoney">
                                                         <span> 零钱理财</span>
                                                     </label>
 
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:payMoney')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:payMoney')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-6-21" value="user:payMoney">
                                                         <span> 工资理财</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:payMoney')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:payMoney')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-6-21" value="user:payMoney">
                                                         <span> 工资理财</span>
                                                     </label>
 
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:termFinancial')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:termFinancial')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-6-44" value="user:termFinancial">
                                                         <span> 期限理财</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:termFinancial')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:termFinancial')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-6-44" value="user:termFinancial">
                                                         <span> 期限理财</span>
                                                     </label>
 
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:fundProduct')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:fundProduct')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-6-45" value="user:fundProduct">
                                                         <span> 基金理财</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:fundProduct')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:fundProduct')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-6-45" value="user:fundProduct">
                                                         <span> 基金理财</span>
                                                     </label>
 
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:bank')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:bank')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-6-46" value="user:bank">
                                                         <span> 银行推荐</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:bank')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:bank')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-6-46" value="user:bank">
@@ -137,13 +147,15 @@
                                             </tr>
                                             <tr>
                                                 <td class="p-l-20">
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:tools')}" class="lyear-checkbox checkbox-primary">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:tools')}"
+                                                           class="lyear-checkbox checkbox-primary">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-parent checkbox-child" dataid="id-1-7"
                                                                value="user:tools">
                                                         <span> 金融工具</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:tools')}" class="lyear-checkbox checkbox-primary">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:tools')}"
+                                                           class="lyear-checkbox checkbox-primary">
                                                         <input name="permissions[]" type="checkbox" checked
                                                                class="checkbox-parent checkbox-child" dataid="id-1-7"
                                                                value="user:tools">
@@ -153,26 +165,30 @@
                                             </tr>
                                             <tr>
                                                 <td class="p-l-40">
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:record')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:record')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-7-51" value="user:record">
                                                         <span> 资金记录</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:record')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:record')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-7-51" value="user:record">
                                                         <span> 资金记录</span>
                                                     </label>
 
-                                                    <label th:if="${!#lists.contains(permissionsList,'user:loan')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${!#lists.contains(permissionsList,'user:loan')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-7-51" value="user:loan">
                                                         <span> 安全网贷</span>
                                                     </label>
-                                                    <label th:if="${#lists.contains(permissionsList,'user:loan')}" class="lyear-checkbox checkbox-primary checkbox-inline">
+                                                    <label th:if="${#lists.contains(permissionsList,'user:loan')}"
+                                                           class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-7-51" value="user:loan">
@@ -185,7 +201,8 @@
                                         </table>
 
                                         <div class="col-md-1">
-                                            <button type="button" id="submit_modal_btn" class="btn btn-primary">提交</button>
+                                            <button type="button" id="submit_modal_btn" class="btn btn-primary">提交
+                                            </button>
                                         </div>
 
                                     </div>
@@ -256,17 +273,17 @@
 
     $("#submit_modal_btn").click(function () {
         var permissions = "";
-        var r=document.getElementsByName("permissions[]");
-        for(var i=0;i<r.length;i++){
-            if(r[i].checked){
-                permissions+=(r[i].value+";")
+        var r = document.getElementsByName("permissions[]");
+        for (var i = 0; i < r.length; i++) {
+            if (r[i].checked) {
+                permissions += (r[i].value + ";")
             }
         }
         $.ajax({
             url: "/admin/updateUserPermissions",
             type: "PUT",
-            data:{
-                "userPermissions":permissions
+            data: {
+                "userPermissions": permissions
             },
             success: function (result) {
                 if (result.code === 100) {

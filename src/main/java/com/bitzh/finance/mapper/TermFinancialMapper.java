@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.TermFinancial;
 import com.bitzh.finance.entity.TermFinancialExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TermFinancialMapper {

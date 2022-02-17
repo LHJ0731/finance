@@ -55,8 +55,10 @@
                                             <td th:text="${(finacnePageInfo.pageNum - 1) * finacnePageInfo.pageSize+financeStat.index+1}"></td>
                                             <td th:text="${finance.code}"></td>
                                             <td th:text="${finance.funddesc}"></td>
-                                            <td th:if="${finance.type==1}" th:text="股票型基金"></td><td th:if="${finance.type==2}" th:text="债券型基金"></td>
-                                            <td th:if="${finance.type==3}" th:text="货币型基金"></td><td th:if="${finance.type==4}" th:text="混合型基金"></td>
+                                            <td th:if="${finance.type==1}" th:text="股票型基金"></td>
+                                            <td th:if="${finance.type==2}" th:text="债券型基金"></td>
+                                            <td th:if="${finance.type==3}" th:text="货币型基金"></td>
+                                            <td th:if="${finance.type==4}" th:text="混合型基金"></td>
                                             <td th:text="${#numbers.formatDecimal(finance.dailygrowth*100,1,2)}+'%'"></td>
                                             <td th:text="${#numbers.formatDecimal(finance.monthlygrowth*100,1,2)}+'%'"></td>
                                             <td th:text="${#numbers.formatDecimal(finance.annualgrowth*100,1,2)}+'%'"></td>
@@ -212,10 +214,10 @@
                                             <label class="col-sm-2 control-label">基金类型：</label>
                                             <div class="col-sm-6">
                                                 <select class="form-control" name="type">
-                                                    <option value="1"  selected>股票型</option>
-                                                    <option value="2" >债券型</option>
-                                                    <option value="3" >货币型</option>
-                                                    <option value="4" >混合型</option>
+                                                    <option value="1" selected>股票型</option>
+                                                    <option value="2">债券型</option>
+                                                    <option value="3">货币型</option>
+                                                    <option value="4">混合型</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-1">
@@ -339,10 +341,10 @@
                                             <label class="col-sm-2 control-label">基金类型：</label>
                                             <div class="col-sm-6">
                                                 <select id="type_update_input" class="form-control" name="type">
-                                                    <option value="1"  selected>股票型</option>
-                                                    <option value="2" >债券型</option>
-                                                    <option value="3" >货币型</option>
-                                                    <option value="4" >混合型</option>
+                                                    <option value="1" selected>股票型</option>
+                                                    <option value="2">债券型</option>
+                                                    <option value="3">货币型</option>
+                                                    <option value="4">混合型</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-1">
@@ -594,7 +596,7 @@
 
                 $("#code_update_input").val(fundProduct.code);
                 $("#funddesc_update_input").val(fundProduct.funddesc);
-                $("#type_update_input").val([ fundProduct.type ]);
+                $("#type_update_input").val([fundProduct.type]);
                 $("#annualgrowth_update_input").val(fundProduct.annualgrowth);
                 $("#dailygrowth_update_input").val(fundProduct.dailygrowth);
                 $("#monthlygrowth_update_input").val(fundProduct.monthlygrowth);

@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.News;
 import com.bitzh.finance.entity.NewsExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface NewsMapper {

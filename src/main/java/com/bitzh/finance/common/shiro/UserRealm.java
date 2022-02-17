@@ -45,21 +45,21 @@ public class UserRealm extends AuthorizingRealm {
 
         String currentUserUsername = (String) subject.getPrincipal();
         User user = userService.selectUserByTerms(currentUserUsername, null);
-        if (user!=null){
+        if (user != null) {
             info.addRole("user");
             List<UserPermissions> list = userPermissionsService.selectUserPermissionsByUserId(1);
-            for (UserPermissions up:list) {
+            for (UserPermissions up : list) {
                 info.addStringPermission(up.getPermissions().getPermission());
             }
         }
 
         String currentAdminUsername = (String) subject.getPrincipal();
         Admin admin = adminService.selectAdminByTerms(currentAdminUsername, null);
-        if (admin!=null){
+        if (admin != null) {
             info.addRole("admin");
             info.addRole("user");
             List<AdminPermissions> list = adminPermissionsService.selectAdminPermissionsByAdminId(1);
-            for (AdminPermissions ap:list) {
+            for (AdminPermissions ap : list) {
                 info.addStringPermission(ap.getPermissions().getPermission());
             }
         }
@@ -83,19 +83,19 @@ public class UserRealm extends AuthorizingRealm {
             user.setStatus(1);
             userService.updateUser(user);
             session.setAttribute("loginUser", user);
-            System.out.println("执行了=>认证=>"+user.getUsername()+"登录进入系统");
+            System.out.println("执行了=>认证=>" + user.getUsername() + "登录进入系统");
             return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), "");
         }
 
         Admin admin = adminService.selectAdminByTerms(userToken.getUsername(), null);
-        if (admin!=null){
+        if (admin != null) {
             Subject currentSubject = SecurityUtils.getSubject();
             Session session = currentSubject.getSession();
             admin.setStatus(1);
             adminService.updateAdmin(admin);
             session.setAttribute("loginAdmin", admin);
-            System.out.println("执行了=>认证=>"+admin.getUsername()+"登录进入系统");
-            return new SimpleAuthenticationInfo(admin.getUsername(),admin.getPassword(),"");
+            System.out.println("执行了=>认证=>" + admin.getUsername() + "登录进入系统");
+            return new SimpleAuthenticationInfo(admin.getUsername(), admin.getPassword(), "");
         }
         return null;
     }

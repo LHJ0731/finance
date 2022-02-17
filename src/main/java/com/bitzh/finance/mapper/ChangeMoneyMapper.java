@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.ChangeMoney;
 import com.bitzh.finance.entity.ChangeMoneyExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ChangeMoneyMapper {

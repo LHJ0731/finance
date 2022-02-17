@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 public class TermFinancialServiceImpl implements TermFinancialService {
     @Autowired
@@ -44,5 +45,7 @@ public class TermFinancialServiceImpl implements TermFinancialService {
 
     @Override
     @Transactional
-    public List<TermFinancial> selectTermFinancialByInfo(String information) { return termFinancialMapper.selectTermFinancialByInfo(information); }
+    public List<TermFinancial> selectTermFinancialByInfo(String information) {
+        return termFinancialMapper.selectTermFinancialByInfo(information);
+    }
 }

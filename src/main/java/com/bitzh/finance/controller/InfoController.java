@@ -21,6 +21,7 @@ public class InfoController {
 
     /**
      * 跳转到我的消息界面
+     *
      * @param pageNum
      * @param pageSize
      * @param model
@@ -44,6 +45,7 @@ public class InfoController {
 
     /**
      * 更新消息（已读）
+     *
      * @param id
      * @return
      */
@@ -61,6 +63,7 @@ public class InfoController {
 
     /**
      * 删除消息
+     *
      * @param id
      * @return
      */

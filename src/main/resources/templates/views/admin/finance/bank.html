@@ -52,7 +52,7 @@
                                             <td th:text="${finance.name}"></td>
                                             <td th:text="${finance.type}"></td>
                                             <td th:text="${finance.assets}"></td>
-<!--                                           <td th:text="${#strings.substring(finance.bankdesc,0,10)}+'...'"></td>-->
+                                            <!--                                           <td th:text="${#strings.substring(finance.bankdesc,0,10)}+'...'"></td>-->
                                             <td th:text="${#strings.length(finance.bankdesc)>=10?#strings.substring(finance.bankdesc,0,10)+'...':finance.bankdesc}"></td>
                                             <td>
                                                 <button class="btn btn-primary btn-sm update_btn"
@@ -216,7 +216,7 @@
                                             <div class="col-sm-10">
                                                 <div id="addDescEditor"></div>
                                                 <input type="text" name="bankdesc" id="addBankdesc"
-                                                       style="display: none" />
+                                                       style="display: none"/>
                                             </div>
                                         </div>
 
@@ -290,7 +290,7 @@
                                             <div class="col-sm-10">
                                                 <div id="updateDescEditor"></div>
                                                 <input type="text" name="bankdesc" id="updateBankdesc"
-                                                       style="display: none" />
+                                                       style="display: none"/>
                                             </div>
                                         </div>
                                     </form>
@@ -332,7 +332,7 @@
         var E = window.wangEditor;
         var editor = new E('#addDescEditor');
         editor.customConfig.zIndex = 100;
-        editor.customConfig.onchange = function(html) {
+        editor.customConfig.onchange = function (html) {
             // 监控变化，同步更新到 textarea
             //alert(html);
             textArea = html;
@@ -435,7 +435,7 @@
                 var E2 = window.wangEditor;
                 var editor2 = new E2('#updateDescEditor');
                 editor2.customConfig.zIndex = 100;
-                editor2.customConfig.onchange = function(html) {
+                editor2.customConfig.onchange = function (html) {
                     // 监控变化，同步更新到 textarea
                     //alert(html);
                     textArea = html;

@@ -4,6 +4,7 @@ import com.bitzh.finance.entity.AdminPermissions;
 import com.bitzh.finance.entity.AdminPermissionsExample;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface AdminPermissionsMapper {

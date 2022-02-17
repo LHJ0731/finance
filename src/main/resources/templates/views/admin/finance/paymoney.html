@@ -132,7 +132,7 @@
 
                                             <li th:if="${finacnePageInfo.hasPreviousPage }">
                                                 <a th:href="@{/admin/finance/toPayMoney.html(pageNum=${finacnePageInfo.pageNum}-1,pageSize=${finacnePageInfo.pageSize})}"
-                                                    aria-label="Previous">
+                                                   aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
@@ -151,7 +151,7 @@
 
                                             <li th:if="${finacnePageInfo.hasNextPage }">
                                                 <a th:href="@{/admin/finance/toPayMoney.html(pageNum=${finacnePageInfo.pageNum}+1,pageSize=${finacnePageInfo.pageSize})}"
-                                                    aria-label="Next">
+                                                   aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
@@ -494,10 +494,10 @@
 
                 $("#updateModal input[name=name]").val(payMoney.name);
                 $("#updateModal input[name=type]").val(
-                    [ payMoney.type ]);
+                    [payMoney.type]);
                 $("#monthmoney_update_input").val(payMoney.monthmoney);
                 $("#updateModal input[name=autointo]").val(
-                    [ payMoney.autointo ]);
+                    [payMoney.autointo]);
                 $("#investerm_update_input").val(payMoney.investerm);
             }
         });
@@ -562,10 +562,10 @@
         var id = $(this).attr("delete-id");
         var type = $(this).attr("delete-name");
         var name;
-        if (type==1){
-            name="国债";
-        }else if(type==2){
-            name="期货";
+        if (type == 1) {
+            name = "国债";
+        } else if (type == 2) {
+            name = "期货";
         }
         $.alert({
             title: '提示：',

@@ -15,13 +15,13 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object user = request.getSession().getAttribute("loginUser");
         Object admin = request.getSession().getAttribute("loginAdmin");
-        if(user == null&&admin==null){
+        if (user == null && admin == null) {
             //未登陆，返回登陆页面
-            request.setAttribute("msg","没有权限请先登陆");
+            request.setAttribute("msg", "没有权限请先登陆");
             System.out.println("LoginHandlerInterceptor.preHandle" + "----------------未登入------拦截请求--------------->");
             response.sendRedirect("/");
             return false;
-        }else{
+        } else {
             //已登陆，放行请求
             return true;
         }

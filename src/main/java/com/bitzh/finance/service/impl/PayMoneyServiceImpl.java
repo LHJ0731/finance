@@ -15,6 +15,7 @@ public class PayMoneyServiceImpl implements PayMoneyService {
 
     @Autowired
     PayMoneyMapper payMoneyMapper;
+
     @Override
     public List<PayMoney> selectAllPayMoney() {
         List<PayMoney> list = payMoneyMapper.selectByExample(null);
@@ -47,5 +48,7 @@ public class PayMoneyServiceImpl implements PayMoneyService {
 
     @Override
     @Transactional
-    public List<PayMoney> selectPayMoneyByInfo(String information) { return payMoneyMapper.selectPayMoneyByInfo(information); }
+    public List<PayMoney> selectPayMoneyByInfo(String information) {
+        return payMoneyMapper.selectPayMoneyByInfo(information);
+    }
 }
