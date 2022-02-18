@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <!-- 新增零钱理财的模态框 -->
+                    <!-- 充值的模态框 -->
                     <div class="modal fade" id="rechargeModal" tabindex="-1"
                          role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
@@ -69,7 +69,18 @@
                                     <!--要提交的表单 -->
                                     <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label">七日年化收益率：</label>
+                                            <label class="col-xs-12" for="example-select">选择银行卡</label>
+                                            <div class="col-xs-12">
+                                                <select class="form-control" id="example-select" name="example-select" size="1">
+                                                    <option value="0">请选择</option>
+                                                    <option value="1">选项 #1</option>
+                                                    <option value="2">选项 #2</option>
+                                                    <option value="3">选项 #3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">充值金额：</label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control"
                                                        id="annualincome_add_input" name="annualincome"
@@ -123,20 +134,52 @@
             type: "GET",
             success: function (result) {
                 if (result.code === 100) {
-                    console.log(result.extend.bankCardList);
                     if (result.extend.bankCardList.length == 0) {
                         $.alert('请添加银行卡,5秒后将自动跳转银行卡界面');
                         setTimeout(function () {
                             location.href = "/user/personal/toBankCard.html";
                         }, 5000);
                     } else {
+                        reset_form("#rechargeModal form")
 
+                        $("#rechargeModal").modal({
+                            backdrop: "static"//打开充值模态框
+                        });
                     }
                 } else {
                     $.alert('查询名下银行卡失败');
                 }
             }
         })
+    }
+
+    //清空表单样式及内容
+    function reset_form(ele) {
+        $(ele)[0].reset();
+        //清空表单样式
+        $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find(".help-block").text("");
+    }
+
+    //清空表单样式
+    function clean_form(ele) {
+        //清空表单样式
+        $(ele).find("*").removeClass("has-error has-success");
+        $(ele).find(".help-block").text("");
+    }
+
+    //显示校验结果的提示信息
+    function show_validate_msg(ele, status, msg) {
+        //清除当前元素的校验状态
+        $(ele).parent().removeClass("has-success has-error");
+        $(ele).next("span").text("");
+        if ("success" === status) {
+            $(ele).parent().addClass("has-success");
+            $(ele).next("span").text(msg);
+        } else if ("error" === status) {
+            $(ele).parent().addClass("has-error");
+            $(ele).next("span").text(msg);
+        }
     }
 </script>
 </body>
