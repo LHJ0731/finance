@@ -69,13 +69,11 @@
                                     <!--要提交的表单 -->
                                     <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="example-select">选择银行卡</label>
+                                            <label class="col-sm-2 control-label" for="bankcard-select">选择银行卡</label>
                                             <div class="col-sm-6">
-                                                <select class="form-control" id="example-select" name="example-select" size="1">
-                                                    <option value="0">请选择</option>
-                                                    <option value="1">选项 #1</option>
-                                                    <option value="2">选项 #2</option>
-                                                    <option value="3">选项 #3</option>
+                                                <select class="form-control" id="bankcard-select" name="bankcard-select"
+                                                        size="1">
+                                                    <option value="">请选择银行卡</option>
                                                 </select>
                                                 <span class="help-block"></span>
                                             </div>
@@ -87,8 +85,8 @@
                                             <label class="col-sm-2 control-label">充值金额：</label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control"
-                                                       id="annualincome_add_input" name="annualincome"
-                                                       placeholder="请输入充值金额：">
+                                                       id="recharge_amount_input" name="rechargeamount"
+                                                       placeholder="请输入充值金额：" onkeyup="clearNoNum(this)">
                                                 <span class="help-block"></span>
                                             </div>
                                             <div class="col-sm-1">
@@ -102,7 +100,7 @@
                                             data-dismiss="modal">关闭
                                     </button>
                                     <button type="button" class="btn btn-primary"
-                                            id="save_btn">充值
+                                            id="recharge_btn">充值
                                     </button>
                                 </div>
                             </div>
@@ -130,6 +128,15 @@
         checkBankCard();
     });
 
+    //限制只能输入数字以及两位小数
+    function clearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+        obj.value = obj.value.replace(/^\./g, "");  //验证第一个字符是数字而不是.
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+    }
+
     //检查用户是否有银行卡
     function checkBankCard() {
         var userId = [[${session.loginUser.id}]];
@@ -145,7 +152,19 @@
                         }, 5000);
                     } else {
                         reset_form("#rechargeModal form")
-
+                        var option = document.createElement('option');
+                        var bankcardList = result.extend.bankCardList;
+                        for (let bc = 0; bc < bankcardList.length; bc++) {
+                            if (bankcardList[bc].type = 1) {
+                                var bankCardType = "借记卡";
+                            } else if (bankcardtype[bc].type = 2) {
+                                var bankCardType = "信用卡";
+                            }
+                            var bankcard = bankcardList[bc].cardbank + bankCardType + bankcardList[bc].cardnum;
+                            var child = "<option value=\"" + bankcardList[bc].id + "\">" + bankcard + "</option>"
+                            option.innerHTML = child;
+                            $("#bankcard-select").append(option);
+                        }
                         $("#rechargeModal").modal({
                             backdrop: "static"//打开充值模态框
                         });
