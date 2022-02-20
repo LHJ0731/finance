@@ -206,4 +206,9 @@
         set balance = #{balance,jdbcType=DECIMAL}
         where userId = #{userid,jdbcType=INTEGER}
     </update>
+    <update id="Add">
+        update balance
+        set balance = balance + #{rechargeamount,jdbcType=DECIMAL}
+        where userId = #{userId,jdbcType=INTEGER}
+    </update>
 </mapper>

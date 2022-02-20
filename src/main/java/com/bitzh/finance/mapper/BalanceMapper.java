@@ -3,6 +3,7 @@ package com.bitzh.finance.mapper;
 import com.bitzh.finance.entity.Balance;
 import com.bitzh.finance.entity.BalanceExample;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,6 @@ public interface BalanceMapper {
     int updateByPrimaryKey(Balance record);
 
     List<Balance> selectByExampleWithUser(BalanceExample balanceExample);
+
+    Integer Add(Integer userId, BigDecimal rechargeamount);
 }
