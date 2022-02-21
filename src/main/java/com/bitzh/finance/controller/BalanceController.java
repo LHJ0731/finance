@@ -52,7 +52,8 @@ public class BalanceController {
      */
     @PostMapping("/user/addByBankCard")
     @ResponseBody
-    public Msg addByBankCard(@RequestParam("amout") BigDecimal amount, @RequestParam("userId") Integer userId) {
+    public Msg addByBankCard(@RequestParam("amout") BigDecimal amount,
+                             @RequestParam("userId") Integer userId,@RequestParam("bankcardText") String bankcardText) {
         Integer result = balanceService.addByBankCard(amount, userId);
         if (result == 1) {
             FlowOfFunds fof = new FlowOfFunds();
@@ -61,7 +62,7 @@ public class BalanceController {
             fof.setType(2);
             fof.setSource("充值");
             fof.setCreatetime(new Date());
-            fof.setFunddesc("银行卡充值");
+            fof.setFunddesc(bankcardText+"充值");
             flowOfFundsService.insertFlowOfFunds(fof);
             return Msg.success();
         } else {
