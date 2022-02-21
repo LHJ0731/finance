@@ -187,10 +187,14 @@
         checkBankCardforRecharge();
     });
 
+    $("#withdraw_btn").click(function () {
+        //清空表单样式
+        clean_form("#addModal form");
+    })
 
     $("#recharge_btn").click(function () {
         //清空表单样式
-        clean_form("#addModal form");
+        clean_form("#rechargeModal form");
 
         var amount = $("#amount").val();
         var userId = [[${session.loginUser.id}]];
