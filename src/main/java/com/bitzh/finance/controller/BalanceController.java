@@ -2,8 +2,10 @@ package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
 import com.bitzh.finance.entity.Balance;
+import com.bitzh.finance.entity.FlowOfFunds;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.BalanceService;
+import com.bitzh.finance.service.FlowOfFundsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,8 @@ public class BalanceController {
 
     @Autowired
     BalanceService balanceService;
+    @Autowired
+    FlowOfFundsService flowOfFundsService;
 
     /**
      * 跳转到账户余额界面（用户）
@@ -50,6 +55,14 @@ public class BalanceController {
     public Msg addByBankCard(@RequestParam("amout") BigDecimal amount, @RequestParam("userId") Integer userId) {
         Integer result = balanceService.addByBankCard(amount, userId);
         if (result == 1) {
+            FlowOfFunds fof = new FlowOfFunds();
+            fof.setUserid(userId);
+            fof.setFlowmoney(amount);
+            fof.setType(2);
+            fof.setSource("充值");
+            fof.setCreatetime(new Date());
+            fof.setFunddesc("银行卡充值");
+            flowOfFundsService.insertFlowOfFunds(fof);
             return Msg.success();
         } else {
             return Msg.fail();

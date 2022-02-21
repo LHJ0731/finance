@@ -142,6 +142,9 @@
             },
             success: function (result) {
                 if (result.code === 100) {
+                    $.ajax({
+                      url:""
+                    })
                     //充值成功
                     //1、关闭模态框
                     $("#rechargeModal").modal('hide');
