@@ -131,18 +131,23 @@
     });
 
     $("#recharge_btn").click(function () {
-        var amount = $("#amount").val;
+        var amount = $("#amount").val();
+        var userId = [[${session.loginUser.id}]];
         $.ajax({
             url: "/user/addByBankCard",
             type: "POST",
             data: {
-                "amout": amount
+                "amout": amount,
+                "userId": userId
             },
             success: function (result) {
                 if (result.code === 100) {
                     //充值成功
                     //1、关闭模态框
                     $("#rechargeModal").modal('hide');
+                    setTimeout(function () {
+                        location.href = "/user/personal/toBalance.html";
+                    }, 100)
                 } else {
                     $.alert("充值失败");
                 }

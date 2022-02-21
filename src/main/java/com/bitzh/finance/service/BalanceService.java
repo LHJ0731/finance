@@ -8,7 +8,8 @@ import java.util.List;
 public interface BalanceService {
     Balance selectBalanceByUserId(Integer id);
 
-    Integer addByBankCard(Balance balance);
+    Integer addByBankCard(BigDecimal amount, Integer userId);
 
-    Integer realaddByBankCard(Balance balance);
+    Integer realaddByBankCard(BigDecimal amount, Integer userId);
+
 }

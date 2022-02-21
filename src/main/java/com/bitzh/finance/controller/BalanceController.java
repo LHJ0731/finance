@@ -41,22 +41,17 @@ public class BalanceController {
     /**
      * 用户通过银行卡增加余额
      *
+     * @param amount
      * @param userId
-     * @param rechargeamount
      * @return
      */
     @PostMapping("/user/addByBankCard")
     @ResponseBody
-    public Msg addByBankCard(@RequestParam("amout") BigDecimal amout) {
-        User loginUser = (User) session.getAttribute("loginUser");
-
-        Balance balance = new Balance();
-        balance.setUserid(loginUser.getId());
-        balance.setBalance(amout);
-        Integer result = balanceService.addByBankCard(balance);
-        if (result==1){
+    public Msg addByBankCard(@RequestParam("amout") BigDecimal amount, @RequestParam("userId") Integer userId) {
+        Integer result = balanceService.addByBankCard(amount, userId);
+        if (result == 1) {
             return Msg.success();
-        }else{
+        } else {
             return Msg.fail();
         }
     }
