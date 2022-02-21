@@ -106,6 +106,61 @@
                         </div>
                     </div>
 
+                    <!-- 提现的模态框 -->
+                    <div class="modal fade" id="withdrawModal" tabindex="-1"
+                         role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">余额提现</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <!--要提交的表单 -->
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="bankcard-select">选择银行卡</label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" id="withdraw_bankcard-select"
+                                                        name="withdraw_bankcard-select"
+                                                        size="1">
+                                                    <option value="">请选择银行卡</option>
+                                                </select>
+                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <em style="color: red">*</em>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="amount">提现金额（元）：</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="withdrawamount"
+                                                       name="withdrawamount"
+                                                       placeholder="请输入提现金额：">
+                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <em style="color: red">*</em>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            id="withdraw_btn">提现
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
@@ -122,9 +177,12 @@
 <script th:src="@{/lyear/jconfirm/jquery-confirm.min.js}"></script>
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
-<!--&lt;!&ndash;引入BigDecimal的js&ndash;&gt;-->
-<!--<script th:src="@{/js/BigDecimal.js}"></script>-->
 <script type="text/javascript">
+
+    $(function () {
+        $("#amount").blur(checkAmount);
+        $("#withdrawamount").blur(checkAmount);
+    })
 
     $("#recharge").click(function () {
         checkBankCard();
@@ -142,9 +200,6 @@
             },
             success: function (result) {
                 if (result.code === 100) {
-                    $.ajax({
-                      url:""
-                    })
                     //充值成功
                     //1、关闭模态框
                     $("#rechargeModal").modal('hide');
