@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button class="btn btn-primary" id="recharge" type="button">充值</button>
-                                        <button class="btn btn-primary" id="withdraw_deposit" type="button">提现</button>
+                                        <button class="btn btn-primary" id="withdraw" type="button">提现</button>
                                     </div>
                                 </form>
                             </div>
@@ -179,9 +179,14 @@
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script type="text/javascript">
 
-    $("#recharge").click(function () {
-        checkBankCard();
+    $("#withdraw").click(function () {
+        checkBankCardforWithDraw();
     });
+
+    $("#recharge").click(function () {
+        checkBankCardforRecharge();
+    });
+
 
     $("#recharge_btn").click(function () {
         //清空表单样式
@@ -251,8 +256,8 @@
         return true;
     }
 
-    //检查用户是否有银行卡
-    function checkBankCard() {
+    //充值检查用户是否有银行卡
+    function checkBankCardforRecharge() {
         var userId = [[${session.loginUser.id}]];
         $.ajax({
             url: "/user/getBankCardByUserId/" + userId,
@@ -280,6 +285,45 @@
                             $("#bankcard-select").append(option);
                         }
                         $("#rechargeModal").modal({
+                            backdrop: "static"//打开充值模态框
+                        });
+                    }
+                } else {
+                    $.alert('查询名下银行卡失败');
+                }
+            }
+        })
+    }
+
+    //提现检查用户是否有银行卡
+    function checkBankCardforWithDraw() {
+        var userId = [[${session.loginUser.id}]];
+        $.ajax({
+            url: "/user/getBankCardByUserId/" + userId,
+            type: "GET",
+            success: function (result) {
+                if (result.code === 100) {
+                    if (result.extend.bankCardList.length == 0) {
+                        $.alert('请添加银行卡,5秒后将自动跳转银行卡界面');
+                        setTimeout(function () {
+                            location.href = "/user/personal/toBankCard.html";
+                        }, 5000);
+                    } else {
+                        reset_form("#withdrawModal form")
+                        var option = document.createElement('option');
+                        var bankcardList = result.extend.bankCardList;
+                        for (let bc = 0; bc < bankcardList.length; bc++) {
+                            if (bankcardList[bc].type = 1) {
+                                var bankCardType = "借记卡";
+                            } else if (bankcardtype[bc].type = 2) {
+                                var bankCardType = "信用卡";
+                            }
+                            var bankcard = bankcardList[bc].cardbank + "\t" + bankCardType + "\t" + bankcardList[bc].cardnum;
+                            var child = "<option value=\"" + bankcardList[bc].id + "\">" + bankcard + "</option>"
+                            option.innerHTML = child;
+                            $("#withdraw_bankcard-select").append(option);
+                        }
+                        $("#withdrawModal").modal({
                             backdrop: "static"//打开充值模态框
                         });
                     }
