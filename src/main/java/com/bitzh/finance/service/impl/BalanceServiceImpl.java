@@ -43,4 +43,14 @@ public class BalanceServiceImpl implements BalanceService {
         return balanceMapper.insert(balance);
     }
 
+    @Override
+    public synchronized Integer withdrawToBankCard(BigDecimal amount, Integer userId) {
+        return balanceService.realwithdrawToBankCard(amount, userId);
+    }
+
+    @Override
+    @Transactional
+    public Integer realwithdrawToBankCard(BigDecimal withdrawamount, Integer userId) {
+        return balanceMapper.SUB(withdrawamount, userId);
+    }
 }

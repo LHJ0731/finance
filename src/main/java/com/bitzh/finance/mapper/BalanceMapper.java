@@ -34,4 +34,6 @@ public interface BalanceMapper {
     List<Balance> selectByExampleWithUser(BalanceExample balanceExample);
 
     Integer Add(BigDecimal amount, Integer userId);
+
+    Integer SUB(BigDecimal withdrawamount, Integer userId);
 }

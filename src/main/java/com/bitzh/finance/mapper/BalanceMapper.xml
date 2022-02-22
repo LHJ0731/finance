@@ -211,4 +211,9 @@
         set balance = balance + #{amount,jdbcType=DECIMAL}
         where userId = #{userId,jdbcType=INTEGER}
     </update>
+    <update id="SUB">
+        update balance
+        set balance = balance - #{withdrawamount,jdbcType=DECIMAL}
+        where userId = #{userId,jdbcType=INTEGER}
+    </update>
 </mapper>

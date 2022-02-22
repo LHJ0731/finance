@@ -218,9 +218,37 @@
             return false;
         }
 
-        if (withdrawamount > balance && withdrawamount != 0) {
-            show_validate_msg("#withdrawamount", "error", "输入金额应小于或等于可用余额且不为0！");
+        if (withdrawamount > balance) {
+            show_validate_msg("#withdrawamount", "error", "输入金额应小于或等于可用余额！");
+            return false;
         }
+
+        if (withdrawamount == 0) {
+            show_validate_msg("#withdrawamount", "error", "输入金额不能为0");
+            return false;
+        }
+
+        $.ajax({
+            url: "/user/withdrawToBankCard",
+            type: "POST",
+            data: {
+                "withdrawamout": withdrawamount,
+                "userId": userId,
+                "bankcardText": bankcardText
+            },
+            success: function (result) {
+                if (result.code === 100) {
+                    //充值成功
+                    //1、关闭模态框
+                    $("#withdrawModal").modal('hide');
+                    setTimeout(function () {
+                        location.href = "/user/personal/toBalance.html";
+                    }, 100)
+                } else {
+                    $.alert("提现失败");
+                }
+            }
+        })
     })
 
     $("#recharge_btn").click(function () {

@@ -53,7 +53,7 @@ public class BalanceController {
     @PostMapping("/user/addByBankCard")
     @ResponseBody
     public Msg addByBankCard(@RequestParam("amout") BigDecimal amount,
-                             @RequestParam("userId") Integer userId,@RequestParam("bankcardText") String bankcardText) {
+                             @RequestParam("userId") Integer userId, @RequestParam("bankcardText") String bankcardText) {
         Integer result = balanceService.addByBankCard(amount, userId);
         if (result == 1) {
             FlowOfFunds fof = new FlowOfFunds();
@@ -62,7 +62,34 @@ public class BalanceController {
             fof.setType(2);
             fof.setSource("充值");
             fof.setCreatetime(new Date());
-            fof.setFunddesc(bankcardText+"充值");
+            fof.setFunddesc("由" + bankcardText + "充值");
+            flowOfFundsService.insertFlowOfFunds(fof);
+            return Msg.success();
+        } else {
+            return Msg.fail();
+        }
+    }
+
+    /**
+     * 用户通过银行卡增加余额
+     *
+     * @param withdrawamount
+     * @param userId
+     * @return
+     */
+    @PostMapping("/user/withdrawToBankCard")
+    @ResponseBody
+    public Msg withdrawToBankCard(@RequestParam("withdrawamout") BigDecimal withdrawamount,
+                                  @RequestParam("userId") Integer userId, @RequestParam("bankcardText") String bankcardText) {
+        Integer result = balanceService.withdrawToBankCard(withdrawamount, userId);
+        if (result == 1) {
+            FlowOfFunds fof = new FlowOfFunds();
+            fof.setUserid(userId);
+            fof.setFlowmoney(withdrawamount);
+            fof.setType(1);
+            fof.setSource("提现");
+            fof.setCreatetime(new Date());
+            fof.setFunddesc("提现至" + bankcardText);
             flowOfFundsService.insertFlowOfFunds(fof);
             return Msg.success();
         } else {

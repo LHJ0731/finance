@@ -13,4 +13,8 @@ public interface BalanceService {
     Integer realaddByBankCard(BigDecimal amount, Integer userId);
 
     Integer insertBalance(Balance balance);
+
+    Integer withdrawToBankCard(BigDecimal withdrawamount, Integer userId);
+
+    Integer realwithdrawToBankCard(BigDecimal withdrawamount, Integer userId);
 }
