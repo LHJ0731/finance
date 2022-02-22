@@ -180,6 +180,14 @@
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script type="text/javascript">
 
+    $("#withdrawModal").on("hide.bs.modal", function () {//模态框隐藏时执行
+        window.location.reload();//重置模态框内容（变成一开始的样子）
+    })
+
+    $("#rechargeModal").on("hide.bs.modal", function () {//模态框隐藏时执行
+        window.location.reload();//重置模态框内容（变成一开始的样子）
+    })
+
     $("#withdraw").click(function () {
         checkBankCardforWithDraw();
     });
