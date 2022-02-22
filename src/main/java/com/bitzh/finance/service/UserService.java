@@ -19,4 +19,6 @@ public interface UserService {
     User selectUserById(Integer id);
 
     Integer deleteUserById(Integer id);
+
+    User selectUserByUsername(String username);
 }

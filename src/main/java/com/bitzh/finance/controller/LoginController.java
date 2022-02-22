@@ -2,8 +2,10 @@ package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
 import com.bitzh.finance.entity.Admin;
+import com.bitzh.finance.entity.Balance;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.AdminService;
+import com.bitzh.finance.service.BalanceService;
 import com.bitzh.finance.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/login")
@@ -24,6 +27,9 @@ public class LoginController {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    BalanceService balanceService;
 
     //public static final Map<String, HttpSession> USR_SESSION = new HashMap<>();
     public static String last_login = "";
@@ -87,6 +93,10 @@ public class LoginController {
         user.setStatus(0);
         user.setReputation("良好");
         userService.insertUser(user);
+        Balance balance = new Balance();
+        balance.setUserid(userService.selectUserByUsername(username).getId());
+        balance.setBalance(BigDecimal.valueOf(0));
+        balanceService.insertBalance(balance);
         return Msg.success().add("url", "/");
     }
 

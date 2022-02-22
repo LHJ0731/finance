@@ -27,14 +27,20 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public synchronized Integer addByBankCard(BigDecimal amount, Integer userId){
-        return balanceService.realaddByBankCard(amount,userId);
+    public synchronized Integer addByBankCard(BigDecimal amount, Integer userId) {
+        return balanceService.realaddByBankCard(amount, userId);
     }
 
     @Override
     @Transactional
-    public Integer realaddByBankCard(BigDecimal amount, Integer userId){
-        return balanceMapper.Add(amount,userId);
+    public Integer realaddByBankCard(BigDecimal amount, Integer userId) {
+        return balanceMapper.Add(amount, userId);
+    }
+
+    @Override
+    @Transactional
+    public Integer insertBalance(Balance balance) {
+        return balanceMapper.insert(balance);
     }
 
 }
