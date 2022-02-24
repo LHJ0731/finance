@@ -71,7 +71,7 @@ public class BalanceController {
     }
 
     /**
-     * 用户通过银行卡增加余额
+     * 用户通过银行卡余额提现
      *
      * @param withdrawamount
      * @param userId
