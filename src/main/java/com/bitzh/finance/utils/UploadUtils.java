@@ -1,4 +1,4 @@
-package com.bitzh.finance.common;
+package com.bitzh.finance.utils;
 
 import java.io.File;
 

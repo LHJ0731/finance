@@ -1,7 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
-import com.bitzh.finance.common.UploadUtils;
+import com.bitzh.finance.utils.UploadUtils;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.UserService;
 import com.github.pagehelper.PageHelper;
