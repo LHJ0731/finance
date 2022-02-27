@@ -1,10 +1,8 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
-import com.bitzh.finance.entity.ChangeMoney;
-import com.bitzh.finance.entity.FlowOfFunds;
-import com.bitzh.finance.entity.PayMoney;
-import com.bitzh.finance.entity.UserPayMoney;
+import com.bitzh.finance.entity.*;
+import com.bitzh.finance.service.BalanceService;
 import com.bitzh.finance.service.FlowOfFundsService;
 import com.bitzh.finance.service.PayMoneyService;
 import com.bitzh.finance.service.UserPayMoneyService;
@@ -29,6 +27,8 @@ public class PayMoneyController {
     UserPayMoneyService userPayMoneyService;
     @Autowired
     FlowOfFundsService flowOfFundsService;
+    @Autowired
+    BalanceService balanceService;
 
     /**
      * 跳转到工资理财界面
@@ -37,8 +37,10 @@ public class PayMoneyController {
      * @return
      */
     @RequestMapping("/user/finance/toPayMoney.html")
-    public String toPaymoney(Model model) {
+    public String toPaymoney(Model model, HttpSession session) {
         List<PayMoney> list = payMoneyService.selectAllPayMoney();
+        User loginUser = (User) session.getAttribute("loginUser");
+        Balance balance = balanceService.selectBalanceByUserId(loginUser.getId());
         model.addAttribute("payMoneyList", list);
         model.addAttribute("pageTopBarInfo", "工资理财界面");
         model.addAttribute("activeUrl1", "financeActive");

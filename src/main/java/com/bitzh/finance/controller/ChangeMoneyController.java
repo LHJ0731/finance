@@ -1,9 +1,8 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
-import com.bitzh.finance.entity.ChangeMoney;
-import com.bitzh.finance.entity.FlowOfFunds;
-import com.bitzh.finance.entity.UserChangeMoney;
+import com.bitzh.finance.entity.*;
+import com.bitzh.finance.service.BalanceService;
 import com.bitzh.finance.service.ChangeMoneyService;
 import com.bitzh.finance.service.FlowOfFundsService;
 import com.bitzh.finance.service.UserChangeMoneyService;
@@ -26,6 +25,8 @@ public class ChangeMoneyController {
     UserChangeMoneyService userChangeMoneyService;
     @Autowired
     FlowOfFundsService flowOfFundsService;
+    @Autowired
+    BalanceService balanceService;
 
     /**
      * 跳转到零钱理财界面（用户）
@@ -34,8 +35,11 @@ public class ChangeMoneyController {
      * @return
      */
     @RequestMapping("/user/finance/toChangeMoney.html")
-    public String toChangemoney(Model model) {
+    public String toChangemoney(Model model, HttpSession session) {
         List<ChangeMoney> list = changeMoneyService.selectAllChangeMoney();
+        User loginUser = (User) session.getAttribute("loginUser");
+        Balance balance = balanceService.selectBalanceByUserId(loginUser.getId());
+        model.addAttribute("Balance", balance);
         model.addAttribute("changeMoneyList", list);
         model.addAttribute("pageTopBarInfo", "零钱理财界面");
         model.addAttribute("activeUrl1", "financeActive");

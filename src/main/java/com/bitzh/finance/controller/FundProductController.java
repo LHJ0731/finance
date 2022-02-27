@@ -1,10 +1,8 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
-import com.bitzh.finance.entity.ChangeMoney;
-import com.bitzh.finance.entity.FlowOfFunds;
-import com.bitzh.finance.entity.FundProduct;
-import com.bitzh.finance.entity.UserFundProduct;
+import com.bitzh.finance.entity.*;
+import com.bitzh.finance.service.BalanceService;
 import com.bitzh.finance.service.FlowOfFundsService;
 import com.bitzh.finance.service.FundProductService;
 import com.bitzh.finance.service.UserFundProductService;
@@ -28,6 +26,8 @@ public class FundProductController {
     UserFundProductService userFundProductService;
     @Autowired
     FlowOfFundsService flowOfFundsService;
+    @Autowired
+    BalanceService balanceService;
 
     /**
      * 跳转到基金理财界面
@@ -36,8 +36,10 @@ public class FundProductController {
      * @return
      */
     @RequestMapping("/user/finance/toFundProduct.html")
-    public String toFundProduct(Model model) {
+    public String toFundProduct(Model model, HttpSession session) {
         List<FundProduct> list = fundProductService.selectAllFundProduct();
+        User loginUser = (User) session.getAttribute("loginUser");
+        Balance balance = balanceService.selectBalanceByUserId(loginUser.getId());
         model.addAttribute("fundProductList", list);
         model.addAttribute("pageTopBarInfo", "基金理财界面");
         model.addAttribute("activeUrl1", "financeActive");

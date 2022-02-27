@@ -5,8 +5,6 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <title>个人理财系统</title>
-    <!-- 网站图标 -->
-    <link rel="icon" th:href="@{images/favicon.ico}" type="image/ico">
     <!-- 引入bootstrap样式 -->
     <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <!--图标库-->
@@ -199,7 +197,6 @@
     });
 
     $("#withdraw_btn").click(function () {
-        console.log(1);
         //清空表单样式
         clean_form("#withdrawModal form");
 

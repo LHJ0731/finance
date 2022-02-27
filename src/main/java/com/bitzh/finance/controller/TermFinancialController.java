@@ -1,10 +1,8 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
-import com.bitzh.finance.entity.ChangeMoney;
-import com.bitzh.finance.entity.FlowOfFunds;
-import com.bitzh.finance.entity.TermFinancial;
-import com.bitzh.finance.entity.UserTermFinancial;
+import com.bitzh.finance.entity.*;
+import com.bitzh.finance.service.BalanceService;
 import com.bitzh.finance.service.FlowOfFundsService;
 import com.bitzh.finance.service.TermFinancialService;
 import com.bitzh.finance.service.UserTermFinancialService;
@@ -28,6 +26,8 @@ public class TermFinancialController {
     UserTermFinancialService userTermFinancialService;
     @Autowired
     FlowOfFundsService flowOfFundsService;
+    @Autowired
+    BalanceService balanceService;
 
     /**
      * 跳转到期限理财界面
@@ -36,8 +36,10 @@ public class TermFinancialController {
      * @return
      */
     @RequestMapping("/user/finance/toTermFinancial.html")
-    public String toPaymoney(Model model) {
+    public String toPaymoney(Model model, HttpSession session) {
         List<TermFinancial> list = termFinancialService.selectAllTermFinancial();
+        User loginUser = (User) session.getAttribute("loginUser");
+        Balance balance = balanceService.selectBalanceByUserId(loginUser.getId());
         model.addAttribute("termFinancialList", list);
         model.addAttribute("pageTopBarInfo", "期限理财界面");
         model.addAttribute("activeUrl1", "financeActive");

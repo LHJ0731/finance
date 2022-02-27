@@ -5,8 +5,6 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <title>个人理财系统</title>
-    <!-- 网站图标 -->
-    <link rel="icon" th:href="@{images/favicon.ico}" type="image/ico">
     <!-- 引入bootstrap样式 -->
     <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <!--图标库-->
@@ -15,7 +13,6 @@
     <link th:href="@{/lyear/jconfirm/jquery-confirm.min.css}" rel="stylesheet" type="text/css"/>
     <!--自定义样式-->
     <link href="../lyear/css/style.min.css" th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
-
 </head>
 <body>
 <div class="lyear-layout-web">
@@ -74,7 +71,7 @@
                                             <td th:text="${cm.invesmoney}+'元'"></td>
                                             <td>
                                                 <button class="btn btn-primary btn-sm buy_btn"
-                                                        th:attr="buyBtnId=${cm.id},buyBtnName=${cm.name}">
+                                                        th:attr="buyBtnId=${cm.id},buyBtnName=${cm.name},buyBtnInvesmoney=${cm.invesmoney}">
                                                     <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 投资
                                                 </button>
                                             </td>
@@ -107,10 +104,12 @@
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script th:inline="javascript">
+
     $(document).on("click", ".buy_btn", function () {
         var changeMoneyId = $(this).attr("buyBtnId");
         var userId = [[${session.loginUser.id}]];
-        //alert(userId);
+        var invesmoney = $(this).attr("buyBtnInvesmoney");
+        console.log(invesmoney);
         var name = $(this).attr("buyBtnName");
         $.alert({
             title: '提示：',
@@ -169,11 +168,11 @@
                         var child = "<td>" + changeMoneyList[cm].id + "</td>" +
                             "<td>" + changeMoneyList[cm].name + "</td>" +
                             "<td>" + annualincome + "</td>" +
-                            "<td>" + changeMoneyList[cm].peiincome + "元</td>" +
+                            "<td>" + changeMoneyList[cm].peiincome + "</td>" +
                             "<td>" + changeMoneyList[cm].investerm + "</td>" +
-                            "<td>" + invesmoney + "元</td>" +
+                            "<td>" + invesmoney + "</td>" +
                             "<td>" +
-                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\"" + changeMoneyList[cm].id + "\" buyBtnName=\"" + changeMoneyList[cm].name + "\">\n" +
+                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\"" + changeMoneyList[cm].id + "\" buyBtnName=\"" + changeMoneyList[cm].name + "\" buyBtnInvesmoney=\"" + invesmoney + "\">" +
                             "<span class=\"glyphicon glyphicon-usd\" aria-hidden=\"true\"></span> 投资" +
                             "</button>" +
                             "</td>";
