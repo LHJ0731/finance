@@ -73,7 +73,7 @@
                                             <td th:text="${pm.investerm}"></td>
                                             <td>
                                                 <button class="btn btn-primary btn-sm buy_btn"
-                                                        th:attr="buyBtnId=${pm.id},buyBtnName=${pm.name}">
+                                                        th:attr="buyBtnId=${pm.id},buyBtnName=${pm.name},buyBtnMonthmoney=${pm.monthmoney}">
                                                     <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 投资
                                                 </button>
                                             </td>
@@ -109,7 +109,12 @@
     $(document).on("click", ".buy_btn", function () {
         var payMoneyId = $(this).attr("buyBtnId");
         var userId = [[${session.loginUser.id}]];
-        //alert(userId);
+        var monthmoney = $(this).attr("buyBtnMonthmoney");
+        var balance = [[${Balance.balance}]];
+        if (monthmoney > balance) {
+            $.alert("余额不足，请先充值");
+            return false;
+        }
         var name = $(this).attr("buyBtnName");
         $.alert({
             title: '提示：',
@@ -182,7 +187,7 @@
                             "<td>" + payMoneyAutoInto + "</td>\n" +
                             "<td>" + payMoneyList[pm].investerm + "</td>\n" +
                             "<td>" +
-                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\"" + payMoneyList[pm].id + "\" buyBtnName=\"" + payMoneyList[pm].name + "\">" +
+                            "<button class=\"btn btn-primary btn-sm buy_btn\" buyBtnId=\"" + payMoneyList[pm].id + "\" buyBtnName=\"" + payMoneyList[pm].name + "\" buyBtnMonthmoney=\"" + monthMoney + "\">" +
                             "<span class=\"glyphicon glyphicon-usd\" aria-hidden=\"true\"></span> 投资" +
                             "</button>" +
                             "</td>";

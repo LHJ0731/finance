@@ -40,6 +40,7 @@ public class TermFinancialController {
         List<TermFinancial> list = termFinancialService.selectAllTermFinancial();
         User loginUser = (User) session.getAttribute("loginUser");
         Balance balance = balanceService.selectBalanceByUserId(loginUser.getId());
+        model.addAttribute("Balance", balance);
         model.addAttribute("termFinancialList", list);
         model.addAttribute("pageTopBarInfo", "期限理财界面");
         model.addAttribute("activeUrl1", "financeActive");

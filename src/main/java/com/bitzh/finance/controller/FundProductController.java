@@ -40,6 +40,7 @@ public class FundProductController {
         List<FundProduct> list = fundProductService.selectAllFundProduct();
         User loginUser = (User) session.getAttribute("loginUser");
         Balance balance = balanceService.selectBalanceByUserId(loginUser.getId());
+        model.addAttribute("Balance", balance);
         model.addAttribute("fundProductList", list);
         model.addAttribute("pageTopBarInfo", "基金理财界面");
         model.addAttribute("activeUrl1", "financeActive");

@@ -104,12 +104,16 @@
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script th:inline="javascript">
-
     $(document).on("click", ".buy_btn", function () {
         var changeMoneyId = $(this).attr("buyBtnId");
         var userId = [[${session.loginUser.id}]];
         var invesmoney = $(this).attr("buyBtnInvesmoney");
         console.log(invesmoney);
+        var balance = [[${Balance.balance}]];
+        if (invesmoney > balance) {
+            $.alert("余额不足，请先充值");
+            return false;
+        }
         var name = $(this).attr("buyBtnName");
         $.alert({
             title: '提示：',
