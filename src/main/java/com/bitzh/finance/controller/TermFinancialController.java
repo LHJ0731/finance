@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +59,9 @@ public class TermFinancialController {
     @PostMapping("/user/buyTermFinancial")
     @ResponseBody
     public Msg buyTermFinancial(@RequestParam("termFinancialId") Integer termFinancialId,
-                                @RequestParam("userId") Integer userId) {
+                                @RequestParam("userId") Integer userId,
+                                @RequestParam("leastmoney") BigDecimal leastmoney) {
+        Integer consumeresult = balanceService.consume(userId, leastmoney);
         UserTermFinancial utf = new UserTermFinancial();
         utf.setUserid(userId);
         utf.setTermid(termFinancialId);
@@ -68,7 +71,7 @@ public class TermFinancialController {
         utf.setProfit(tf.getAnnualincome().multiply(tf.getLeastmoney()));
         utf.setStatus(1);
         Integer result = userTermFinancialService.insertUserTermFinancial(utf);
-        if (result == 1) {
+        if (result == 1 && consumeresult == 1) {
             FlowOfFunds fof = new FlowOfFunds();
             fof.setUserid(userId);
             fof.setFlowmoney(tf.getLeastmoney());

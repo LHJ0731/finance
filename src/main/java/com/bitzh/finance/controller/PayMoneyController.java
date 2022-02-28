@@ -59,7 +59,9 @@ public class PayMoneyController {
     @PostMapping("/user/buyPayMoney")
     @ResponseBody
     public Msg buyPayMoney(@RequestParam("payMoneyId") Integer payMoneyId,
-                           @RequestParam("userId") Integer userId) {
+                           @RequestParam("userId") Integer userId,
+                           @RequestParam("monthmoney") BigDecimal monthmoney) {
+        Integer consumeresult = balanceService.consume(userId, monthmoney);
         PayMoney pm = payMoneyService.selectPayMoneyById(payMoneyId);
         UserPayMoney upm = new UserPayMoney();
         upm.setUserid(userId);
@@ -69,7 +71,7 @@ public class PayMoneyController {
         upm.setProfit(new BigDecimal("0.03123").multiply(pm.getMonthmoney()));
         upm.setStatus(1);
         Integer result = userPayMoneyService.insertUserPayMoney(upm);
-        if (result == 1) {
+        if (result == 1 && consumeresult == 1) {
             FlowOfFunds fof = new FlowOfFunds();
             fof.setUserid(userId);
             fof.setFlowmoney(pm.getMonthmoney());

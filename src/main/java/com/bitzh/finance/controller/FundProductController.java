@@ -60,7 +60,7 @@ public class FundProductController {
     @ResponseBody
     public Msg buyFundProduct(@RequestParam("fundProductId") Integer fundProductId,
                               @RequestParam("userId") Integer userId,
-                              @RequestParam("invesmoney") BigDecimal leastmoney) {
+                              @RequestParam("leastmoney") BigDecimal leastmoney) {
         Integer consumeresult = balanceService.consume(userId, leastmoney);
         UserFundProduct ufp = new UserFundProduct();
         ufp.setUserid(userId);
