@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -57,7 +58,9 @@ public class ChangeMoneyController {
     @PostMapping("/user/buyChangeMoney")
     @ResponseBody
     public Msg buyChangeMoney(@RequestParam("changeMoneyId") Integer changeMoneyId,
-                              @RequestParam("userId") Integer userId) {
+                              @RequestParam("userId") Integer userId,
+                              @RequestParam("invesmoney") BigDecimal invesmoney) {
+        Integer consumeresult = balanceService.consume(userId, invesmoney);
         ChangeMoney cm = changeMoneyService.selectChangeMoneyById(changeMoneyId);
         UserChangeMoney ucm = new UserChangeMoney();
         ucm.setUserid(userId);
@@ -67,7 +70,7 @@ public class ChangeMoneyController {
         ucm.setProfit(cm.getAnnualincome().multiply(cm.getInvesmoney()));
         ucm.setStatus(1);
         Integer result = userChangeMoneyService.insertUserChangeMoney(ucm);
-        if (result == 1) {
+        if (result == 1 && consumeresult == 1) {
             FlowOfFunds fof = new FlowOfFunds();
             fof.setUserid(userId);
             fof.setFlowmoney(cm.getInvesmoney());

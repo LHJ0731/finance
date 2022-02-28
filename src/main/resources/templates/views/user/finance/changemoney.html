@@ -108,7 +108,6 @@
         var changeMoneyId = $(this).attr("buyBtnId");
         var userId = [[${session.loginUser.id}]];
         var invesmoney = $(this).attr("buyBtnInvesmoney");
-        console.log(invesmoney);
         var balance = [[${Balance.balance}]];
         if (invesmoney > balance) {
             $.alert("余额不足，请先充值");
@@ -128,7 +127,8 @@
                             type: "POST",
                             data: {
                                 "changeMoneyId": changeMoneyId,
-                                "userId": userId
+                                "userId": userId,
+                                "invesmoney": invesmoney
                             },
                             success: function (result) {
                                 if (result.code === 100) {

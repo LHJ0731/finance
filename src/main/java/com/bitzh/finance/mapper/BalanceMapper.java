@@ -35,5 +35,7 @@ public interface BalanceMapper {
 
     Integer Add(BigDecimal amount, Integer userId);
 
-    Integer SUB(BigDecimal withdrawamount, Integer userId);
+    Integer Sub(BigDecimal withdrawamount, Integer userId);
+
+    Integer consume(Integer userId, BigDecimal monetary);
 }

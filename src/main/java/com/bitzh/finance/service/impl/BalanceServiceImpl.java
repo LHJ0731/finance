@@ -1,7 +1,6 @@
 package com.bitzh.finance.service.impl;
 
 import com.bitzh.finance.entity.Balance;
-import com.bitzh.finance.entity.BalanceExample;
 import com.bitzh.finance.mapper.BalanceMapper;
 import com.bitzh.finance.service.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class BalanceServiceImpl implements BalanceService {
@@ -51,6 +49,17 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     @Transactional
     public Integer realwithdrawToBankCard(BigDecimal withdrawamount, Integer userId) {
-        return balanceMapper.SUB(withdrawamount, userId);
+        return balanceMapper.Sub(withdrawamount, userId);
+    }
+
+    @Override
+    public synchronized Integer consume(Integer userId, BigDecimal monetary) {
+        return balanceService.realconsume(userId, monetary);
+    }
+
+    @Override
+    @Transactional
+    public Integer realconsume(Integer userId, BigDecimal monetary) {
+        return balanceMapper.consume(userId, monetary);
     }
 }
