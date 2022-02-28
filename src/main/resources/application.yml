@@ -71,7 +71,7 @@ configuration:
 
 server:
   #端口设置
-  port: 9999
+  port: 9090
   servlet:
     session:
       #session超时时间设置：2小时 7200秒
