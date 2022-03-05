@@ -77,4 +77,9 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectUserByUsername(username);
         return user;
     }
+
+    @Override
+    public Integer selectOnlineUser() {
+        return userMapper.selectOnlineUser();
+    }
 }

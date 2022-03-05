@@ -297,4 +297,9 @@
         from user
         where username = #{username,jdbcType=VARCHAR}
     </select>
+    <select id="selectOnlineUser" resultType="java.lang.Integer">
+        select *
+        from user
+        where status = 1;
+    </select>
 </mapper>

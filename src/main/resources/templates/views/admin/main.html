@@ -31,7 +31,8 @@
                             <div class="card-body clearfix">
                                 <div class="pull-right">
                                     <p class="h6 text-white m-t-0">用户总数</p>
-                                    <p class="h3 text-white m-b-0 fa-1-5x" th:text="${userPageInfo.total}"></p>
+                                    <p class="h3 text-white m-b-0 fa-1-5x"
+                                       th:text="${userPageInfo.total}"></p>
                                 </div>
                                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i
                                         class="mdi mdi-account fa-1-5x"></i></span></div>
@@ -44,7 +45,8 @@
                             <div class="card-body clearfix">
                                 <div class="pull-right">
                                     <p class="h6 text-white m-t-0">当前在线用户数</p>
-                                    <p class="h3 text-white m-b-0 fa-1-5x" th:text="${userPageInfo.total}"></p>
+                                    <p class="h3 text-white m-b-0 fa-1-5x"
+                                       th:text="${OnlineUsernum}==null?0:${OnlineUsernum}"></p>
                                 </div>
                                 <div class="pull-left"> <span class="img-avatar img-avatar-48 bg-translucent"><i
                                         class="mdi mdi-account fa-1-5x"></i></span></div>

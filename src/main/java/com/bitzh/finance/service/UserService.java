@@ -21,4 +21,6 @@ public interface UserService {
     Integer deleteUserById(Integer id);
 
     User selectUserByUsername(String username);
+
+    Integer selectOnlineUser();
 }
