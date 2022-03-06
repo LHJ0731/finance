@@ -239,10 +239,18 @@ public class UserController {
         return "/admin/userinfo/reputation";
     }
 
+    /**
+     * 跳转到用户信誉管理界面（管理员）
+     *
+     * @param headimgFile
+     * @param username
+     * @param request
+     * @param session
+     * @return
+     */
     @PutMapping("/user/updateUserheadimg/{username}")
     @ResponseBody
     public Msg upload(@RequestParam("file") MultipartFile headimgFile, @PathVariable("username") String username, HttpServletRequest request, HttpSession session) {
-        System.out.println("进来了controller");
         if (!headimgFile.isEmpty() && headimgFile.getSize() > 0) {
             // 拿到文件名
             String filename = headimgFile.getOriginalFilename();

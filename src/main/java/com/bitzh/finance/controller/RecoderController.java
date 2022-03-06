@@ -3,15 +3,25 @@ package com.bitzh.finance.controller;
 import com.bitzh.finance.entity.FlowOfFunds;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.FlowOfFundsService;
+import com.bitzh.finance.utils.ExportUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -47,5 +57,33 @@ public class RecoderController {
         return "/user/tools/record";
     }
 
+    /**
+     * 导出数据
+     *
+     * @param userId
+     * @param session
+     */
+    @RequestMapping("/user/export/{userId}")
+    public ResponseEntity<Object> export(@PathVariable("userId") String userId, HttpSession session) {
+        List<FlowOfFunds> list = flowOfFundsService.selectFlowOfFundsByUserId(Integer.parseInt(userId));
+        String fileName = "客户资金记录数据.xls";
+        String sheetName = "资金记录数据";
 
+        ByteArrayOutputStream bos = ExportUtils.exportRecord(list, sheetName);
+
+        try {
+            //处理文件名乱码
+            fileName = URLEncoder.encode(fileName, "UTF-8");
+            //创建 封装响应头信息的对象
+            HttpHeaders headers = new HttpHeaders();
+            //封装响应内容类型(APPLICATION_OCTET_STREAM 响应的内容不限定)
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            //设置下载的文件的名称
+            headers.setContentDispositionFormData("attachment", fileName);
+            return new ResponseEntity<Object>(bos.toByteArray(), headers, HttpStatus.CREATED);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
