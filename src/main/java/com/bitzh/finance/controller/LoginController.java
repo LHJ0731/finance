@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.Admin;
 import com.bitzh.finance.entity.Balance;
 import com.bitzh.finance.entity.User;
@@ -50,6 +51,7 @@ public class LoginController {
 
     @GetMapping("/verifyLogin")
     @ResponseBody
+    @OperLog(operModul = "登录模块", operType = "登录", operDesc = "验证登录")
     public Msg verifyLogin(@RequestParam("username") String username, @RequestParam("password") String password,
                            HttpSession session) {
 

@@ -33,6 +33,10 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     AdminPermissionsService adminPermissionsService;
 
+    public static String getCurrentUserName() {
+        return (String) SecurityUtils.getSubject().getPrincipal();
+    }
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //System.out.println("执行了=>授权doGetAuthorizationInfo");
@@ -71,7 +75,6 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-
         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
 
         //从token中取到用户名再去查用户密码
@@ -99,4 +102,6 @@ public class UserRealm extends AuthorizingRealm {
         }
         return null;
     }
+
+
 }
