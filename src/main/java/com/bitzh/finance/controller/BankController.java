@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.Bank;
 import com.bitzh.finance.service.BankService;
 import com.github.pagehelper.PageHelper;
@@ -59,12 +60,14 @@ public class BankController {
     }
 
     /**
-     * 新增推荐银行
+     * 新增推荐银行(管理员)
      *
+     * @param bank
      * @return
      */
     @PostMapping("/admin/addBank")
     @ResponseBody
+    @OperLog(operModul = "银行模块", operType = "新增", operDesc = "新增推荐银行(管理员)")
     public Msg addBank(Bank bank) {
         Integer result = bankService.insertBank(bank);
         if (result == 1) {
@@ -74,26 +77,28 @@ public class BankController {
     }
 
     /**
-     * 更新时回显信息
+     * 查询指定银行信息，用于回显银行信息
      *
      * @param id
      * @return
      */
     @GetMapping("/admin/getBankInfoById/{id}")
     @ResponseBody
+    @OperLog(operModul = "银行模块", operType = "查询", operDesc = "查询指定银行信息，用于回显银行信息")
     public Msg getBankInfoById(@PathVariable("id") Integer id) {
         Bank bank = bankService.selectBankById(id);
         return Msg.success().add("bank", bank);
     }
 
     /**
-     * 更新
+     * 更新银行信息
      *
      * @param id
      * @return
      */
     @PutMapping("/admin/updateBank/{id}")
     @ResponseBody
+    @OperLog(operModul = "银行模块", operType = "更新", operDesc = "更新银行信息")
     public Msg updateBank(@PathVariable("id") Integer id, Bank bank) {
         bank.setId(id);
         Integer result = bankService.updateBank(bank);
@@ -104,13 +109,14 @@ public class BankController {
     }
 
     /**
-     * 删除
+     * 删除银行
      *
      * @param id
      * @return
      */
     @DeleteMapping("/admin/deleteBankById/{id}")
     @ResponseBody
+    @OperLog(operModul = "银行模块", operType = "删除", operDesc = "删除银行")
     public Msg deleteBankById(@PathVariable("id") Integer id) {
         Integer result = bankService.deleteBankById(id);
         if (result == 1) {

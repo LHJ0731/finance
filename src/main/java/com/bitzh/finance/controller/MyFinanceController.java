@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.*;
 import com.bitzh.finance.service.UserChangeMoneyService;
 import com.bitzh.finance.service.UserFundProductService;
@@ -58,6 +59,7 @@ public class MyFinanceController {
 
     @PutMapping("/user/revokeUserChangeMoney")
     @ResponseBody
+    @OperLog(operModul = "我的理财模块", operType = "更新", operDesc = "撤销持有的零钱理财产品")
     public Msg revokeUserChangeMoney(@RequestParam("userChangeMoneyId") Integer userChangeMoneyId, HttpSession session) {
         UserChangeMoney ucm = userChangeMoneyService.selectUserChangeMoneyById(userChangeMoneyId);
         ucm.setStatus(3);
@@ -71,6 +73,7 @@ public class MyFinanceController {
 
     @PutMapping("/user/revokeUserPayMoney")
     @ResponseBody
+    @OperLog(operModul = "我的理财模块", operType = "更新", operDesc = "撤销持有的工资理财产品")
     public Msg revokeUserPayMoney(@RequestParam("userPayMoneyId") Integer userPayMoneyId, HttpSession session) {
         UserPayMoney upm = userPayMoneyService.selectUserPayMoneyById(userPayMoneyId);
         upm.setStatus(3);
@@ -85,6 +88,7 @@ public class MyFinanceController {
 
     @PutMapping("/user/revokeUserTermFinancial")
     @ResponseBody
+    @OperLog(operModul = "我的理财模块", operType = "更新", operDesc = "撤销持有的期限理财产品")
     public Msg revokeUserTermFinancial(@RequestParam("userTermFinancialId") Integer userTermFinancialId, HttpSession session) {
         UserTermFinancial utf = userTermFinancialService.selectUserTermFinancialById(userTermFinancialId);
         utf.setStatus(3);
@@ -99,6 +103,7 @@ public class MyFinanceController {
 
     @PutMapping("/user/revokeUserFundProduct")
     @ResponseBody
+    @OperLog(operModul = "我的理财模块", operType = "更新", operDesc = "撤销持有的基金理财产品")
     public Msg revokeUserFundProduct(@RequestParam("userFundProductId") Integer userFundProductId, HttpSession session) {
 
         UserFundProduct ufp = userFundProductService.selectUserFundProductById(userFundProductId);

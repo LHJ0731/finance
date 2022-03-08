@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.AdminPermissions;
 import com.bitzh.finance.entity.UserPermissions;
 import com.bitzh.finance.service.AdminPermissionsService;
@@ -58,6 +59,7 @@ public class PermissionsController {
      */
     @PutMapping("/admin/updateUserPermissions")
     @ResponseBody
+    @OperLog(operModul = "权限模块", operType = "更新", operDesc = "更新用户权限")
     public Msg updateUserPermissions(@RequestParam("userPermissions") String userPermissions) {
         String[] strings = userPermissions.split(";");
         //System.out.println(strings.length+":"+ Arrays.toString(strings));
@@ -87,8 +89,15 @@ public class PermissionsController {
         return "/admin/permission/adminpermissions";
     }
 
+    /**
+     * 更新管理员权限
+     *
+     * @param adminPermissions
+     * @return
+     */
     @PutMapping("/admin/updateAdminPermissions")
     @ResponseBody
+    @OperLog(operModul = "权限模块", operType = "更新", operDesc = "更新管理员权限")
     public Msg updateAdminPermissions(@RequestParam("adminPermissions") String adminPermissions) {
         String[] strings = adminPermissions.split(";");
         //System.out.println(strings.length+":"+ Arrays.toString(strings));

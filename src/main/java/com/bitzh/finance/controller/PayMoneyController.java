@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.*;
 import com.bitzh.finance.service.BalanceService;
 import com.bitzh.finance.service.FlowOfFundsService;
@@ -50,7 +51,7 @@ public class PayMoneyController {
     }
 
     /**
-     * 购买工资理财产品
+     * 买入工资理财产品
      *
      * @param payMoneyId
      * @param userId
@@ -58,6 +59,7 @@ public class PayMoneyController {
      */
     @PostMapping("/user/buyPayMoney")
     @ResponseBody
+    @OperLog(operModul = "工资理财模块", operType = "新增", operDesc = "买入工资理财产品")
     public Msg buyPayMoney(@RequestParam("payMoneyId") Integer payMoneyId,
                            @RequestParam("userId") Integer userId,
                            @RequestParam("monthmoney") BigDecimal monthmoney) {
@@ -98,6 +100,7 @@ public class PayMoneyController {
      */
     @PostMapping("/user/selectPayMoney")
     @ResponseBody
+    @OperLog(operModul = "工资理财模块", operType = "查询", operDesc = "搜索工资理财产品")
     public Msg selectChangeMoney(@RequestParam("information") String information, Model model) {
         List<PayMoney> list = payMoneyService.selectPayMoneyByInfo(information);
         model.addAttribute("payMoneyList", list);
@@ -130,13 +133,14 @@ public class PayMoneyController {
     }
 
     /**
-     * 新增工资理财产品
+     * 新增工资理财产品(管理员)
      *
      * @param payMoney
      * @return
      */
     @PostMapping("/admin/addPayMoney")
     @ResponseBody
+    @OperLog(operModul = "工资理财模块", operType = "新增", operDesc = "新增工资理财产品(管理员)")
     public Msg addPayMoney(PayMoney payMoney) {
         Integer result = payMoneyService.insertPayMoney(payMoney);
         if (result == 1) {
@@ -146,20 +150,21 @@ public class PayMoneyController {
     }
 
     /**
-     * 更新时回显信息
+     * 查询指定工资理财产品信息，用于更新时回显信息
      *
      * @param id
      * @return
      */
     @GetMapping("/admin/getPayMoneyInfoById/{id}")
     @ResponseBody
+    @OperLog(operModul = "工资理财模块", operType = "查询", operDesc = "查询指定工资理财产品信息，用于更新时回显信息")
     public Msg getPayMoneyInfoById(@PathVariable("id") Integer id) {
         PayMoney payMoney = payMoneyService.selectPayMoneyById(id);
         return Msg.success().add("payMoney", payMoney);
     }
 
     /**
-     * 更新
+     * 更新工资理财产品信息
      *
      * @param id
      * @param payMoney
@@ -167,6 +172,7 @@ public class PayMoneyController {
      */
     @PutMapping("/admin/updatePayMoney/{id}")
     @ResponseBody
+    @OperLog(operModul = "工资理财模块", operType = "更新", operDesc = "更新工资理财产品信息")
     public Msg updatePayMoney(@PathVariable("id") Integer id, PayMoney payMoney) {
         payMoney.setId(id);
         Integer result = payMoneyService.updatePayMoney(payMoney);
@@ -184,6 +190,7 @@ public class PayMoneyController {
      */
     @DeleteMapping("/admin/deletePayMoneyById/{id}")
     @ResponseBody
+    @OperLog(operModul = "工资理财模块", operType = "删除", operDesc = "删除基工资理财产品信息")
     public Msg deletePayMoneyById(@PathVariable("id") Integer id) {
         Integer result = payMoneyService.deletePayMoneyById(id);
         if (result == 1) {

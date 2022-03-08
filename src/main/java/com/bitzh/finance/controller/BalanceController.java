@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.Balance;
 import com.bitzh.finance.entity.FlowOfFunds;
 import com.bitzh.finance.entity.User;
@@ -50,6 +51,7 @@ public class BalanceController {
      */
     @PostMapping("/user/addByBankCard")
     @ResponseBody
+    @OperLog(operModul = "余额模块", operType = "新增", operDesc = "用户通过银行卡增加余额")
     public Msg addByBankCard(@RequestParam("amout") BigDecimal amount,
                              @RequestParam("userId") Integer userId, @RequestParam("bankcardText") String bankcardText) {
         Integer result = balanceService.addByBankCard(amount, userId);
@@ -77,6 +79,7 @@ public class BalanceController {
      */
     @PostMapping("/user/withdrawToBankCard")
     @ResponseBody
+    @OperLog(operModul = "余额模块", operType = "更新", operDesc = "用户通过银行卡余额提现")
     public Msg withdrawToBankCard(@RequestParam("withdrawamout") BigDecimal withdrawamount,
                                   @RequestParam("userId") Integer userId, @RequestParam("bankcardText") String bankcardText) {
         Integer result = balanceService.withdrawToBankCard(withdrawamount, userId);

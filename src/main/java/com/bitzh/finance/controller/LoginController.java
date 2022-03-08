@@ -51,7 +51,7 @@ public class LoginController {
 
     @GetMapping("/verifyLogin")
     @ResponseBody
-    @OperLog(operModul = "登录模块", operType = "登录", operDesc = "验证登录")
+    @OperLog(operModul = "登录模块", operType = "查询", operDesc = "验证登录")
     public Msg verifyLogin(@RequestParam("username") String username, @RequestParam("password") String password,
                            HttpSession session) {
 
@@ -88,6 +88,7 @@ public class LoginController {
 
     @PostMapping("/register")
     @ResponseBody
+    @OperLog(operModul = "登录模块", operType = "新增", operDesc = "用户注册")
     public Msg register(@RequestParam("username") String username, @RequestParam("password") String password) {
         User user = new User();
         user.setUsername(username);

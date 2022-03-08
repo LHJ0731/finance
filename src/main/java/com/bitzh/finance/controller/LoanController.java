@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.Admin;
 import com.bitzh.finance.entity.Info;
 import com.bitzh.finance.entity.Loan;
@@ -76,6 +77,7 @@ public class LoanController {
      */
     @PostMapping("/user/applyLoan")
     @ResponseBody
+    @OperLog(operModul = "借款模块", operType = "新增", operDesc = "新增借款申请")
     public Msg applyLoan(@RequestParam("amout") BigDecimal amout,
                          @RequestParam("term") Integer term,
                          @RequestParam("rate") BigDecimal rate, HttpSession session) {
@@ -104,6 +106,7 @@ public class LoanController {
      */
     @PutMapping("/user/repayment/{id}")
     @ResponseBody
+    @OperLog(operModul = "借款模块", operType = "更新", operDesc = "还款,进行更新借款信息")
     public Msg repayment(@PathVariable("id") Integer id) {
         Loan loan = loanService.selectLoanById(id);
         loan.setLoanstatus(2);
@@ -143,13 +146,14 @@ public class LoanController {
     }
 
     /**
-     * 审核通过
+     * 借款审核通过
      *
      * @param id
      * @return
      */
     @PutMapping("/loan/passApplyStatus/{id}")
     @ResponseBody
+    @OperLog(operModul = "借款模块", operType = "更新", operDesc = "借款审核通过")
     public Msg passApplyStatus(@PathVariable("id") Integer id, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("loginAdmin");
         Loan loan = loanService.selectLoanById(id);
@@ -171,13 +175,14 @@ public class LoanController {
     }
 
     /**
-     * 审核不通过
+     * 借款审核不通过
      *
      * @param id
      * @return
      */
     @PutMapping("/loan/notPassApplyStatus/{id}")
     @ResponseBody
+    @OperLog(operModul = "借款模块", operType = "更新", operDesc = "借款审核不通过")
     public Msg notPassApplyStatus(@PathVariable("id") Integer id, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("loginAdmin");
         Loan loan = loanService.selectLoanById(id);
@@ -226,8 +231,16 @@ public class LoanController {
         return "admin/loan/loaninfo";
     }
 
+    /**
+     * 提醒用户还款（管理员）
+     *
+     * @param id
+     * @param session
+     * @return
+     */
     @PutMapping("/loan/remindPay/{id}")
     @ResponseBody
+    @OperLog(operModul = "借款模块", operType = "新增", operDesc = "提醒用户还款（管理员）")
     public Msg remindPay(@PathVariable("id") Integer id, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("loginAdmin");
         Loan loan = loanService.selectLoanById(id);

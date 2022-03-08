@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.utils.UploadUtils;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.UserService;
@@ -62,6 +63,7 @@ public class UserController {
      */
     @PutMapping("/user/updatePwd")
     @ResponseBody
+    @OperLog(operModul = "用户模块", operType = "更新", operDesc = "判断并更新密码（用户）")
     public Msg updatePwd(HttpServletRequest request, HttpSession session) {
 
         String id = request.getParameter("id");
@@ -93,6 +95,7 @@ public class UserController {
      */
     @PutMapping("/user/updateUserProfile/{userId}")
     @ResponseBody
+    @OperLog(operModul = "用户模块", operType = "更新", operDesc = "更新用户信息(用户更改自己信息)")
     public Msg updateUserProfile(@PathVariable("userId") Integer id, User user, HttpSession session) {
         user.setId(id);
         Integer result = userService.updateUser(user);
@@ -118,6 +121,7 @@ public class UserController {
      */
     @PutMapping("/user/updateUserStatus/{id}")
     @ResponseBody
+    @OperLog(operModul = "用户模块", operType = "更新", operDesc = "用户强制下线（管理员更改用户信息）")
     public Msg updateUserStatus(@PathVariable("id") Integer id, HttpSession session) {
         User user = userService.selectUserById(id);
         user.setStatus(0);
@@ -166,6 +170,7 @@ public class UserController {
      */
     @PostMapping("/user/addUser")
     @ResponseBody
+    @OperLog(operModul = "用户模块", operType = "新增", operDesc = "添加用户（管理员）")
     public Msg addUser(User user) {
         user.setStatus(0);
         user.setReputation("良好");
@@ -184,6 +189,7 @@ public class UserController {
      */
     @GetMapping("/user/getUserById/{id}")
     @ResponseBody
+    @OperLog(operModul = "用户模块", operType = "查询", operDesc = "更新用户信息时回显用户信息（管理员）")
     public Msg getUserInfoById(@PathVariable("id") Integer id) {
         User user = userService.selectUserById(id);
         return Msg.success().add("user", user);
@@ -198,6 +204,7 @@ public class UserController {
      */
     @DeleteMapping("/user/deleteUserById/{id}")
     @ResponseBody
+    @OperLog(operModul = "用户模块", operType = "删除", operDesc = "删除用户（管理员）")
     public Msg deleteUserById(@PathVariable("id") Integer id, HttpSession session) {
         Integer result = userService.deleteUserById(id);
         if (result == 1) {
@@ -239,7 +246,7 @@ public class UserController {
     }
 
     /**
-     * 跳转到用户信誉管理界面（管理员）
+     * 更新用户头像
      *
      * @param headimgFile
      * @param username
@@ -249,6 +256,7 @@ public class UserController {
      */
     @PutMapping("/user/updateUserheadimg/{username}")
     @ResponseBody
+    @OperLog(operModul = "用户模块", operType = "更新", operDesc = "更新用户头像")
     public Msg upload(@RequestParam("file") MultipartFile headimgFile, @PathVariable("username") String username, HttpServletRequest request, HttpSession session) {
         if (!headimgFile.isEmpty() && headimgFile.getSize() > 0) {
             // 拿到文件名

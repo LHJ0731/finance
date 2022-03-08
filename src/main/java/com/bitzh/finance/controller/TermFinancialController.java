@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.*;
 import com.bitzh.finance.service.BalanceService;
 import com.bitzh.finance.service.FlowOfFundsService;
@@ -50,7 +51,7 @@ public class TermFinancialController {
     }
 
     /**
-     * 购买工资理财产品
+     * 买入期限理财产品
      *
      * @param termFinancialId
      * @param userId
@@ -58,6 +59,7 @@ public class TermFinancialController {
      */
     @PostMapping("/user/buyTermFinancial")
     @ResponseBody
+    @OperLog(operModul = "期限理财模块", operType = "新增", operDesc = "买入期限理财产品")
     public Msg buyTermFinancial(@RequestParam("termFinancialId") Integer termFinancialId,
                                 @RequestParam("userId") Integer userId,
                                 @RequestParam("leastmoney") BigDecimal leastmoney) {
@@ -93,6 +95,7 @@ public class TermFinancialController {
      */
     @PostMapping("/user/selectTermFinancial")
     @ResponseBody
+    @OperLog(operModul = "期限理财模块", operType = "查询", operDesc = "搜索期限理财产品")
     public Msg selectTermFinancial(@RequestParam("information") String information, Model model) {
         List<TermFinancial> list = termFinancialService.selectTermFinancialByInfo(information);
         model.addAttribute("termFinancialList", list);
@@ -125,12 +128,13 @@ public class TermFinancialController {
     }
 
     /**
-     * 新增期限理财产品
+     * 新增期限理财产品(管理员)
      *
      * @return
      */
     @PostMapping("/admin/addTermFinancial")
     @ResponseBody
+    @OperLog(operModul = "期限理财模块", operType = "新增", operDesc = "新增期限理财产品(管理员)")
     public Msg addTermFinancial(TermFinancial termFinancial) {
         Integer result = termFinancialService.insertTermFinancial(termFinancial);
         if (result == 1) {
@@ -140,26 +144,28 @@ public class TermFinancialController {
     }
 
     /**
-     * 更新时回显信息
+     * 查询指定期限理财产品信息，用于更新时回显信息
      *
      * @param id
      * @return
      */
     @GetMapping("/admin/getTermFinancialInfoById/{id}")
     @ResponseBody
+    @OperLog(operModul = "期限理财模块", operType = "查询", operDesc = "查询指定期限理财产品信息，用于更新时回显信息")
     public Msg getTermFinancialInfoById(@PathVariable("id") Integer id) {
         TermFinancial termFinancial = termFinancialService.selectTermFinancialById(id);
         return Msg.success().add("termFinancial", termFinancial);
     }
 
     /**
-     * 更新
+     * 更新期限理财产品信息
      *
      * @param id
      * @return
      */
     @PutMapping("/admin/updateTermFinancial/{id}")
     @ResponseBody
+    @OperLog(operModul = "期限理财模块", operType = "更新", operDesc = "更新期限理财产品信息")
     public Msg updateTermFinancial(@PathVariable("id") Integer id, TermFinancial termFinancial) {
         termFinancial.setId(id);
         Integer result = termFinancialService.updateTermFinancial(termFinancial);
@@ -170,13 +176,14 @@ public class TermFinancialController {
     }
 
     /**
-     * 删除
+     * 删除期限理财产品信息
      *
      * @param id
      * @return
      */
     @DeleteMapping("/admin/deleteTermFinancialById/{id}")
     @ResponseBody
+    @OperLog(operModul = "期限理财模块", operType = "删除", operDesc = "删除期限理财产品信息")
     public Msg deleteTermFinancialById(@PathVariable("id") Integer id) {
         Integer result = termFinancialService.deleteTermFinancialById(id);
         if (result == 1) {

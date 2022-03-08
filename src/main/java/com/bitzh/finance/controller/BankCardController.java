@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.Bankcard;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.BankCardService;
@@ -46,6 +47,7 @@ public class BankCardController {
      */
     @GetMapping("/user/getBankCardByUserId/{userId}")
     @ResponseBody
+    @OperLog(operModul = "银行卡模块", operType = "查询", operDesc = "获得用户名下银行卡信息")
     public Msg getBankCardByUserId(@PathVariable("userId") Integer userId) {
         List<Bankcard> list = bankCardService.selectBankCardByUserId(userId);
         return Msg.success().add("bankCardList", list);
@@ -60,6 +62,7 @@ public class BankCardController {
      */
     @PostMapping("/user/addBankCard")
     @ResponseBody
+    @OperLog(operModul = "银行卡模块", operType = "新增", operDesc = "新增银行卡")
     public Msg addBankCard(Bankcard bankcard, HttpSession session) {
         //System.out.println(bankcard.getCardbank());
         User loginUser = (User) session.getAttribute("loginUser");
@@ -79,6 +82,7 @@ public class BankCardController {
      */
     @GetMapping("/user/getBankCardById/{id}")
     @ResponseBody
+    @OperLog(operModul = "银行卡模块", operType = "查询", operDesc = "修改银行卡时回显银行卡信息")
     public Msg getBankCardById(@PathVariable("id") Integer id) {
         Bankcard bankcard = bankCardService.selectBankCardById(id);
         return Msg.success().add("bankcard", bankcard);
@@ -93,6 +97,7 @@ public class BankCardController {
      */
     @PutMapping("/user/updateBankCard/{update-id}")
     @ResponseBody
+    @OperLog(operModul = "银行卡模块", operType = "更新", operDesc = "修改银行卡信息")
     public Msg updateBankCard(@PathVariable("update-id") Integer id, Bankcard bankcard) {
         bankcard.setId(id);
         Integer result = bankCardService.updateBankCard(bankcard);
@@ -110,6 +115,7 @@ public class BankCardController {
      */
     @DeleteMapping("/user/deleteBankCard/{id}")
     @ResponseBody
+    @OperLog(operModul = "银行卡模块", operType = "删除", operDesc = "删除银行卡")
     public Msg deleteBankCard(@PathVariable("id") Integer id) {
         Integer result = bankCardService.deleteBankCardById(id);
         if (result == 1) {

@@ -1,6 +1,7 @@
 package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.Info;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.InfoService;
@@ -51,6 +52,7 @@ public class InfoController {
      */
     @PutMapping("/user/updateInfo/{infoId}")
     @ResponseBody
+    @OperLog(operModul = "消息模块", operType = "更新", operDesc = "更新消息（已读）")
     public Msg updateInfo(@PathVariable("infoId") Integer id) {
         Info info = infoService.selectInfoById(id);
         info.setStatus(1);
@@ -69,6 +71,7 @@ public class InfoController {
      */
     @DeleteMapping("/user/deleteInfo/{infoId}")
     @ResponseBody
+    @OperLog(operModul = "消息模块", operType = "删除", operDesc = "删除消息")
     public Msg deleteInfo(@PathVariable("infoId") Integer id) {
         Integer result = infoService.deleteInfobyId(id);
         if (result == 1) {

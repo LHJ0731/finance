@@ -1,5 +1,6 @@
 package com.bitzh.finance.controller;
 
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.Admin;
 import com.bitzh.finance.entity.News;
 import com.bitzh.finance.entity.User;
@@ -116,6 +117,7 @@ public class MainController {
      * @return
      */
     @GetMapping("/logout")
+    @OperLog(operModul = "登录模块", operType = "更新", operDesc = "注销（只有正常退出的用户可以注销）")
     public String logout(@RequestParam("logout") String logout, HttpSession session) {
 
         if ("userLogout".equals(logout)) {

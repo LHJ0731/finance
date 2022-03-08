@@ -1,5 +1,6 @@
 package com.bitzh.finance.controller;
 
+import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.FlowOfFunds;
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.service.FlowOfFundsService;
@@ -58,12 +59,13 @@ public class RecoderController {
     }
 
     /**
-     * 导出数据
+     * 导出用户资金记录数据
      *
      * @param userId
      * @param session
      */
     @RequestMapping("/user/export/{userId}")
+    @OperLog(operModul = "资金记录模块", operType = "查询", operDesc = "导出用户资金记录数据")
     public ResponseEntity<Object> export(@PathVariable("userId") String userId, HttpSession session) {
         List<FlowOfFunds> list = flowOfFundsService.selectFlowOfFundsByUserId(Integer.parseInt(userId));
         String fileName = "客户资金记录数据.xls";
