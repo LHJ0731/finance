@@ -385,73 +385,73 @@ public class OperationLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameIsNull() {
-            addCriterion("oper_user_name is null");
+        public Criteria andOperUsernameIsNull() {
+            addCriterion("oper_username is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameIsNotNull() {
-            addCriterion("oper_user_name is not null");
+        public Criteria andOperUsernameIsNotNull() {
+            addCriterion("oper_username is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameEqualTo(String value) {
-            addCriterion("oper_user_name =", value, "operUserName");
+        public Criteria andOperUsernameEqualTo(String value) {
+            addCriterion("oper_username =", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameNotEqualTo(String value) {
-            addCriterion("oper_user_name <>", value, "operUserName");
+        public Criteria andOperUsernameNotEqualTo(String value) {
+            addCriterion("oper_username <>", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameGreaterThan(String value) {
-            addCriterion("oper_user_name >", value, "operUserName");
+        public Criteria andOperUsernameGreaterThan(String value) {
+            addCriterion("oper_username >", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameGreaterThanOrEqualTo(String value) {
-            addCriterion("oper_user_name >=", value, "operUserName");
+        public Criteria andOperUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("oper_username >=", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameLessThan(String value) {
-            addCriterion("oper_user_name <", value, "operUserName");
+        public Criteria andOperUsernameLessThan(String value) {
+            addCriterion("oper_username <", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameLessThanOrEqualTo(String value) {
-            addCriterion("oper_user_name <=", value, "operUserName");
+        public Criteria andOperUsernameLessThanOrEqualTo(String value) {
+            addCriterion("oper_username <=", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameLike(String value) {
-            addCriterion("oper_user_name like", value, "operUserName");
+        public Criteria andOperUsernameLike(String value) {
+            addCriterion("oper_username like", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameNotLike(String value) {
-            addCriterion("oper_user_name not like", value, "operUserName");
+        public Criteria andOperUsernameNotLike(String value) {
+            addCriterion("oper_username not like", value, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameIn(List<String> values) {
-            addCriterion("oper_user_name in", values, "operUserName");
+        public Criteria andOperUsernameIn(List<String> values) {
+            addCriterion("oper_username in", values, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameNotIn(List<String> values) {
-            addCriterion("oper_user_name not in", values, "operUserName");
+        public Criteria andOperUsernameNotIn(List<String> values) {
+            addCriterion("oper_username not in", values, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameBetween(String value1, String value2) {
-            addCriterion("oper_user_name between", value1, value2, "operUserName");
+        public Criteria andOperUsernameBetween(String value1, String value2) {
+            addCriterion("oper_username between", value1, value2, "operUsername");
             return (Criteria) this;
         }
 
-        public Criteria andOperUserNameNotBetween(String value1, String value2) {
-            addCriterion("oper_user_name not between", value1, value2, "operUserName");
+        public Criteria andOperUsernameNotBetween(String value1, String value2) {
+            addCriterion("oper_username not between", value1, value2, "operUsername");
             return (Criteria) this;
         }
 
@@ -665,63 +665,63 @@ public class OperationLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeIsNull() {
-            addCriterion("oper_create_time is null");
+        public Criteria andOperCreatetimeIsNull() {
+            addCriterion("oper_createtime is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeIsNotNull() {
-            addCriterion("oper_create_time is not null");
+        public Criteria andOperCreatetimeIsNotNull() {
+            addCriterion("oper_createtime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeEqualTo(Date value) {
-            addCriterion("oper_create_time =", value, "operCreateTime");
+        public Criteria andOperCreatetimeEqualTo(Date value) {
+            addCriterion("oper_createtime =", value, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeNotEqualTo(Date value) {
-            addCriterion("oper_create_time <>", value, "operCreateTime");
+        public Criteria andOperCreatetimeNotEqualTo(Date value) {
+            addCriterion("oper_createtime <>", value, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeGreaterThan(Date value) {
-            addCriterion("oper_create_time >", value, "operCreateTime");
+        public Criteria andOperCreatetimeGreaterThan(Date value) {
+            addCriterion("oper_createtime >", value, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("oper_create_time >=", value, "operCreateTime");
+        public Criteria andOperCreatetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("oper_createtime >=", value, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeLessThan(Date value) {
-            addCriterion("oper_create_time <", value, "operCreateTime");
+        public Criteria andOperCreatetimeLessThan(Date value) {
+            addCriterion("oper_createtime <", value, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("oper_create_time <=", value, "operCreateTime");
+        public Criteria andOperCreatetimeLessThanOrEqualTo(Date value) {
+            addCriterion("oper_createtime <=", value, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeIn(List<Date> values) {
-            addCriterion("oper_create_time in", values, "operCreateTime");
+        public Criteria andOperCreatetimeIn(List<Date> values) {
+            addCriterion("oper_createtime in", values, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeNotIn(List<Date> values) {
-            addCriterion("oper_create_time not in", values, "operCreateTime");
+        public Criteria andOperCreatetimeNotIn(List<Date> values) {
+            addCriterion("oper_createtime not in", values, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeBetween(Date value1, Date value2) {
-            addCriterion("oper_create_time between", value1, value2, "operCreateTime");
+        public Criteria andOperCreatetimeBetween(Date value1, Date value2) {
+            addCriterion("oper_createtime between", value1, value2, "operCreatetime");
             return (Criteria) this;
         }
 
-        public Criteria andOperCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("oper_create_time not between", value1, value2, "operCreateTime");
+        public Criteria andOperCreatetimeNotBetween(Date value1, Date value2) {
+            addCriterion("oper_createtime not between", value1, value2, "operCreatetime");
             return (Criteria) this;
         }
     }

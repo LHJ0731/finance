@@ -4,14 +4,14 @@
     <resultMap id="BaseResultMap" type="com.bitzh.finance.entity.ExceptionLog">
         <id column="exc_id" jdbcType="VARCHAR" property="excId"/>
         <result column="exc_name" jdbcType="VARCHAR" property="excName"/>
-        <result column="oper_user_name" jdbcType="VARCHAR" property="operUserName"/>
+        <result column="oper_username" jdbcType="VARCHAR" property="operUsername"/>
         <result column="oper_method" jdbcType="VARCHAR" property="operMethod"/>
         <result column="oper_url" jdbcType="VARCHAR" property="operUrl"/>
         <result column="oper_ip" jdbcType="VARCHAR" property="operIp"/>
-        <result column="oper_create_time" jdbcType="VARCHAR" property="operCreateTime"/>
+        <result column="oper_createtime" jdbcType="TIMESTAMP" property="operCreatetime"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bitzh.finance.entity.ExceptionLog">
-        <result column="exc_requ_param" jdbcType="LONGVARCHAR" property="excRequParam"/>
+        <result column="exc_requparam" jdbcType="LONGVARCHAR" property="excRequparam"/>
         <result column="exc_message" jdbcType="LONGVARCHAR" property="excMessage"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -76,10 +76,10 @@
     </sql>
     <sql id="Base_Column_List">
         exc_id
-        , exc_name, oper_user_name, oper_method, oper_url, oper_ip, oper_create_time
+        , exc_name, oper_username, oper_method, oper_url, oper_ip, oper_createtime
     </sql>
     <sql id="Blob_Column_List">
-        exc_requ_param
+        exc_requparam
         , exc_message
     </sql>
     <select id="selectByExampleWithBLOBs" parameterType="com.bitzh.finance.entity.ExceptionLogExample"
@@ -133,12 +133,12 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.bitzh.finance.entity.ExceptionLog">
-        insert into exceptionlog (exc_id, exc_name, oper_user_name,
+        insert into exceptionlog (exc_id, exc_name, oper_username,
                                   oper_method, oper_url, oper_ip,
-                                  oper_create_time, exc_requ_param, exc_message)
-        values (#{excId,jdbcType=VARCHAR}, #{excName,jdbcType=VARCHAR}, #{operUserName,jdbcType=VARCHAR},
+                                  oper_createtime, exc_requparam, exc_message)
+        values (#{excId,jdbcType=VARCHAR}, #{excName,jdbcType=VARCHAR}, #{operUsername,jdbcType=VARCHAR},
                 #{operMethod,jdbcType=VARCHAR}, #{operUrl,jdbcType=VARCHAR}, #{operIp,jdbcType=VARCHAR},
-                #{operCreateTime,jdbcType=VARCHAR}, #{excRequParam,jdbcType=LONGVARCHAR},
+                #{operCreatetime,jdbcType=TIMESTAMP}, #{excRequparam,jdbcType=LONGVARCHAR},
                 #{excMessage,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.bitzh.finance.entity.ExceptionLog">
@@ -150,8 +150,8 @@
             <if test="excName != null">
                 exc_name,
             </if>
-            <if test="operUserName != null">
-                oper_user_name,
+            <if test="operUsername != null">
+                oper_username,
             </if>
             <if test="operMethod != null">
                 oper_method,
@@ -162,11 +162,11 @@
             <if test="operIp != null">
                 oper_ip,
             </if>
-            <if test="operCreateTime != null">
-                oper_create_time,
+            <if test="operCreatetime != null">
+                oper_createtime,
             </if>
-            <if test="excRequParam != null">
-                exc_requ_param,
+            <if test="excRequparam != null">
+                exc_requparam,
             </if>
             <if test="excMessage != null">
                 exc_message,
@@ -179,8 +179,8 @@
             <if test="excName != null">
                 #{excName,jdbcType=VARCHAR},
             </if>
-            <if test="operUserName != null">
-                #{operUserName,jdbcType=VARCHAR},
+            <if test="operUsername != null">
+                #{operUsername,jdbcType=VARCHAR},
             </if>
             <if test="operMethod != null">
                 #{operMethod,jdbcType=VARCHAR},
@@ -191,11 +191,11 @@
             <if test="operIp != null">
                 #{operIp,jdbcType=VARCHAR},
             </if>
-            <if test="operCreateTime != null">
-                #{operCreateTime,jdbcType=VARCHAR},
+            <if test="operCreatetime != null">
+                #{operCreatetime,jdbcType=TIMESTAMP},
             </if>
-            <if test="excRequParam != null">
-                #{excRequParam,jdbcType=LONGVARCHAR},
+            <if test="excRequparam != null">
+                #{excRequparam,jdbcType=LONGVARCHAR},
             </if>
             <if test="excMessage != null">
                 #{excMessage,jdbcType=LONGVARCHAR},
@@ -218,8 +218,8 @@
             <if test="record.excName != null">
                 exc_name = #{record.excName,jdbcType=VARCHAR},
             </if>
-            <if test="record.operUserName != null">
-                oper_user_name = #{record.operUserName,jdbcType=VARCHAR},
+            <if test="record.operUsername != null">
+                oper_username = #{record.operUsername,jdbcType=VARCHAR},
             </if>
             <if test="record.operMethod != null">
                 oper_method = #{record.operMethod,jdbcType=VARCHAR},
@@ -230,11 +230,11 @@
             <if test="record.operIp != null">
                 oper_ip = #{record.operIp,jdbcType=VARCHAR},
             </if>
-            <if test="record.operCreateTime != null">
-                oper_create_time = #{record.operCreateTime,jdbcType=VARCHAR},
+            <if test="record.operCreatetime != null">
+                oper_createtime = #{record.operCreatetime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.excRequParam != null">
-                exc_requ_param = #{record.excRequParam,jdbcType=LONGVARCHAR},
+            <if test="record.excRequparam != null">
+                exc_requparam = #{record.excRequparam,jdbcType=LONGVARCHAR},
             </if>
             <if test="record.excMessage != null">
                 exc_message = #{record.excMessage,jdbcType=LONGVARCHAR},
@@ -248,12 +248,12 @@
         update exceptionlog
         set exc_id = #{record.excId,jdbcType=VARCHAR},
         exc_name = #{record.excName,jdbcType=VARCHAR},
-        oper_user_name = #{record.operUserName,jdbcType=VARCHAR},
+        oper_username = #{record.operUsername,jdbcType=VARCHAR},
         oper_method = #{record.operMethod,jdbcType=VARCHAR},
         oper_url = #{record.operUrl,jdbcType=VARCHAR},
         oper_ip = #{record.operIp,jdbcType=VARCHAR},
-        oper_create_time = #{record.operCreateTime,jdbcType=VARCHAR},
-        exc_requ_param = #{record.excRequParam,jdbcType=LONGVARCHAR},
+        oper_createtime = #{record.operCreatetime,jdbcType=TIMESTAMP},
+        exc_requparam = #{record.excRequparam,jdbcType=LONGVARCHAR},
         exc_message = #{record.excMessage,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -263,11 +263,11 @@
         update exceptionlog
         set exc_id = #{record.excId,jdbcType=VARCHAR},
         exc_name = #{record.excName,jdbcType=VARCHAR},
-        oper_user_name = #{record.operUserName,jdbcType=VARCHAR},
+        oper_username = #{record.operUsername,jdbcType=VARCHAR},
         oper_method = #{record.operMethod,jdbcType=VARCHAR},
         oper_url = #{record.operUrl,jdbcType=VARCHAR},
         oper_ip = #{record.operIp,jdbcType=VARCHAR},
-        oper_create_time = #{record.operCreateTime,jdbcType=VARCHAR}
+        oper_createtime = #{record.operCreatetime,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -278,8 +278,8 @@
             <if test="excName != null">
                 exc_name = #{excName,jdbcType=VARCHAR},
             </if>
-            <if test="operUserName != null">
-                oper_user_name = #{operUserName,jdbcType=VARCHAR},
+            <if test="operUsername != null">
+                oper_username = #{operUsername,jdbcType=VARCHAR},
             </if>
             <if test="operMethod != null">
                 oper_method = #{operMethod,jdbcType=VARCHAR},
@@ -290,11 +290,11 @@
             <if test="operIp != null">
                 oper_ip = #{operIp,jdbcType=VARCHAR},
             </if>
-            <if test="operCreateTime != null">
-                oper_create_time = #{operCreateTime,jdbcType=VARCHAR},
+            <if test="operCreatetime != null">
+                oper_createtime = #{operCreatetime,jdbcType=TIMESTAMP},
             </if>
-            <if test="excRequParam != null">
-                exc_requ_param = #{excRequParam,jdbcType=LONGVARCHAR},
+            <if test="excRequparam != null">
+                exc_requparam = #{excRequparam,jdbcType=LONGVARCHAR},
             </if>
             <if test="excMessage != null">
                 exc_message = #{excMessage,jdbcType=LONGVARCHAR},
@@ -304,24 +304,24 @@
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bitzh.finance.entity.ExceptionLog">
         update exceptionlog
-        set exc_name         = #{excName,jdbcType=VARCHAR},
-            oper_user_name   = #{operUserName,jdbcType=VARCHAR},
-            oper_method      = #{operMethod,jdbcType=VARCHAR},
-            oper_url         = #{operUrl,jdbcType=VARCHAR},
-            oper_ip          = #{operIp,jdbcType=VARCHAR},
-            oper_create_time = #{operCreateTime,jdbcType=VARCHAR},
-            exc_requ_param   = #{excRequParam,jdbcType=LONGVARCHAR},
-            exc_message      = #{excMessage,jdbcType=LONGVARCHAR}
+        set exc_name        = #{excName,jdbcType=VARCHAR},
+            oper_username   = #{operUsername,jdbcType=VARCHAR},
+            oper_method     = #{operMethod,jdbcType=VARCHAR},
+            oper_url        = #{operUrl,jdbcType=VARCHAR},
+            oper_ip         = #{operIp,jdbcType=VARCHAR},
+            oper_createtime = #{operCreatetime,jdbcType=TIMESTAMP},
+            exc_requparam   = #{excRequparam,jdbcType=LONGVARCHAR},
+            exc_message     = #{excMessage,jdbcType=LONGVARCHAR}
         where exc_id = #{excId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.bitzh.finance.entity.ExceptionLog">
         update exceptionlog
-        set exc_name         = #{excName,jdbcType=VARCHAR},
-            oper_user_name   = #{operUserName,jdbcType=VARCHAR},
-            oper_method      = #{operMethod,jdbcType=VARCHAR},
-            oper_url         = #{operUrl,jdbcType=VARCHAR},
-            oper_ip          = #{operIp,jdbcType=VARCHAR},
-            oper_create_time = #{operCreateTime,jdbcType=VARCHAR}
+        set exc_name        = #{excName,jdbcType=VARCHAR},
+            oper_username   = #{operUsername,jdbcType=VARCHAR},
+            oper_method     = #{operMethod,jdbcType=VARCHAR},
+            oper_url        = #{operUrl,jdbcType=VARCHAR},
+            oper_ip         = #{operIp,jdbcType=VARCHAR},
+            oper_createtime = #{operCreatetime,jdbcType=TIMESTAMP}
         where exc_id = #{excId,jdbcType=VARCHAR}
     </update>
 </mapper>

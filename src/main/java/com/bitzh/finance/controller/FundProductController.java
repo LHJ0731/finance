@@ -20,7 +20,6 @@ import java.util.List;
 
 @Controller
 public class FundProductController {
-
     @Autowired
     FundProductService fundProductService;
     @Autowired

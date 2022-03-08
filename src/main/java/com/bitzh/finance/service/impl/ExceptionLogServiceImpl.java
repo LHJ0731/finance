@@ -4,7 +4,9 @@ import com.bitzh.finance.entity.ExceptionLog;
 import com.bitzh.finance.mapper.ExceptionLogMapper;
 import com.bitzh.finance.service.ExceptionLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ExceptionLogServiceImpl implements ExceptionLogService {
     @Autowired
     ExceptionLogMapper exceptionLogMapper;

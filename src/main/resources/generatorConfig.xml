@@ -73,8 +73,8 @@
         <!--		<table tableName="user_permissions" domainObjectName="UserPermissions" />-->
         <!--		<table tableName="user_term_financial" domainObjectName="UserTermFinancial" />-->
         <!--		<table tableName="flow_of_funds" domainObjectName="FlowOfFunds" />-->
-        <!--        <table tableName="operationlog" domainObjectName="OperationLog"/>-->
-        <!--        <table tableName="exceptionlog" domainObjectName="ExceptionLog"/>-->
+        <!--                <table tableName="operationlog" domainObjectName="OperationLog"/>-->
+        <!--                <table tableName="exceptionlog" domainObjectName="ExceptionLog"/>-->
 
         <!-- <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer"
             > <property name="useActualColumnNames" value="true"/> <generatedKey column="ID"

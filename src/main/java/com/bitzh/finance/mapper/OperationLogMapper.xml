@@ -6,15 +6,15 @@
         <result column="oper_modul" jdbcType="VARCHAR" property="operModul"/>
         <result column="oper_type" jdbcType="VARCHAR" property="operType"/>
         <result column="oper_desc" jdbcType="VARCHAR" property="operDesc"/>
-        <result column="oper_user_name" jdbcType="VARCHAR" property="operUserName"/>
+        <result column="oper_username" jdbcType="VARCHAR" property="operUsername"/>
         <result column="oper_method" jdbcType="VARCHAR" property="operMethod"/>
         <result column="oper_url" jdbcType="VARCHAR" property="operUrl"/>
         <result column="oper_ip" jdbcType="VARCHAR" property="operIp"/>
-        <result column="oper_create_time" jdbcType="TIMESTAMP" property="operCreateTime"/>
+        <result column="oper_createtime" jdbcType="TIMESTAMP" property="operCreatetime"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bitzh.finance.entity.OperationLog">
-        <result column="oper_requ_param" jdbcType="LONGVARCHAR" property="operRequParam"/>
-        <result column="oper_resp_param" jdbcType="LONGVARCHAR" property="operRespParam"/>
+        <result column="oper_requparam" jdbcType="LONGVARCHAR" property="operRequparam"/>
+        <result column="oper_respparam" jdbcType="LONGVARCHAR" property="operRespparam"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -78,12 +78,12 @@
     </sql>
     <sql id="Base_Column_List">
         oper_id
-        , oper_modul, oper_type, oper_desc, oper_user_name, oper_method, oper_url,
-    oper_ip, oper_create_time
+        , oper_modul, oper_type, oper_desc, oper_username, oper_method, oper_url,
+    oper_ip, oper_createtime
     </sql>
     <sql id="Blob_Column_List">
-        oper_requ_param
-        , oper_resp_param
+        oper_requparam
+        , oper_respparam
     </sql>
     <select id="selectByExampleWithBLOBs" parameterType="com.bitzh.finance.entity.OperationLogExample"
             resultMap="ResultMapWithBLOBs">
@@ -137,13 +137,13 @@
     </delete>
     <insert id="insert" parameterType="com.bitzh.finance.entity.OperationLog">
         insert into operationlog (oper_id, oper_modul, oper_type,
-                                  oper_desc, oper_user_name, oper_method,
-                                  oper_url, oper_ip, oper_create_time,
-                                  oper_requ_param, oper_resp_param)
+                                  oper_desc, oper_username, oper_method,
+                                  oper_url, oper_ip, oper_createtime,
+                                  oper_requparam, oper_respparam)
         values (#{operId,jdbcType=VARCHAR}, #{operModul,jdbcType=VARCHAR}, #{operType,jdbcType=VARCHAR},
-                #{operDesc,jdbcType=VARCHAR}, #{operUserName,jdbcType=VARCHAR}, #{operMethod,jdbcType=VARCHAR},
-                #{operUrl,jdbcType=VARCHAR}, #{operIp,jdbcType=VARCHAR}, #{operCreateTime,jdbcType=TIMESTAMP},
-                #{operRequParam,jdbcType=LONGVARCHAR}, #{operRespParam,jdbcType=LONGVARCHAR})
+                #{operDesc,jdbcType=VARCHAR}, #{operUsername,jdbcType=VARCHAR}, #{operMethod,jdbcType=VARCHAR},
+                #{operUrl,jdbcType=VARCHAR}, #{operIp,jdbcType=VARCHAR}, #{operCreatetime,jdbcType=TIMESTAMP},
+                #{operRequparam,jdbcType=LONGVARCHAR}, #{operRespparam,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.bitzh.finance.entity.OperationLog">
         insert into operationlog
@@ -160,8 +160,8 @@
             <if test="operDesc != null">
                 oper_desc,
             </if>
-            <if test="operUserName != null">
-                oper_user_name,
+            <if test="operUsername != null">
+                oper_username,
             </if>
             <if test="operMethod != null">
                 oper_method,
@@ -172,14 +172,14 @@
             <if test="operIp != null">
                 oper_ip,
             </if>
-            <if test="operCreateTime != null">
-                oper_create_time,
+            <if test="operCreatetime != null">
+                oper_createtime,
             </if>
-            <if test="operRequParam != null">
-                oper_requ_param,
+            <if test="operRequparam != null">
+                oper_requparam,
             </if>
-            <if test="operRespParam != null">
-                oper_resp_param,
+            <if test="operRespparam != null">
+                oper_respparam,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -195,8 +195,8 @@
             <if test="operDesc != null">
                 #{operDesc,jdbcType=VARCHAR},
             </if>
-            <if test="operUserName != null">
-                #{operUserName,jdbcType=VARCHAR},
+            <if test="operUsername != null">
+                #{operUsername,jdbcType=VARCHAR},
             </if>
             <if test="operMethod != null">
                 #{operMethod,jdbcType=VARCHAR},
@@ -207,14 +207,14 @@
             <if test="operIp != null">
                 #{operIp,jdbcType=VARCHAR},
             </if>
-            <if test="operCreateTime != null">
-                #{operCreateTime,jdbcType=TIMESTAMP},
+            <if test="operCreatetime != null">
+                #{operCreatetime,jdbcType=TIMESTAMP},
             </if>
-            <if test="operRequParam != null">
-                #{operRequParam,jdbcType=LONGVARCHAR},
+            <if test="operRequparam != null">
+                #{operRequparam,jdbcType=LONGVARCHAR},
             </if>
-            <if test="operRespParam != null">
-                #{operRespParam,jdbcType=LONGVARCHAR},
+            <if test="operRespparam != null">
+                #{operRespparam,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -240,8 +240,8 @@
             <if test="record.operDesc != null">
                 oper_desc = #{record.operDesc,jdbcType=VARCHAR},
             </if>
-            <if test="record.operUserName != null">
-                oper_user_name = #{record.operUserName,jdbcType=VARCHAR},
+            <if test="record.operUsername != null">
+                oper_username = #{record.operUsername,jdbcType=VARCHAR},
             </if>
             <if test="record.operMethod != null">
                 oper_method = #{record.operMethod,jdbcType=VARCHAR},
@@ -252,14 +252,14 @@
             <if test="record.operIp != null">
                 oper_ip = #{record.operIp,jdbcType=VARCHAR},
             </if>
-            <if test="record.operCreateTime != null">
-                oper_create_time = #{record.operCreateTime,jdbcType=TIMESTAMP},
+            <if test="record.operCreatetime != null">
+                oper_createtime = #{record.operCreatetime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.operRequParam != null">
-                oper_requ_param = #{record.operRequParam,jdbcType=LONGVARCHAR},
+            <if test="record.operRequparam != null">
+                oper_requparam = #{record.operRequparam,jdbcType=LONGVARCHAR},
             </if>
-            <if test="record.operRespParam != null">
-                oper_resp_param = #{record.operRespParam,jdbcType=LONGVARCHAR},
+            <if test="record.operRespparam != null">
+                oper_respparam = #{record.operRespparam,jdbcType=LONGVARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -272,13 +272,13 @@
         oper_modul = #{record.operModul,jdbcType=VARCHAR},
         oper_type = #{record.operType,jdbcType=VARCHAR},
         oper_desc = #{record.operDesc,jdbcType=VARCHAR},
-        oper_user_name = #{record.operUserName,jdbcType=VARCHAR},
+        oper_username = #{record.operUsername,jdbcType=VARCHAR},
         oper_method = #{record.operMethod,jdbcType=VARCHAR},
         oper_url = #{record.operUrl,jdbcType=VARCHAR},
         oper_ip = #{record.operIp,jdbcType=VARCHAR},
-        oper_create_time = #{record.operCreateTime,jdbcType=TIMESTAMP},
-        oper_requ_param = #{record.operRequParam,jdbcType=LONGVARCHAR},
-        oper_resp_param = #{record.operRespParam,jdbcType=LONGVARCHAR}
+        oper_createtime = #{record.operCreatetime,jdbcType=TIMESTAMP},
+        oper_requparam = #{record.operRequparam,jdbcType=LONGVARCHAR},
+        oper_respparam = #{record.operRespparam,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -289,11 +289,11 @@
         oper_modul = #{record.operModul,jdbcType=VARCHAR},
         oper_type = #{record.operType,jdbcType=VARCHAR},
         oper_desc = #{record.operDesc,jdbcType=VARCHAR},
-        oper_user_name = #{record.operUserName,jdbcType=VARCHAR},
+        oper_username = #{record.operUsername,jdbcType=VARCHAR},
         oper_method = #{record.operMethod,jdbcType=VARCHAR},
         oper_url = #{record.operUrl,jdbcType=VARCHAR},
         oper_ip = #{record.operIp,jdbcType=VARCHAR},
-        oper_create_time = #{record.operCreateTime,jdbcType=TIMESTAMP}
+        oper_createtime = #{record.operCreatetime,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -310,8 +310,8 @@
             <if test="operDesc != null">
                 oper_desc = #{operDesc,jdbcType=VARCHAR},
             </if>
-            <if test="operUserName != null">
-                oper_user_name = #{operUserName,jdbcType=VARCHAR},
+            <if test="operUsername != null">
+                oper_username = #{operUsername,jdbcType=VARCHAR},
             </if>
             <if test="operMethod != null">
                 oper_method = #{operMethod,jdbcType=VARCHAR},
@@ -322,42 +322,42 @@
             <if test="operIp != null">
                 oper_ip = #{operIp,jdbcType=VARCHAR},
             </if>
-            <if test="operCreateTime != null">
-                oper_create_time = #{operCreateTime,jdbcType=TIMESTAMP},
+            <if test="operCreatetime != null">
+                oper_createtime = #{operCreatetime,jdbcType=TIMESTAMP},
             </if>
-            <if test="operRequParam != null">
-                oper_requ_param = #{operRequParam,jdbcType=LONGVARCHAR},
+            <if test="operRequparam != null">
+                oper_requparam = #{operRequparam,jdbcType=LONGVARCHAR},
             </if>
-            <if test="operRespParam != null">
-                oper_resp_param = #{operRespParam,jdbcType=LONGVARCHAR},
+            <if test="operRespparam != null">
+                oper_respparam = #{operRespparam,jdbcType=LONGVARCHAR},
             </if>
         </set>
         where oper_id = #{operId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bitzh.finance.entity.OperationLog">
         update operationlog
-        set oper_modul       = #{operModul,jdbcType=VARCHAR},
-            oper_type        = #{operType,jdbcType=VARCHAR},
-            oper_desc        = #{operDesc,jdbcType=VARCHAR},
-            oper_user_name   = #{operUserName,jdbcType=VARCHAR},
-            oper_method      = #{operMethod,jdbcType=VARCHAR},
-            oper_url         = #{operUrl,jdbcType=VARCHAR},
-            oper_ip          = #{operIp,jdbcType=VARCHAR},
-            oper_create_time = #{operCreateTime,jdbcType=TIMESTAMP},
-            oper_requ_param  = #{operRequParam,jdbcType=LONGVARCHAR},
-            oper_resp_param  = #{operRespParam,jdbcType=LONGVARCHAR}
+        set oper_modul      = #{operModul,jdbcType=VARCHAR},
+            oper_type       = #{operType,jdbcType=VARCHAR},
+            oper_desc       = #{operDesc,jdbcType=VARCHAR},
+            oper_username   = #{operUsername,jdbcType=VARCHAR},
+            oper_method     = #{operMethod,jdbcType=VARCHAR},
+            oper_url        = #{operUrl,jdbcType=VARCHAR},
+            oper_ip         = #{operIp,jdbcType=VARCHAR},
+            oper_createtime = #{operCreatetime,jdbcType=TIMESTAMP},
+            oper_requparam  = #{operRequparam,jdbcType=LONGVARCHAR},
+            oper_respparam  = #{operRespparam,jdbcType=LONGVARCHAR}
         where oper_id = #{operId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.bitzh.finance.entity.OperationLog">
         update operationlog
-        set oper_modul       = #{operModul,jdbcType=VARCHAR},
-            oper_type        = #{operType,jdbcType=VARCHAR},
-            oper_desc        = #{operDesc,jdbcType=VARCHAR},
-            oper_user_name   = #{operUserName,jdbcType=VARCHAR},
-            oper_method      = #{operMethod,jdbcType=VARCHAR},
-            oper_url         = #{operUrl,jdbcType=VARCHAR},
-            oper_ip          = #{operIp,jdbcType=VARCHAR},
-            oper_create_time = #{operCreateTime,jdbcType=TIMESTAMP}
+        set oper_modul      = #{operModul,jdbcType=VARCHAR},
+            oper_type       = #{operType,jdbcType=VARCHAR},
+            oper_desc       = #{operDesc,jdbcType=VARCHAR},
+            oper_username   = #{operUsername,jdbcType=VARCHAR},
+            oper_method     = #{operMethod,jdbcType=VARCHAR},
+            oper_url        = #{operUrl,jdbcType=VARCHAR},
+            oper_ip         = #{operIp,jdbcType=VARCHAR},
+            oper_createtime = #{operCreatetime,jdbcType=TIMESTAMP}
         where oper_id = #{operId,jdbcType=VARCHAR}
     </update>
 </mapper>

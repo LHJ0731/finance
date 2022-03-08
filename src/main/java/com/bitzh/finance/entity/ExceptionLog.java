@@ -1,11 +1,13 @@
 package com.bitzh.finance.entity;
 
+import java.util.Date;
+
 public class ExceptionLog {
     private String excId;
 
     private String excName;
 
-    private String operUserName;
+    private String operUsername;
 
     private String operMethod;
 
@@ -13,9 +15,9 @@ public class ExceptionLog {
 
     private String operIp;
 
-    private String operCreateTime;
+    private Date operCreatetime;
 
-    private String excRequParam;
+    private String excRequparam;
 
     private String excMessage;
 
@@ -35,12 +37,12 @@ public class ExceptionLog {
         this.excName = excName == null ? null : excName.trim();
     }
 
-    public String getOperUserName() {
-        return operUserName;
+    public String getOperUsername() {
+        return operUsername;
     }
 
-    public void setOperUserName(String operUserName) {
-        this.operUserName = operUserName == null ? null : operUserName.trim();
+    public void setOperUsername(String operUsername) {
+        this.operUsername = operUsername == null ? null : operUsername.trim();
     }
 
     public String getOperMethod() {
@@ -67,20 +69,20 @@ public class ExceptionLog {
         this.operIp = operIp == null ? null : operIp.trim();
     }
 
-    public String getOperCreateTime() {
-        return operCreateTime;
+    public Date getOperCreatetime() {
+        return operCreatetime;
     }
 
-    public void setOperCreateTime(String operCreateTime) {
-        this.operCreateTime = operCreateTime == null ? null : operCreateTime.trim();
+    public void setOperCreatetime(Date operCreatetime) {
+        this.operCreatetime = operCreatetime;
     }
 
-    public String getExcRequParam() {
-        return excRequParam;
+    public String getExcRequparam() {
+        return excRequparam;
     }
 
-    public void setExcRequParam(String excRequParam) {
-        this.excRequParam = excRequParam == null ? null : excRequParam.trim();
+    public void setExcRequparam(String excRequparam) {
+        this.excRequparam = excRequparam == null ? null : excRequparam.trim();
     }
 
     public String getExcMessage() {

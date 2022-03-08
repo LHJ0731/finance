@@ -11,7 +11,7 @@ public class OperationLog {
 
     private String operDesc;
 
-    private String operUserName;
+    private String operUsername;
 
     private String operMethod;
 
@@ -19,11 +19,11 @@ public class OperationLog {
 
     private String operIp;
 
-    private Date operCreateTime;
+    private Date operCreatetime;
 
-    private String operRequParam;
+    private String operRequparam;
 
-    private String operRespParam;
+    private String operRespparam;
 
     public String getOperId() {
         return operId;
@@ -57,12 +57,12 @@ public class OperationLog {
         this.operDesc = operDesc == null ? null : operDesc.trim();
     }
 
-    public String getOperUserName() {
-        return operUserName;
+    public String getOperUsername() {
+        return operUsername;
     }
 
-    public void setOperUserName(String operUserName) {
-        this.operUserName = operUserName == null ? null : operUserName.trim();
+    public void setOperUsername(String operUsername) {
+        this.operUsername = operUsername == null ? null : operUsername.trim();
     }
 
     public String getOperMethod() {
@@ -89,27 +89,27 @@ public class OperationLog {
         this.operIp = operIp == null ? null : operIp.trim();
     }
 
-    public Date getOperCreateTime() {
-        return operCreateTime;
+    public Date getOperCreatetime() {
+        return operCreatetime;
     }
 
-    public void setOperCreateTime(Date operCreateTime) {
-        this.operCreateTime = operCreateTime;
+    public void setOperCreatetime(Date operCreatetime) {
+        this.operCreatetime = operCreatetime;
     }
 
-    public String getOperRequParam() {
-        return operRequParam;
+    public String getOperRequparam() {
+        return operRequparam;
     }
 
-    public void setOperRequParam(String operRequParam) {
-        this.operRequParam = operRequParam == null ? null : operRequParam.trim();
+    public void setOperRequparam(String operRequparam) {
+        this.operRequparam = operRequparam == null ? null : operRequparam.trim();
     }
 
-    public String getOperRespParam() {
-        return operRespParam;
+    public String getOperRespparam() {
+        return operRespparam;
     }
 
-    public void setOperRespParam(String operRespParam) {
-        this.operRespParam = operRespParam == null ? null : operRespParam.trim();
+    public void setOperRespparam(String operRespparam) {
+        this.operRespparam = operRespparam == null ? null : operRespparam.trim();
     }
 }

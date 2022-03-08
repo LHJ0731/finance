@@ -1,4 +1,4 @@
-package com.bitzh.finance.utils;
+package com.bitzh.finance.common;
 
 import com.alibaba.fastjson.JSON;
 import com.bitzh.finance.common.OperLog;
@@ -7,6 +7,8 @@ import com.bitzh.finance.entity.ExceptionLog;
 import com.bitzh.finance.entity.OperationLog;
 import com.bitzh.finance.service.ExceptionLogService;
 import com.bitzh.finance.service.OperationLogService;
+import com.bitzh.finance.utils.IpUtils;
+import com.bitzh.finance.utils.UuidUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -20,6 +22,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +33,12 @@ import java.util.Map;
  */
 @Aspect
 @Component
-class OperLogAspect {
+public class OperLogAspect {
 
-    @Autowired(required = false)
+    @Autowired
     private OperationLogService operationLogService;
 
-    @Autowired(required = false)
+    @Autowired
     private ExceptionLogService exceptionLogService;
 
     /**
@@ -97,12 +100,17 @@ class OperLogAspect {
             // 将参数所在的数组转换成json
             String params = JSON.toJSONString(rtnMap);
 
-            operlog.setOperRequParam(params); // 请求参数
-            operlog.setOperRespParam(JSON.toJSONString(keys)); // 返回结果
-            operlog.setOperUserName(UserRealm.getCurrentUserName()); // 请求用户名称
+            operlog.setOperRequparam(params); // 请求参数
+            operlog.setOperRespparam(JSON.toJSONString(keys)); // 返回结果
+            operlog.setOperUsername(UserRealm.getCurrentUserName()); // 请求用户名称
             operlog.setOperIp(IpUtils.getRealIp(request)); // 请求IP
             operlog.setOperUrl(request.getRequestURI()); // 请求URL
-            operlog.setOperCreateTime(new Date()); // 创建时间
+            Timestamp Date = new Timestamp(new Date().getTime());
+            System.out.println(Date);
+            operlog.setOperCreatetime(Date); // 创建时间
+            if (operlog == null) {
+                System.out.println("operlog为空");
+            }
             operationLogService.insert(operlog);
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,14 +147,15 @@ class OperLogAspect {
             Map<String, String> rtnMap = converMap(request.getParameterMap());
             // 将参数所在的数组转换成json
             String params = JSON.toJSONString(rtnMap);
-            excepLog.setExcRequParam(params); // 请求参数
+            excepLog.setExcRequparam(params); // 请求参数
             excepLog.setOperMethod(methodName); // 请求方法名
             excepLog.setExcName(e.getClass().getName()); // 异常名称
             excepLog.setExcMessage(stackTraceToString(e.getClass().getName(), e.getMessage(), e.getStackTrace())); // 异常信息
-            excepLog.setOperUserName(UserRealm.getCurrentUserName()); // 操作员名称
+            excepLog.setOperUsername(UserRealm.getCurrentUserName()); // 操作员名称
             excepLog.setOperUrl(request.getRequestURI()); // 操作URL
             excepLog.setOperIp(IpUtils.getRealIp(request)); // 操作员IP
-            excepLog.setOperCreateTime(String.valueOf(new Date())); // 发生异常时间
+            Timestamp Date = new Timestamp(new Date().getTime());
+            excepLog.setOperCreatetime(Date); // 发生异常时间
 
             exceptionLogService.insert(excepLog);
 
