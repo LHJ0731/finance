@@ -106,7 +106,6 @@ public class OperLogAspect {
             operlog.setOperIp(IpUtils.getRealIp(request)); // 请求IP
             operlog.setOperUrl(request.getRequestURI()); // 请求URL
             Timestamp Date = new Timestamp(new Date().getTime());
-            System.out.println(Date);
             operlog.setOperCreatetime(Date); // 创建时间
             if (operlog == null) {
                 System.out.println("operlog为空");
