@@ -107,9 +107,6 @@ public class OperLogAspect {
             operlog.setOperUrl(request.getRequestURI()); // 请求URL
             Timestamp Date = new Timestamp(new Date().getTime());
             operlog.setOperCreatetime(Date); // 创建时间
-            if (operlog == null) {
-                System.out.println("operlog为空");
-            }
             operationLogService.insert(operlog);
         } catch (Exception e) {
             e.printStackTrace();
