@@ -24,4 +24,9 @@ public class OperationLogServiceImpl implements OperationLogService {
     public List<OperationLog> selectAllOperationLog() {
         return operationLogMapper.selectAllOperationLog();
     }
+
+    @Override
+    public Integer deleteOperationLogById(String id) {
+        return operationLogMapper.deleteByPrimaryKey(id);
+    }
 }

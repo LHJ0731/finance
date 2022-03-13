@@ -1,5 +1,6 @@
 package com.bitzh.finance.controller;
 
+import com.bitzh.finance.common.Msg;
 import com.bitzh.finance.entity.ExceptionLog;
 import com.bitzh.finance.entity.OperationLog;
 import com.bitzh.finance.service.ExceptionLogService;
@@ -9,8 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -80,4 +80,29 @@ public class SystemController {
         return "/admin/system/exceptionlogmanage";
     }
 
+    /**
+     * 删除操作日志记录
+     */
+    @DeleteMapping("/admin/deleteOperationLogById/{id}")
+    @ResponseBody
+    public Msg deleteOperationlog(@PathVariable("id") String id) {
+        Integer result = operationLogService.deleteOperationLogById(id);
+        if (result == 1) {
+            return Msg.success();
+        }
+        return Msg.fail();
+    }
+
+    /**
+     * 删除操作日志记录
+     */
+    @DeleteMapping("/admin/deleteExceptionLogById/{id}")
+    @ResponseBody
+    public Msg deleteExceptionlog(@PathVariable("id") String id) {
+        Integer result = exceptionLogService.deleteExceptionLogById(id);
+        if (result == 1) {
+            return Msg.success();
+        }
+        return Msg.fail();
+    }
 }

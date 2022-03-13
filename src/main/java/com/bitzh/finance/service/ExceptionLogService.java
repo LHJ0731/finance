@@ -8,4 +8,6 @@ public interface ExceptionLogService {
     Integer insert(ExceptionLog excepLog);
 
     List<ExceptionLog> selectAllExceptionLog();
+
+    Integer deleteExceptionLogById(String id);
 }

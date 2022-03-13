@@ -8,4 +8,6 @@ public interface OperationLogService {
     Integer insert(OperationLog operlog);
 
     List<OperationLog> selectAllOperationLog();
+
+    Integer deleteOperationLogById(String id);
 }

@@ -22,4 +22,9 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
     public List<ExceptionLog> selectAllExceptionLog() {
         return exceptionLogMapper.selectAllExceptionLog();
     }
+
+    @Override
+    public Integer deleteExceptionLogById(String id) {
+        return exceptionLogMapper.deleteByPrimaryKey(id);
+    }
 }

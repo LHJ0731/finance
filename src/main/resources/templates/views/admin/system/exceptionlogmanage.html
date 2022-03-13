@@ -190,7 +190,45 @@
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
 <script type="text/javascript">
-
+    //单个删除
+    $(document).on("click", ".delete_btn", function () {
+        //1、弹出是否确认删除对话框
+        var id = $(this).attr("delete-id");
+        $.alert({
+            title: '提示：',
+            content: "确定删除该错误记录吗？",
+            buttons: {
+                confirm: {
+                    text: '确认',
+                    btnClass: 'btn-primary',
+                    action: function () {
+                        $.ajax({
+                            url: "/admin/deleteExceptionLogById/" + id,
+                            type: "DELETE",
+                            success: function (result) {
+                                if (result.code === 100) {
+                                    $.alert('删除该错误记录成功！');
+                                    setTimeout(function () {
+                                        var pageNum = [[${exceptionLogPageInfo.pageNum}]];
+                                        var pageSize = [[${exceptionLogPageInfo.pageSize}]];
+                                        location.href = "/admin/system/toExceptionLogManage.html?pageNum=" + pageNum + "&pageSize=" + pageSize;
+                                    }, 1000);
+                                } else {
+                                    $.alert('删除该错误记录失败!');
+                                }
+                            }
+                        });
+                    }
+                },
+                cancel: {
+                    text: '取消',
+                    action: function () {
+                        $.alert('已取消!');
+                    }
+                }
+            }
+        });
+    });
 </script>
 </body>
 </html>
