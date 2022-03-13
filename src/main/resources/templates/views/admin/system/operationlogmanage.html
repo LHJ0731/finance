@@ -13,6 +13,25 @@
     <link th:href="@{/lyear/jconfirm/jquery-confirm.min.css}" rel="stylesheet" type="text/css"/>
     <!--自定义样式-->
     <link href="../lyear/css/style.min.css" th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            table-layout: fixed; /*不添加此样式，会全部显示    */
+        }
+
+        table td {
+            border: 1px solid #eef2e9;
+            /* text-overflow: ellipsis; */ /* 加上，显示省略号*/
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        table td:hover { /* 鼠标滑过  显示隐藏的内容  伴有横向的滚动条 */
+            overflow: auto;
+            text-overflow: clip;
+        }
+    </style>
 </head>
 <body>
 <div class="lyear-layout-web">
@@ -34,7 +53,7 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-striped">
+                                    <table class="table table-hover table-striped" style="overflow: hidden">
                                         <thead>
                                         <tr>
                                             <th class="info">ID</th>
@@ -79,7 +98,7 @@
                             </div>
 
                             <!-- 显示分页信息 -->
-                            <div class="row">
+                            <div class="row" style="margin-left: 20px">
 
                                 <div class="col-md-5">
                                     <div class="btn-group">

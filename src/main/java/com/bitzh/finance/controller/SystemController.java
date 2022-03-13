@@ -63,7 +63,7 @@ public class SystemController {
      */
     @RequestMapping("/admin/system/toExceptionLogManage.html")
     public String toException(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                              @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize,
+                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                               Model model, HttpSession session) {
         // 引入PageHelper插件，在查询之前调用startPage方法，传入页码以及每页大小
         PageHelper.startPage(pageNum, pageSize);
@@ -79,15 +79,5 @@ public class SystemController {
         model.addAttribute("pageTopBarInfo", "错误日志界面");
         return "/admin/system/exceptionlogmanage";
     }
-
-//    /**
-//     * 跳转监控界面
-//     */
-//    @GetMapping("/admin/system/toDataSource")
-//    public String toDataSource(Model model){
-//        model.addAttribute("activeUrl1", "systemActive");
-//        model.addAttribute("activeUrl2", "DataSourceActive");
-//        return "http://localhost:9090/druid/login.html";
-//    }
 
 }

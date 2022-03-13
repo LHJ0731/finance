@@ -330,5 +330,6 @@
         ,
         <include refid="Blob_Column_List"/>
         from exceptionlog
+        order by oper_createtime
     </select>
 </mapper>
