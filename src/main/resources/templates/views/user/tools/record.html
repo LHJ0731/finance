@@ -152,12 +152,6 @@
                             </div>
 
                         </div>
-                        <div class="card">
-                            <div class="card-header"><h4>资金记录表</h4></div>
-                            <div class="card-body">
-                                <canvas id="chart-vbar-2"></canvas>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -176,7 +170,6 @@
 <script th:src="@{/lyear/jconfirm/jquery-confirm.min.js}"></script>
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
-<script th:src="@{/lyear/js/Chart.js}"></script>
 <script th:inline="javascript">
     //导出
     $("#export_btn").click(function () {
@@ -201,39 +194,6 @@
             }
         })
     });
-
-    new Chart($("#chart-vbar-2"), {
-        type: 'bar',
-        data: {
-            labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月"],
-            datasets: [{
-                label: "收入",
-                backgroundColor: "rgba(51,202,185,0.5)",
-                borderColor: "rgba(0,0,0,0)",
-                hoverBackgroundColor: "rgba(51,202,185,0.7)",
-                hoverBorderColor: "rgba(0,0,0,0)",
-                data: [10, 59, 80, 58, 20, 55, 40]
-            },
-                {
-                    label: "支出",
-                    backgroundColor: "rgba(243,245,246,0.8)",
-                    borderColor: "rgba(0,0,0,0)",
-                    hoverBackgroundColor: "rgba(238,239,240,1)",
-                    hoverBorderColor: "rgba(0,0,0,0)",
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-
 </script>
 </body>
 </html>
