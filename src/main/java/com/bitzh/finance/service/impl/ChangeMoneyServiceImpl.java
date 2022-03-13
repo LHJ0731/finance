@@ -50,4 +50,9 @@ public class ChangeMoneyServiceImpl implements ChangeMoneyService {
     public List<ChangeMoney> selectChangeMoneyByInfo(String information) {
         return changeMoneyMapper.selectChangeMoneyByInfo(information);
     }
+
+    @Override
+    public Integer selectcount() {
+        return changeMoneyMapper.selectcount();
+    }
 }

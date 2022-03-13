@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class OperationLogServiceImpl implements OperationLogService {
     @Autowired
@@ -16,5 +18,10 @@ public class OperationLogServiceImpl implements OperationLogService {
     @Transactional
     public Integer insert(OperationLog operlog) {
         return operationLogMapper.insert(operlog);
+    }
+
+    @Override
+    public List<OperationLog> selectAllOperationLog() {
+        return operationLogMapper.selectAllOperationLog();
     }
 }

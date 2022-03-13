@@ -31,4 +31,6 @@ public interface FundProductMapper {
     int updateByPrimaryKey(FundProduct record);
 
     List<FundProduct> selectFundProductByInfo(String information);
+
+    Integer selectcount();
 }

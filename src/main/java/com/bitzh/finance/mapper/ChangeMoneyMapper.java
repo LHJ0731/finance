@@ -31,4 +31,6 @@ public interface ChangeMoneyMapper {
     int updateByPrimaryKey(ChangeMoney record);
 
     List<ChangeMoney> selectChangeMoneyByInfo(String information);
+
+    Integer selectcount();
 }

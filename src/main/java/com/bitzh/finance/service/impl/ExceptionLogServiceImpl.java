@@ -6,6 +6,8 @@ import com.bitzh.finance.service.ExceptionLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExceptionLogServiceImpl implements ExceptionLogService {
     @Autowired
@@ -14,5 +16,10 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
     @Override
     public Integer insert(ExceptionLog excepLog) {
         return exceptionLogMapper.insert(excepLog);
+    }
+
+    @Override
+    public List<ExceptionLog> selectAllExceptionLog() {
+        return exceptionLogMapper.selectAllExceptionLog();
     }
 }

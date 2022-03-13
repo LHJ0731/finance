@@ -17,4 +17,6 @@ public interface ChangeMoneyService {
     Integer deleteChangeMoneyById(Integer id);
 
     List<ChangeMoney> selectChangeMoneyByInfo(String information);
+
+    Integer selectcount();
 }

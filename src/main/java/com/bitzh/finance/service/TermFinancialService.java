@@ -17,4 +17,6 @@ public interface TermFinancialService {
     Integer deleteTermFinancialById(Integer id);
 
     List<TermFinancial> selectTermFinancialByInfo(String information);
+
+    Integer selectcount();
 }

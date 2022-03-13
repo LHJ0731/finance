@@ -51,4 +51,9 @@ public class PayMoneyServiceImpl implements PayMoneyService {
     public List<PayMoney> selectPayMoneyByInfo(String information) {
         return payMoneyMapper.selectPayMoneyByInfo(information);
     }
+
+    @Override
+    public Integer selectcount() {
+        return payMoneyMapper.selectcount();
+    }
 }

@@ -33,4 +33,6 @@ public interface ExceptionLogMapper {
     int updateByPrimaryKeyWithBLOBs(ExceptionLog record);
 
     int updateByPrimaryKey(ExceptionLog record);
+
+    List<ExceptionLog> selectAllExceptionLog();
 }

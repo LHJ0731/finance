@@ -48,4 +48,9 @@ public class TermFinancialServiceImpl implements TermFinancialService {
     public List<TermFinancial> selectTermFinancialByInfo(String information) {
         return termFinancialMapper.selectTermFinancialByInfo(information);
     }
+
+    @Override
+    public Integer selectcount() {
+        return termFinancialMapper.selectcount();
+    }
 }

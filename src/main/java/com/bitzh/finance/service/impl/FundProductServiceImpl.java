@@ -48,4 +48,9 @@ public class FundProductServiceImpl implements FundProductService {
     public List<FundProduct> selectFundProductByInfo(String information) {
         return fundProductMapper.selectFundProductByInfo(information);
     }
+
+    @Override
+    public Integer selectcount() {
+        return fundProductMapper.selectcount();
+    }
 }

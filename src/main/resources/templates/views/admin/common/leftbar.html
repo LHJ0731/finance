@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>leftbar</title>
@@ -20,8 +21,7 @@
                         class="mdi mdi-home"></i>系统首页</a></li>
                 <li shiro:hasPermission="admin:userInfo" class="nav-item nav-item-has-subnav"
                     th:class="${activeUrl1=='userInfoActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}">
-                    <a href="javascript:void(0)"><i class="mdi mdi-account-settings-variant"></i>
-                        用户信息管理</a>
+                    <a href="javascript:void(0)"><i class="mdi mdi-account-settings-variant"></i>用户信息管理</a>
                     <ul class="nav nav-subnav">
                         <li shiro:hasPermission="admin:userInfoElse"
                             th:class="${activeUrl2=='userInfoActive'?'active':''}"><a
@@ -41,17 +41,21 @@
                         <li shiro:hasPermission="admin:changeMoney"
                             th:class="${activeUrl2=='changemoneyActive'?'active':''}"><a
                                 th:href="@{/admin/finance/toChangeMoney.html}">零钱理财</a></li>
-                        <li shiro:hasPermission="admin:payMoney" th:class="${activeUrl2=='paymoneyActive'?'active':''}">
-                            <a
-                                    th:href="@{/admin/finance/toPayMoney.html}">工资理财</a></li>
+                        <li shiro:hasPermission="admin:payMoney"
+                            th:class="${activeUrl2=='paymoneyActive'?'active':''}"><a
+                                th:href="@{/admin/finance/toPayMoney.html}">工资理财</a></li>
                         <li shiro:hasPermission="admin:termFinancial"
                             th:class="${activeUrl2=='termfinancialActive'?'active':''}"><a
                                 th:href="@{/admin/finance/toTermFinancial.html}">期限理财</a></li>
                         <li shiro:hasPermission="admin:fundProduct"
                             th:class="${activeUrl2=='fundproductActive'?'active':''}"><a
                                 th:href="@{/admin/finance/toFundProduct.html}">基金理财</a></li>
-                        <li shiro:hasPermission="admin:bank" th:class="${activeUrl2=='bankctive'?'active':''}"><a
+                        <li shiro:hasPermission="admin:bank"
+                            th:class="${activeUrl2=='bankActive'?'active':''}"><a
                                 th:href="@{/admin/finance/toBank.html}">精选银行</a></li>
+                        <li th:class="${activeUrl2=='statActive'?'active':''}">
+                            <a th:href="@{/admin/finance/toProductStat.html}">产品分析</a>
+                        </li>
                     </ul>
                 </li>
                 <li shiro:hasPermission="admin:permission" class="nav-item nav-item-has-subnav"
@@ -67,21 +71,27 @@
                     </ul>
                 </li>
                 <li shiro:hasPermission="admin:loan" class="nav-item nav-item-has-subnav"
-                    th:class="${activeUrl1=='loanActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}"
-                ><a href="javascript:void(0)"><i class="mdi mdi-comment-text"></i>借款管理</a>
+                    th:class="${activeUrl1=='loanActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}">
+                    <a href="javascript:void(0)"><i class="mdi mdi-comment-text"></i>借款管理</a>
                     <ul class="nav nav-subnav">
-                        <li shiro:hasPermission="admin:loanExam" th:class="${activeUrl2=='loanexamActive'?'active':''}">
-                            <a
-                                    th:href="@{/admin/loan/toLoanexam.html}">借款审核</a></li>
-                        <li shiro:hasPermission="admin:loanInfo" th:class="${activeUrl2=='loaninfoActive'?'active':''}">
-                            <a
-                                    th:href="@{/admin/loan/toLoaninfo.html}">借款信息</a></li>
+                        <li shiro:hasPermission="admin:loanExam"
+                            th:class="${activeUrl2=='loanexamActive'?'active':''}"><a
+                                th:href="@{/admin/loan/toLoanexam.html}">借款审核</a></li>
+                        <li shiro:hasPermission="admin:loanInfo"
+                            th:class="${activeUrl2=='loaninfoActive'?'active':''}"><a
+                                th:href="@{/admin/loan/toLoaninfo.html}">借款信息</a></li>
                     </ul>
                 </li>
-                <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="mdi mdi-settings"></i>系统管理</a>
+                <li class="nav-item nav-item-has-subnav"
+                    th:class="${activeUrl1=='systemActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}"
+                ><a href="javascript:void(0)"><i class="mdi mdi-settings"></i>个人中心</a>
                     <ul class="nav nav-subnav">
-                        <li><a href="http://localhost:9090/druid/login.html" target="_blank">数据源监控</a></li>
+                        <li th:class="${activeUrl2=='operationActive'?'active':''}"><a
+                                th:href="@{/admin/system/toOperationLogManage.html}">操作日志管理</a></li>
+                        <li th:class="${activeUrl2=='exceptionActive'?'active':''}"><a
+                                th:href="@{/admin/system/toExceptionLogManage.html}">错误日志管理</a></li>
+                        <li><a href="http://localhost:9090/druid/login.html"
+                               target="_blank">数据源监控</a></li>
                     </ul>
                 </li>
             </ul>

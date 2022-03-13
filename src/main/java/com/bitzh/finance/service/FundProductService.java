@@ -17,4 +17,6 @@ public interface FundProductService {
     Integer deleteFundProductById(Integer id);
 
     List<FundProduct> selectFundProductByInfo(String information);
+
+    Integer selectcount();
 }

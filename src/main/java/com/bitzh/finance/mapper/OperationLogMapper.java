@@ -33,4 +33,6 @@ public interface OperationLogMapper {
     int updateByPrimaryKeyWithBLOBs(OperationLog record);
 
     int updateByPrimaryKey(OperationLog record);
+
+    List<OperationLog> selectAllOperationLog();
 }

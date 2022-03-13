@@ -31,4 +31,6 @@ public interface TermFinancialMapper {
     int updateByPrimaryKey(TermFinancial record);
 
     List<TermFinancial> selectTermFinancialByInfo(String information);
+
+    Integer selectcount();
 }

@@ -17,4 +17,6 @@ public interface PayMoneyService {
     Integer deletePayMoneyById(Integer id);
 
     List<PayMoney> selectPayMoneyByInfo(String information);
+
+    Integer selectcount();
 }

@@ -233,4 +233,8 @@
             invesTerm  = #{investerm,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectcount" resultType="java.lang.Integer">
+        select count(*)
+        from pay_money;
+    </select>
 </mapper>

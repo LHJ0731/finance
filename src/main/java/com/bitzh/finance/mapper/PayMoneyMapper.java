@@ -31,4 +31,6 @@ public interface PayMoneyMapper {
     int updateByPrimaryKey(PayMoney record);
 
     List<PayMoney> selectPayMoneyByInfo(String information);
+
+    Integer selectcount();
 }

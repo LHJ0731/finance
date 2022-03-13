@@ -232,4 +232,8 @@
             invesMoney   = #{invesmoney,jdbcType=DECIMAL}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectcount" resultType="java.lang.Integer">
+        select count(*)
+        from change_money;
+    </select>
 </mapper>

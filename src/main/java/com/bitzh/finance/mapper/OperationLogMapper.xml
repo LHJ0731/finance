@@ -360,4 +360,11 @@
             oper_createtime = #{operCreatetime,jdbcType=TIMESTAMP}
         where oper_id = #{operId,jdbcType=VARCHAR}
     </update>
+    <select id="selectAllOperationLog" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from operationlog
+    </select>
 </mapper>
