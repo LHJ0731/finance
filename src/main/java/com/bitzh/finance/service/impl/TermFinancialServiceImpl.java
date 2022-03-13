@@ -1,6 +1,5 @@
 package com.bitzh.finance.service.impl;
 
-import com.bitzh.finance.entity.ChangeMoney;
 import com.bitzh.finance.entity.TermFinancial;
 import com.bitzh.finance.mapper.TermFinancialMapper;
 import com.bitzh.finance.service.TermFinancialService;

@@ -1,8 +1,5 @@
 package com.bitzh.finance.entity;
 
-import com.bitzh.finance.entity.ChangeMoney;
-import com.bitzh.finance.entity.User;
-
 import java.math.BigDecimal;
 import java.util.Date;
 

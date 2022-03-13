@@ -1,8 +1,5 @@
 package com.bitzh.finance.entity;
 
-import com.bitzh.finance.entity.Admin;
-import com.bitzh.finance.entity.User;
-
 import java.util.Date;
 
 public class Info {

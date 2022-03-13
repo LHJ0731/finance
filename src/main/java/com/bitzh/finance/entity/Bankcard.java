@@ -1,7 +1,5 @@
 package com.bitzh.finance.entity;
 
-import com.bitzh.finance.entity.User;
-
 public class Bankcard {
     private Integer id;
 

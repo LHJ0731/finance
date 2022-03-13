@@ -2,10 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.Bankcard;
 import com.bitzh.finance.entity.BankcardExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface BankcardMapper {
     long countByExample(BankcardExample example);

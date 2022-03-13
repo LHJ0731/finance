@@ -1,7 +1,6 @@
 package com.bitzh.finance.common;
 
 import com.alibaba.fastjson.JSON;
-import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.common.shiro.UserRealm;
 import com.bitzh.finance.entity.ExceptionLog;
 import com.bitzh.finance.entity.OperationLog;

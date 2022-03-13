@@ -2,11 +2,10 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.Admin;
 import com.bitzh.finance.entity.AdminExample;
-
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface AdminMapper {

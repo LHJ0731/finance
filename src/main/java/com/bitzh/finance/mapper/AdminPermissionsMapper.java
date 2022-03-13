@@ -2,10 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.AdminPermissions;
 import com.bitzh.finance.entity.AdminPermissionsExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface AdminPermissionsMapper {
     long countByExample(AdminPermissionsExample example);

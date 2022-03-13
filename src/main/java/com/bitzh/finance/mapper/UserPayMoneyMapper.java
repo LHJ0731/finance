@@ -2,10 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.UserPayMoney;
 import com.bitzh.finance.entity.UserPayMoneyExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface UserPayMoneyMapper {
     long countByExample(UserPayMoneyExample example);

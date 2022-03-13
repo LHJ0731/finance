@@ -2,11 +2,10 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.Balance;
 import com.bitzh.finance.entity.BalanceExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface BalanceMapper {
     long countByExample(BalanceExample example);

@@ -1,6 +1,5 @@
 package com.bitzh.finance.service.impl;
 
-import com.bitzh.finance.entity.FundProduct;
 import com.bitzh.finance.entity.PayMoney;
 import com.bitzh.finance.mapper.PayMoneyMapper;
 import com.bitzh.finance.service.PayMoneyService;

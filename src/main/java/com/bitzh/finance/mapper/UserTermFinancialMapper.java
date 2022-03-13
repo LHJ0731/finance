@@ -2,10 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.UserTermFinancial;
 import com.bitzh.finance.entity.UserTermFinancialExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface UserTermFinancialMapper {
     long countByExample(UserTermFinancialExample example);

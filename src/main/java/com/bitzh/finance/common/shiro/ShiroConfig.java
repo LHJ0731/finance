@@ -1,8 +1,6 @@
 package com.bitzh.finance.common.shiro;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.bitzh.finance.entity.User;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;

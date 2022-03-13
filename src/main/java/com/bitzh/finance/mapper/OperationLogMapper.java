@@ -2,8 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.OperationLog;
 import com.bitzh.finance.entity.OperationLogExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OperationLogMapper {
     long countByExample(OperationLogExample example);

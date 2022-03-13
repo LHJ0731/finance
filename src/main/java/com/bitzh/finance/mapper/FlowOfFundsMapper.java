@@ -2,10 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.FlowOfFunds;
 import com.bitzh.finance.entity.FlowOfFundsExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface FlowOfFundsMapper {
     long countByExample(FlowOfFundsExample example);

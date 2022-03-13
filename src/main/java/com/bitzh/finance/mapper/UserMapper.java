@@ -2,11 +2,10 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.User;
 import com.bitzh.finance.entity.UserExample;
-
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {

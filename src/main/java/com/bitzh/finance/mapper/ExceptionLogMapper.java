@@ -2,8 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.ExceptionLog;
 import com.bitzh.finance.entity.ExceptionLogExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ExceptionLogMapper {
     long countByExample(ExceptionLogExample example);

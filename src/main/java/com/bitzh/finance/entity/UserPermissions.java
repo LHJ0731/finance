@@ -1,8 +1,5 @@
 package com.bitzh.finance.entity;
 
-import com.bitzh.finance.entity.Permissions;
-import com.bitzh.finance.entity.User;
-
 public class UserPermissions {
     private Integer id;
 

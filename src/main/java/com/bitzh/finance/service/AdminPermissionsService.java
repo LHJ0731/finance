@@ -2,7 +2,6 @@ package com.bitzh.finance.service;
 
 import com.bitzh.finance.entity.AdminPermissions;
 
-
 import java.util.List;
 
 public interface AdminPermissionsService {

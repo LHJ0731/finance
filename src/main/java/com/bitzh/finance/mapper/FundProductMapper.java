@@ -2,10 +2,9 @@ package com.bitzh.finance.mapper;
 
 import com.bitzh.finance.entity.FundProduct;
 import com.bitzh.finance.entity.FundProductExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface FundProductMapper {
     long countByExample(FundProductExample example);

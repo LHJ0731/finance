@@ -1,18 +1,12 @@
 package com.bitzh.finance.common;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 对所有乱码进行拦截及纠正，包括get提交方式，解决get提交方式乱码，方式是重写了request的getParameter方法，
