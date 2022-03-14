@@ -58,7 +58,7 @@ public class FundProductController {
      */
     @PostMapping("/user/buyFundProduct")
     @ResponseBody
-    @OperLog(operModul = "基金理财模块", operType = "新增", operDesc = "买入基金理财产品")
+    @OperLog(operModul = "产品模块", operType = "新增", operDesc = "买入基金理财产品")
     public Msg buyFundProduct(@RequestParam("fundProductId") Integer fundProductId,
                               @RequestParam("userId") Integer userId,
                               @RequestParam("leastmoney") BigDecimal leastmoney) {
@@ -95,7 +95,7 @@ public class FundProductController {
      */
     @PostMapping("/user/selectFundProduct")
     @ResponseBody
-    @OperLog(operModul = "基金理财模块", operType = "查询", operDesc = "搜索基金理财产品")
+    @OperLog(operModul = "产品模块", operType = "查询", operDesc = "搜索基金理财产品")
     public Msg selectFundProduct(@RequestParam("information") String information, Model model) {
         List<FundProduct> list = fundProductService.selectFundProductByInfo(information);
         model.addAttribute("fundProductList", list);
@@ -134,7 +134,7 @@ public class FundProductController {
      */
     @PostMapping("/admin/addFundProduct")
     @ResponseBody
-    @OperLog(operModul = "基金理财模块", operType = "新增", operDesc = "新增基金理财产品(管理员)")
+    @OperLog(operModul = "产品模块", operType = "新增", operDesc = "新增基金理财产品(管理员)")
     public Msg addFundProduct(FundProduct fundProduct) {
         Integer result = fundProductService.insertFundProduct(fundProduct);
         if (result == 1) {
@@ -151,7 +151,7 @@ public class FundProductController {
      */
     @GetMapping("/admin/getFundProductInfoById/{id}")
     @ResponseBody
-    @OperLog(operModul = "基金理财模块", operType = "查询", operDesc = "查询指定基金理财产品信息，用于更新时回显信息")
+    @OperLog(operModul = "产品模块", operType = "查询", operDesc = "查询指定基金理财产品信息，用于更新时回显信息")
     public Msg getFundProductInfoById(@PathVariable("id") Integer id) {
         FundProduct fundProduct = fundProductService.selectFundProductById(id);
         //System.out.println(fundProduct.getFunddesc());
@@ -166,7 +166,7 @@ public class FundProductController {
      */
     @PutMapping("/admin/updateFundProduct/{id}")
     @ResponseBody
-    @OperLog(operModul = "基金理财模块", operType = "更新", operDesc = "更新基金理财产品信息")
+    @OperLog(operModul = "产品模块", operType = "更新", operDesc = "更新基金理财产品信息")
     public Msg updateFundProduct(@PathVariable("id") Integer id, FundProduct fundProduct) {
         fundProduct.setId(id);
         Integer result = fundProductService.updateFundProduct(fundProduct);
@@ -184,7 +184,7 @@ public class FundProductController {
      */
     @DeleteMapping("/admin/deleteFundProductById/{id}")
     @ResponseBody
-    @OperLog(operModul = "基金理财模块", operType = "删除", operDesc = "删除基金理财产品信息")
+    @OperLog(operModul = "产品模块", operType = "删除", operDesc = "删除基金理财产品信息")
     public Msg deleteFundProductById(@PathVariable("id") Integer id) {
         Integer result = fundProductService.deleteFundProductById(id);
         if (result == 1) {

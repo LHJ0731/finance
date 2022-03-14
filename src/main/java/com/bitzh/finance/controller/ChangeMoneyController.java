@@ -58,7 +58,7 @@ public class ChangeMoneyController {
      */
     @PostMapping("/user/buyChangeMoney")
     @ResponseBody
-    @OperLog(operModul = "零钱理财模块", operType = "新增", operDesc = "买入零钱理财产品")
+    @OperLog(operModul = "产品模块", operType = "新增", operDesc = "买入零钱理财产品")
     public Msg buyChangeMoney(@RequestParam("changeMoneyId") Integer changeMoneyId,
                               @RequestParam("userId") Integer userId,
                               @RequestParam("invesmoney") BigDecimal invesmoney) {
@@ -95,7 +95,7 @@ public class ChangeMoneyController {
      */
     @PostMapping("/user/selectChangeMoney")
     @ResponseBody
-    @OperLog(operModul = "零钱理财模块", operType = "查询", operDesc = "搜索零钱理财产品")
+    @OperLog(operModul = "产品模块", operType = "查询", operDesc = "搜索零钱理财产品")
     public Msg selectChangeMoney(@RequestParam("information") String information, Model model) {
         List<ChangeMoney> list = changeMoneyService.selectChangeMoneyByInfo(information);
         model.addAttribute("changeMoneyList", list);
@@ -135,7 +135,7 @@ public class ChangeMoneyController {
      */
     @PostMapping("/admin/addChangeMoney")
     @ResponseBody
-    @OperLog(operModul = "零钱理财模块", operType = "新增", operDesc = "新增零钱理财产品(管理员)")
+    @OperLog(operModul = "产品模块", operType = "新增", operDesc = "新增零钱理财产品(管理员)")
     public Msg addChangeMoney(ChangeMoney changeMoney) {
         Integer result = changeMoneyService.insertChangeMoney(changeMoney);
         if (result == 1) {
@@ -152,7 +152,7 @@ public class ChangeMoneyController {
      */
     @GetMapping("/admin/getChangeMoneyInfoById/{id}")
     @ResponseBody
-    @OperLog(operModul = "零钱理财模块", operType = "查询", operDesc = "查询指定零钱理财产品信息，用于更新时回显信息")
+    @OperLog(operModul = "产品模块", operType = "查询", operDesc = "查询指定零钱理财产品信息，用于更新时回显信息")
     public Msg getChangeMoneyInfoById(@PathVariable("id") Integer id) {
         ChangeMoney changeMoney = changeMoneyService.selectChangeMoneyById(id);
         return Msg.success().add("changeMoney", changeMoney);
@@ -167,7 +167,7 @@ public class ChangeMoneyController {
      */
     @PutMapping("/admin/updateChangeMoney/{id}")
     @ResponseBody
-    @OperLog(operModul = "零钱理财模块", operType = "更新", operDesc = "更新零钱理财产品信息")
+    @OperLog(operModul = "产品模块", operType = "更新", operDesc = "更新零钱理财产品信息")
     public Msg updateChangeMoney(@PathVariable("id") Integer id, ChangeMoney changeMoney) {
         changeMoney.setId(id);
         Integer result = changeMoneyService.updateChangeMoney(changeMoney);
@@ -185,7 +185,7 @@ public class ChangeMoneyController {
      */
     @DeleteMapping("/admin/deleteChangeMoneyById/{id}")
     @ResponseBody
-    @OperLog(operModul = "零钱理财模块", operType = "删除", operDesc = "删除零钱理财产品信息")
+    @OperLog(operModul = "产品模块", operType = "删除", operDesc = "删除零钱理财产品信息")
     public Msg deleteChangeMoneyById(@PathVariable("id") Integer id) {
         Integer result = changeMoneyService.deleteChangeMoneyById(id);
         if (result == 1) {

@@ -59,7 +59,7 @@ public class TermFinancialController {
      */
     @PostMapping("/user/buyTermFinancial")
     @ResponseBody
-    @OperLog(operModul = "期限理财模块", operType = "新增", operDesc = "买入期限理财产品")
+    @OperLog(operModul = "产品模块", operType = "新增", operDesc = "买入期限理财产品")
     public Msg buyTermFinancial(@RequestParam("termFinancialId") Integer termFinancialId,
                                 @RequestParam("userId") Integer userId,
                                 @RequestParam("leastmoney") BigDecimal leastmoney) {
@@ -95,7 +95,7 @@ public class TermFinancialController {
      */
     @PostMapping("/user/selectTermFinancial")
     @ResponseBody
-    @OperLog(operModul = "期限理财模块", operType = "查询", operDesc = "搜索期限理财产品")
+    @OperLog(operModul = "产品模块", operType = "查询", operDesc = "搜索期限理财产品")
     public Msg selectTermFinancial(@RequestParam("information") String information, Model model) {
         List<TermFinancial> list = termFinancialService.selectTermFinancialByInfo(information);
         model.addAttribute("termFinancialList", list);
@@ -134,7 +134,7 @@ public class TermFinancialController {
      */
     @PostMapping("/admin/addTermFinancial")
     @ResponseBody
-    @OperLog(operModul = "期限理财模块", operType = "新增", operDesc = "新增期限理财产品(管理员)")
+    @OperLog(operModul = "产品模块", operType = "新增", operDesc = "新增期限理财产品(管理员)")
     public Msg addTermFinancial(TermFinancial termFinancial) {
         Integer result = termFinancialService.insertTermFinancial(termFinancial);
         if (result == 1) {
@@ -151,7 +151,7 @@ public class TermFinancialController {
      */
     @GetMapping("/admin/getTermFinancialInfoById/{id}")
     @ResponseBody
-    @OperLog(operModul = "期限理财模块", operType = "查询", operDesc = "查询指定期限理财产品信息，用于更新时回显信息")
+    @OperLog(operModul = "产品模块", operType = "查询", operDesc = "查询指定期限理财产品信息，用于更新时回显信息")
     public Msg getTermFinancialInfoById(@PathVariable("id") Integer id) {
         TermFinancial termFinancial = termFinancialService.selectTermFinancialById(id);
         return Msg.success().add("termFinancial", termFinancial);
@@ -165,7 +165,7 @@ public class TermFinancialController {
      */
     @PutMapping("/admin/updateTermFinancial/{id}")
     @ResponseBody
-    @OperLog(operModul = "期限理财模块", operType = "更新", operDesc = "更新期限理财产品信息")
+    @OperLog(operModul = "产品模块", operType = "更新", operDesc = "更新期限理财产品信息")
     public Msg updateTermFinancial(@PathVariable("id") Integer id, TermFinancial termFinancial) {
         termFinancial.setId(id);
         Integer result = termFinancialService.updateTermFinancial(termFinancial);
@@ -183,7 +183,7 @@ public class TermFinancialController {
      */
     @DeleteMapping("/admin/deleteTermFinancialById/{id}")
     @ResponseBody
-    @OperLog(operModul = "期限理财模块", operType = "删除", operDesc = "删除期限理财产品信息")
+    @OperLog(operModul = "产品模块", operType = "删除", operDesc = "删除期限理财产品信息")
     public Msg deleteTermFinancialById(@PathVariable("id") Integer id) {
         Integer result = termFinancialService.deleteTermFinancialById(id);
         if (result == 1) {
