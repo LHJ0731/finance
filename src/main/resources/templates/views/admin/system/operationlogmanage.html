@@ -12,10 +12,13 @@
     <!--弹出框样式-->
     <link th:href="@{/lyear/jconfirm/jquery-confirm.min.css}" rel="stylesheet" type="text/css"/>
     <!--自定义样式-->
-    <link href="../lyear/css/style.min.css" th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
+    <!--时间选择插件-->
+    <link th:href="@{/bootstrap/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+    <!--日期选择插件-->
+    <link th:href="@{/bootstrap/css/bootstrap-datepicker3.min.css}" rel="stylesheet"/>
     <style type="text/css">
         table {
-            width: 50%;
             border-collapse: collapse;
             table-layout: fixed; /*不添加此样式，会全部显示    */
         }
@@ -51,6 +54,30 @@
                                 <h4>操作日志管理</h4>
                             </div>
                             <div class="card-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                            <input class="form-control" type="text" placeholder="请输入操作员名称" id="opertor">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="input-group">
+                                                <div class="input-daterange input-group js-datepicker"
+                                                     data-auto-close="false" data-date-format="yyyy-mm-dd">
+                                                    <input class="form-control" type="text" id="startdate"
+                                                           name="startdate" placeholder="开始日期">
+                                                    <span class="input-group-addon"><i
+                                                            class="mdi mdi-chevron-right"></i></span>
+                                                    <input class="form-control" type="text" id="enddate"
+                                                           name="enddate" placeholder="结束日期">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-primary" type="submit" id="search">查询</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="table-responsive">
                                     <table class="table table-hover table-striped" style="overflow: hidden">
                                         <thead>
@@ -194,6 +221,14 @@
 <script th:src="@{/lyear/jconfirm/jquery-confirm.min.js}"></script>
 <!--自定义js脚本-->
 <script th:src="@{/lyear/js/main.min.js}"></script>
+<!--时间选择插件-->
+<script th:src="@{/js/moment.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/zh-cn.js}"></script>
+<!--日期选择插件-->
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.zh-CN.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
 <script type="text/javascript">
     //单个删除
     $(document).on("click", ".delete_btn", function () {
@@ -234,6 +269,24 @@
             }
         });
     });
+
+    $("#search").click(function () {
+        var opertor = $("#opertor").val();
+        var startdate = $("#startdate").val();
+        var enddate = $("#enddate").val();
+        $.ajax({
+            url: "/admin/selectOperationLog",
+            type: "POST",
+            data: {
+                "opertor": opertor,
+                "startdate": startdate,
+                "enddate": enddate
+            },
+            success() {
+
+            }
+        })
+    })
 </script>
 </body>
 </html>

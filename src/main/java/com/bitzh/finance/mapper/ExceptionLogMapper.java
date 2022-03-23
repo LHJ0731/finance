@@ -36,4 +36,6 @@ public interface ExceptionLogMapper {
     int updateByPrimaryKey(ExceptionLog record);
 
     List<ExceptionLog> selectAllExceptionLog();
+
+    List<ExceptionLog> selectExceptionLogByInfo(String opertor, String startdate, String enddate);
 }

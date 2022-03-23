@@ -27,4 +27,9 @@ public class ExceptionLogServiceImpl implements ExceptionLogService {
     public Integer deleteExceptionLogById(String id) {
         return exceptionLogMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<ExceptionLog> selectExceptionLogByInfo(String opertor, String startdate, String enddate) {
+        return exceptionLogMapper.selectExceptionLogByInfo(opertor, startdate, enddate);
+    }
 }

@@ -82,6 +82,8 @@ public class SystemController {
 
     /**
      * 删除操作日志记录
+     *
+     * @param id
      */
     @DeleteMapping("/admin/deleteOperationLogById/{id}")
     @ResponseBody
@@ -95,6 +97,8 @@ public class SystemController {
 
     /**
      * 删除操作日志记录
+     *
+     * @param id
      */
     @DeleteMapping("/admin/deleteExceptionLogById/{id}")
     @ResponseBody
@@ -104,5 +108,68 @@ public class SystemController {
             return Msg.success();
         }
         return Msg.fail();
+    }
+
+    /**
+     * 查询操作日志
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param model
+     * @param session
+     * @return
+     */
+    @PostMapping("/admin/selectOperationLog")
+    public String selectOperationLog(@RequestParam("opertor") String opertor,
+                                     @RequestParam("startdate") String startdate, @RequestParam("enddate") String enddate,
+                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                     Model model, HttpSession session) {
+        // 引入PageHelper插件，在查询之前调用startPage方法，传入页码以及每页大小
+        PageHelper.startPage(pageNum, pageSize);
+        List<OperationLog> list = operationLogService.selectOperationLogByInfo(opertor, startdate, enddate);
+        System.out.println(list);
+        // 使用PageInfo包装查询后的结果，并交给页面处理
+        // PageInfo封装了详细的分页信息，包括我们查询出来的数据，还可以传入连续显示的页数（5）
+        PageInfo<OperationLog> pageInfo = new PageInfo<OperationLog>(list, 5);
+
+        model.addAttribute("operationLogPageInfo", pageInfo);
+        model.addAttribute("operationLogList", list);
+
+        model.addAttribute("pageTopBarInfo", "操作日志界面");
+        model.addAttribute("activeUrl1", "systemActive");
+        model.addAttribute("activeUrl2", "operationActive");
+        return "/admin/system/operationlogmanage";
+    }
+
+    /**
+     * 查询错误日志
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param model
+     * @param session
+     * @return
+     */
+    @PostMapping("/admin/selectExceptionLog")
+    public String selectExceptionLog(@RequestParam("opertor") String opertor,
+                                     @RequestParam("startdate") String startdate, @RequestParam("enddate") String enddate,
+                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+                                     Model model, HttpSession session) {
+        // 引入PageHelper插件，在查询之前调用startPage方法，传入页码以及每页大小
+        PageHelper.startPage(pageNum, pageSize);
+        List<ExceptionLog> list = exceptionLogService.selectExceptionLogByInfo(opertor, startdate, enddate);
+        System.out.println(list);
+        // 使用PageInfo包装查询后的结果，并交给页面处理
+        // PageInfo封装了详细的分页信息，包括我们查询出来的数据，还可以传入连续显示的页数（5）
+        PageInfo<ExceptionLog> pageInfo = new PageInfo<ExceptionLog>(list, 5);
+        model.addAttribute("exceptionLogPageInfo", pageInfo);
+        model.addAttribute("exceptionLogList", list);
+
+        model.addAttribute("activeUrl1", "systemActive");
+        model.addAttribute("activeUrl2", "exceptionActive");
+        model.addAttribute("pageTopBarInfo", "错误日志界面");
+        return "/admin/system/exceptionlogmanage";
     }
 }

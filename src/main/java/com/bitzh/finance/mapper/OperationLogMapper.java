@@ -36,4 +36,6 @@ public interface OperationLogMapper {
     int updateByPrimaryKey(OperationLog record);
 
     List<OperationLog> selectAllOperationLog();
+
+    List<OperationLog> selectOperationLogByInfo(String opertor, String startdate, String enddate);
 }

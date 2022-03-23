@@ -10,4 +10,6 @@ public interface ExceptionLogService {
     List<ExceptionLog> selectAllExceptionLog();
 
     Integer deleteExceptionLogById(String id);
+
+    List<ExceptionLog> selectExceptionLogByInfo(String opertor, String startdate, String enddate);
 }

@@ -10,4 +10,6 @@ public interface OperationLogService {
     List<OperationLog> selectAllOperationLog();
 
     Integer deleteOperationLogById(String id);
+
+    List<OperationLog> selectOperationLogByInfo(String opertor, String startdate, String enddate);
 }

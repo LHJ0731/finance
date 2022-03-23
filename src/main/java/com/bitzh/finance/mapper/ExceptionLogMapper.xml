@@ -332,4 +332,22 @@
         from exceptionlog
         order by oper_createtime
     </select>
+    <select id="selectExceptionLogByInfo" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from exceptionlog
+        <where>
+            <if test="opertor != null and opertor !=''">
+                and oper_username = #{opertor,jdbcType=VARCHAR}
+            </if>
+            <if test="startdate !=null and startdate !=''">
+                and oper_createtime <![CDATA[>=]]> #{startdate}
+            </if>
+            <if test="enddate !=null and enddate !=''">
+                and oper_createtime <![CDATA[<=]]> #{enddate}
+            </if>
+        </where>
+    </select>
 </mapper>

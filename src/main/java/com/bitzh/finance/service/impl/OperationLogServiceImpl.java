@@ -29,4 +29,9 @@ public class OperationLogServiceImpl implements OperationLogService {
     public Integer deleteOperationLogById(String id) {
         return operationLogMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<OperationLog> selectOperationLogByInfo(String opertor, String startdate, String enddate) {
+        return operationLogMapper.selectOperationLogByInfo(opertor, startdate, enddate);
+    }
 }
