@@ -349,5 +349,6 @@
                 and oper_createtime <![CDATA[<=]]> #{enddate}
             </if>
         </where>
+        order by oper_createtime
     </select>
 </mapper>

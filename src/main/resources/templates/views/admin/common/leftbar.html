@@ -35,8 +35,8 @@
                     </ul>
                 </li>
                 <li shiro:hasPermission="admin:finance" class="nav-item nav-item-has-subnav"
-                    th:class="${activeUrl1=='financeActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}"
-                ><a href="javascript:void(0)"><i class="mdi mdi-skype-business"></i>理财产品管理</a>
+                    th:class="${activeUrl1=='financeActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}">
+                    <a href="javascript:void(0)"><i class="mdi mdi-skype-business"></i>理财产品管理</a>
                     <ul class="nav nav-subnav">
                         <li shiro:hasPermission="admin:changeMoney"
                             th:class="${activeUrl2=='changemoneyActive'?'active':''}"><a
@@ -59,8 +59,8 @@
                     </ul>
                 </li>
                 <li shiro:hasPermission="admin:permission" class="nav-item nav-item-has-subnav"
-                    th:class="${activeUrl1=='permissionActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}"
-                ><a href="javascript:void(0)"><i class="mdi mdi-key-change"></i>权限管理</a>
+                    th:class="${activeUrl1=='permissionActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}">
+                    <a href="javascript:void(0)"><i class="mdi mdi-key-change"></i>权限管理</a>
                     <ul class="nav nav-subnav">
                         <li shiro:hasPermission="admin:userPermissions"
                             th:class="${activeUrl2=='userPermissionsActive'?'active':''}"><a
@@ -83,8 +83,8 @@
                     </ul>
                 </li>
                 <li class="nav-item nav-item-has-subnav"
-                    th:class="${activeUrl1=='systemActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}"
-                ><a href="javascript:void(0)"><i class="mdi mdi-settings"></i>系统管理</a>
+                    th:class="${activeUrl1=='systemActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}">
+                    <a href="javascript:void(0)"><i class="mdi mdi-settings"></i>系统管理</a>
                     <ul class="nav nav-subnav">
                         <li th:class="${activeUrl2=='operationActive'?'active':''}"><a
                                 th:href="@{/admin/system/toOperationLogManage.html}">操作日志管理</a></li>
