@@ -86,7 +86,7 @@ public class UserController {
     }
 
     /**
-     * 更新用户信息(用户更改自己信息)
+     * 更新用户信息
      *
      * @param id
      * @param user
@@ -95,7 +95,7 @@ public class UserController {
      */
     @PutMapping("/user/updateUserProfile/{userId}")
     @ResponseBody
-    @OperLog(operModul = "用户模块", operType = "更新", operDesc = "更新用户信息(用户更改自己信息)")
+    @OperLog(operModul = "用户模块", operType = "更新", operDesc = "更新用户信息")
     public Msg updateUserProfile(@PathVariable("userId") Integer id, User user, HttpSession session) {
         user.setId(id);
         Integer result = userService.updateUser(user);
