@@ -193,7 +193,12 @@
                         btnClass: 'btn-primary',
                         action: function () {
                             $.ajax({
-                                url: "/loan/passApplyStatus/" + id,
+                                url: "/loan/passApplyStatus",
+                                data: {
+                                    "id": id,
+                                    "username": username,
+                                    "amount": amount
+                                },
                                 type: "put",
                                 success: function (result) {
                                     if (result.code === 100) {
@@ -228,7 +233,12 @@
                         btnClass: 'btn-primary',
                         action: function () {
                             $.ajax({
-                                url: "/loan/passApplyStatus/" + id,
+                                url: "/loan/passApplyStatus",
+                                data: {
+                                    "id": id,
+                                    "username": username,
+                                    "amount": amount
+                                },
                                 type: "put",
                                 success: function (result) {
                                     if (result.code === 100) {

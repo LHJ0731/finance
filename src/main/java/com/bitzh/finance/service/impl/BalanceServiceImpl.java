@@ -62,4 +62,15 @@ public class BalanceServiceImpl implements BalanceService {
     public Integer realconsume(Integer userId, BigDecimal monetary) {
         return balanceMapper.consume(userId, monetary);
     }
+
+    @Override
+    public synchronized Integer income(Integer userId, BigDecimal monetary) {
+        return balanceService.realincome(userId, monetary);
+    }
+
+    @Override
+    @Transactional
+    public Integer realincome(Integer userId, BigDecimal monetary) {
+        return balanceMapper.Add(monetary, userId);
+    }
 }

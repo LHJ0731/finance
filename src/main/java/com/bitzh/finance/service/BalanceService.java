@@ -20,4 +20,8 @@ public interface BalanceService {
     Integer consume(Integer userId, BigDecimal monetary);
 
     Integer realconsume(Integer userId, BigDecimal monetary);
+
+    Integer income(Integer userId, BigDecimal monetary);
+
+    Integer realincome(Integer userId, BigDecimal monetary);
 }

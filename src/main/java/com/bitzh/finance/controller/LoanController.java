@@ -2,12 +2,8 @@ package com.bitzh.finance.controller;
 
 import com.bitzh.finance.common.Msg;
 import com.bitzh.finance.common.OperLog;
-import com.bitzh.finance.entity.Admin;
-import com.bitzh.finance.entity.Info;
-import com.bitzh.finance.entity.Loan;
-import com.bitzh.finance.entity.User;
-import com.bitzh.finance.service.InfoService;
-import com.bitzh.finance.service.LoanService;
+import com.bitzh.finance.entity.*;
+import com.bitzh.finance.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +22,12 @@ public class LoanController {
     LoanService loanService;
     @Autowired
     InfoService infoService;
+    @Autowired
+    BalanceService balanceService;
+    @Autowired
+    FlowOfFundsService flowOfFundsService;
+    @Autowired
+    UserService userService;
 
     /**
      * 跳转到网贷申请界面
@@ -151,16 +153,18 @@ public class LoanController {
      * @param id
      * @return
      */
-    @PutMapping("/loan/passApplyStatus/{id}")
+    @PutMapping("/loan/passApplyStatus")
     @ResponseBody
     @OperLog(operModul = "借款模块", operType = "更新", operDesc = "借款审核通过")
-    public Msg passApplyStatus(@PathVariable("id") Integer id, HttpSession session) {
+    public Msg passApplyStatus(@RequestParam("id") Integer id, @RequestParam("amount") BigDecimal amount, @RequestParam("username") String username, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("loginAdmin");
         Loan loan = loanService.selectLoanById(id);
         loan.setExamineid(admin.getId());
         loan.setApplystatus(2);
         Integer result = loanService.updateLoan(loan);
-        if (result == 1) {
+        User user = userService.selectUserByUsername(username);
+        Integer incomeresult = balanceService.income(user.getId(), amount);
+        if (result == 1 && incomeresult == 1) {
             Info info = new Info();
             info.setSendid(admin.getId());
             info.setReceiveid(loan.getLoanid());
@@ -168,8 +172,18 @@ public class LoanController {
             info.setTitle("借款审核通过");
             info.setInfodesc("用户" + loan.getUser().getUsername() + "的" + loan.getAmount() + "元借款申请审核通过！审核人为：" + admin.getUsername());
             info.setStatus(0);
-            infoService.insertInfo(info);
-            return Msg.success();
+            Integer insertInfoResult = infoService.insertInfo(info);
+            FlowOfFunds fof = new FlowOfFunds();
+            fof.setUserid(user.getId());
+            fof.setFlowmoney(amount);
+            fof.setType(2);
+            fof.setSource("借款申请");
+            fof.setCreatetime(new Date());
+            fof.setFunddesc("借款申请通过");
+            Integer insertFlowOfFundsResult = flowOfFundsService.insertFlowOfFunds(fof);
+            if (insertInfoResult == 1 && insertFlowOfFundsResult == 1) {
+                return Msg.success();
+            }
         }
         return Msg.fail();
     }
