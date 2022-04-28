@@ -26,8 +26,6 @@ public class LoanController {
     BalanceService balanceService;
     @Autowired
     FlowOfFundsService flowOfFundsService;
-    @Autowired
-    UserService userService;
 
     /**
      * 跳转到网贷申请界面
@@ -156,14 +154,13 @@ public class LoanController {
     @PutMapping("/loan/passApplyStatus")
     @ResponseBody
     @OperLog(operModul = "借款模块", operType = "更新", operDesc = "借款审核通过")
-    public Msg passApplyStatus(@RequestParam("id") Integer id, @RequestParam("amount") BigDecimal amount, @RequestParam("username") String username, HttpSession session) {
+    public Msg passApplyStatus(@RequestParam("id") Integer id, @RequestParam("amount") BigDecimal amount, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("loginAdmin");
         Loan loan = loanService.selectLoanById(id);
         loan.setExamineid(admin.getId());
         loan.setApplystatus(2);
         Integer result = loanService.updateLoan(loan);
-        User user = userService.selectUserByUsername(username);
-        Integer incomeresult = balanceService.income(user.getId(), amount);
+        Integer incomeresult = balanceService.income(loan.getLoanid(), amount);
         if (result == 1 && incomeresult == 1) {
             Info info = new Info();
             info.setSendid(admin.getId());
@@ -174,7 +171,7 @@ public class LoanController {
             info.setStatus(0);
             Integer insertInfoResult = infoService.insertInfo(info);
             FlowOfFunds fof = new FlowOfFunds();
-            fof.setUserid(user.getId());
+            fof.setUserid(loan.getLoanid());
             fof.setFlowmoney(amount);
             fof.setType(2);
             fof.setSource("借款申请");
