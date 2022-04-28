@@ -74,9 +74,10 @@ public class SystemController {
         model.addAttribute("exceptionLogPageInfo", pageInfo);
         model.addAttribute("exceptionLogList", list);
 
+        model.addAttribute("pageTopBarInfo", "错误日志界面");
         model.addAttribute("activeUrl1", "systemActive");
         model.addAttribute("activeUrl2", "exceptionActive");
-        model.addAttribute("pageTopBarInfo", "错误日志界面");
+
         return "/admin/system/exceptionlogmanage";
     }
 

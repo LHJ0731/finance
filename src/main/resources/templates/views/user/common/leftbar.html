@@ -49,8 +49,8 @@
                     </ul>
                 </li>
                 <li class="nav-item nav-item-has-subnav"
-                    th:class="${activeUrl1=='personalActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}"
-                ><a href="javascript:void(0)"><i class="mdi mdi-account-location"></i>个人中心</a>
+                    th:class="${activeUrl1=='personalActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}">
+                    <a href="javascript:void(0)"><i class="mdi mdi-account-location"></i>个人中心</a>
                     <ul class="nav nav-subnav">
                         <li th:class="${activeUrl2=='myFinanceActive'?'active':''}"><a
                                 th:href="@{/user/personal/toMyFinance.html}">我的理财</a></li>

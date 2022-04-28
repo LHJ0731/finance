@@ -86,8 +86,8 @@
                     th:class="${activeUrl1=='systemActive'?'nav-item nav-item-has-subnav active open':'nav-item nav-item-has-subnav'}">
                     <a href="javascript:void(0)"><i class="mdi mdi-settings"></i>系统管理</a>
                     <ul class="nav nav-subnav">
-                        <li th:class="${activeUrl2=='operationActive'?'active':''}"><a
-                                th:href="@{/admin/system/toOperationLogManage.html}">操作日志管理</a></li>
+                        <!--                        <li th:class="${activeUrl2=='operationActive'?'active':''}"><a-->
+                        <!--                                th:href="@{/admin/system/toOperationLogManage.html}">操作日志管理</a></li>-->
                         <li th:class="${activeUrl2=='exceptionActive'?'active':''}"><a
                                 th:href="@{/admin/system/toExceptionLogManage.html}">错误日志管理</a></li>
                         <li><a href="http://localhost:9090/druid/login.html"
