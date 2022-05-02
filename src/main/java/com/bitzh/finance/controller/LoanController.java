@@ -3,7 +3,10 @@ package com.bitzh.finance.controller;
 import com.bitzh.finance.common.Msg;
 import com.bitzh.finance.common.OperLog;
 import com.bitzh.finance.entity.*;
-import com.bitzh.finance.service.*;
+import com.bitzh.finance.service.BalanceService;
+import com.bitzh.finance.service.FlowOfFundsService;
+import com.bitzh.finance.service.InfoService;
+import com.bitzh.finance.service.LoanService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +59,8 @@ public class LoanController {
 
         PageHelper.startPage(pageNum, pageSize);
         List<Loan> list = loanService.selectLoanByLoanId(loginUser.getId());
+        Balance balance = balanceService.selectBalanceByUserId(loginUser.getId());
+        model.addAttribute("Balance", balance);
         PageInfo<Loan> pageInfo = new PageInfo<Loan>(list, 5);
         model.addAttribute("myLoansPageInfo", pageInfo);
         model.addAttribute("loansList", list);
@@ -107,11 +112,20 @@ public class LoanController {
     @PutMapping("/user/repayment/{id}")
     @ResponseBody
     @OperLog(operModul = "借款模块", operType = "更新", operDesc = "还款,进行更新借款信息")
-    public Msg repayment(@PathVariable("id") Integer id) {
+    public Msg repayment(@PathVariable("id") Integer id, @RequestParam("amount") BigDecimal amount, @RequestParam("userId") Integer userId) {
+        Integer repaymentresult = balanceService.consume(userId, amount);
         Loan loan = loanService.selectLoanById(id);
         loan.setLoanstatus(2);
         Integer result = loanService.updateLoan(loan);
-        if (result == 1) {
+        if (repaymentresult == 1 && result == 1) {
+            FlowOfFunds fof = new FlowOfFunds();
+            fof.setUserid(userId);
+            fof.setFlowmoney(amount);
+            fof.setType(1);
+            fof.setSource("借款还款");
+            fof.setCreatetime(new Date());
+            fof.setFunddesc("还款");
+            flowOfFundsService.insertFlowOfFunds(fof);
             return Msg.success();
         }
         return Msg.fail();
