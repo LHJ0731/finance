@@ -129,7 +129,6 @@ public class SystemController {
         // 引入PageHelper插件，在查询之前调用startPage方法，传入页码以及每页大小
         PageHelper.startPage(pageNum, pageSize);
         List<OperationLog> list = operationLogService.selectOperationLogByInfo(opertor, startdate, enddate);
-        System.out.println(list);
         // 使用PageInfo包装查询后的结果，并交给页面处理
         // PageInfo封装了详细的分页信息，包括我们查询出来的数据，还可以传入连续显示的页数（5）
         PageInfo<OperationLog> pageInfo = new PageInfo<OperationLog>(list, 5);
@@ -157,7 +156,7 @@ public class SystemController {
         // 引入PageHelper插件，在查询之前调用startPage方法，传入页码以及每页大小
         PageHelper.startPage(pageNum, pageSize);
         List<ExceptionLog> list = exceptionLogService.selectExceptionLogByInfo(opertor, startdate, enddate);
-        System.out.println(list);
+
         // 使用PageInfo包装查询后的结果，并交给页面处理
         // PageInfo封装了详细的分页信息，包括我们查询出来的数据，还可以传入连续显示的页数（5）
         PageInfo<ExceptionLog> pageInfo = new PageInfo<ExceptionLog>(list, 5);
