@@ -14,7 +14,7 @@
     <!--自定义样式-->
     <link href="../lyear/css/style.min.css" th:href="@{/lyear/css/style.min.css}" rel="stylesheet" type="text/css"/>
 </head>
-<body>
+<body data-sidebarbg="color_8" data-logobg="color_8">
 <div class="lyear-layout-web">
     <div class="lyear-layout-container">
         <!--左侧导航-->
@@ -184,14 +184,14 @@
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child"
                                                                dataid="id-1-7-51" value="user:loan">
-                                                        <span> 安全网贷</span>
+                                                        <span> 借款申请</span>
                                                     </label>
                                                     <label th:if="${#lists.contains(permissionsList,'user:loan')}"
                                                            class="lyear-checkbox checkbox-primary checkbox-inline">
                                                         <input name="permissions[]" type="checkbox"
                                                                class="checkbox-child" checked
                                                                dataid="id-1-7-51" value="user:loan">
-                                                        <span> 安全网贷</span>
+                                                        <span> 借款申请</span>
                                                     </label>
                                                 </td>
                                             </tr>
